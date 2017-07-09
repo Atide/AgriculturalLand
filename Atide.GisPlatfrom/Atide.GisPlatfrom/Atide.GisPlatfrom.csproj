@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atide.ReadTool">
+      <HintPath>..\lib\Atide.ReadTool.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -147,6 +150,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +200,7 @@
     <Content Include="Content\MapSystem\index.css" />
     <Content Include="Content\MapSystem\stylesv.css" />
     <Content Include="Content\MapSystem\timeline.css" />
+    <Content Include="Content\MapSystem\user.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1170,6 +1175,7 @@
     <Content Include="Scripts\lib\ztree.3.5.26\jquery.ztree.exedit.min.js" />
     <Content Include="Scripts\lib\ztree.3.5.26\jquery.ztree.exhide.js" />
     <Content Include="Scripts\lib\ztree.3.5.26\jquery.ztree.exhide.min.js" />
+    <Content Include="Scripts\MapSystem\common\user.js" />
     <Content Include="Scripts\MapSystem\gis\arcgis-toolbars.js" />
     <Content Include="Scripts\MapSystem\gis\config\system-config.js" />
     <Content Include="Scripts\MapSystem\gis\main.js" />
@@ -1227,10 +1233,7 @@
     <Content Include="Views\MapSystem\Index.cshtml" />
     <Content Include="Scripts\lib\jquery\jquery.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
@@ -1322,6 +1325,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\MapSystem\_YearSelectView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MapSystem\UserView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\user.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

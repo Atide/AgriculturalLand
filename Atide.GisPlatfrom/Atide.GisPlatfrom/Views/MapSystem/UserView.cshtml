@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "UserView";
+    Layout = "~/Views/Shared/_MapSystemLayout.cshtml";
+}
+
+@section TitleSection{
+    云南省设施农用地备案监管系统
+}
+
+@section HeaderSection{
+<link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="~/Content/MapSystem/user.css">
+<script type="text/javascript" src="~/Scripts/lib/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="~/Scripts/MapSystem/common/user.js"></script>
+<script>
+        var toolbar = [{
+            text: '新增',
+            iconCls: 'icon-add',
+            handler: function () {
+                $('#userInfo').css("display", "block");
+                g_UserState = 1;
+            }
+        }, {
+            text: '删除',
+            iconCls: 'icon-cut',
+            handler: function () {
+                var rows = $("#userTable").datagrid('getSelections');//这里是用getSelections获取到选中的行的数据。
+                var Ele = []//新建一个空的数组
+                for(i=0;i<rows.length;i++){//循环，把行的数组拆分。
+                    Ele.push(rows[i]);//把拆分好的数据用push的方法保存到数组Ele中。
+                }
+                for(j=0;j<Ele.length;j++){
+                    var index = $("#userTable").datagrid('getRowIndex', Ele[j])//循环Ele里面的数据，根据几条数据（几行）获取到对应数量的索引。
+                    $("#userTable").datagrid('deleteRow', index)//根据索引删除对应的行。
+                }
+            }
+        }, {
+            text: '编辑',
+            iconCls: 'icon-edit',
+            handler: function () {
+                var row = $("#userTable").datagrid('getSelected');
+
+                if (row) {
+                    $('#username').val(row.username);
+                   
+                }
+                $('#userInfo').css("display", "block");
+                g_UserState = 2;
+               
+            }
+        }, '-', {
+            text: '保存',
+            iconCls: 'icon-save',
+            handler: function () {
+                var arr = JSON.stringify($('#userTable').datagrid('getData'));
+                $.post("/MapSystem/SaveJsonToFile", { path: "", content: arr }, function (data, status) {
+                    console.log("Data: " + data + "\nStatus: " + status);
+                });
+            }
+        }];
+</script>
+
+}
+
+@section ContentBody{
+
+<table id="userTable" class="easyui-datagrid" title="Basic DataGrid" style="width:700px;height:250px"
+       data-options="singleSelect:true,collapsible:true,url:'/MapSystem/GetJsonFromFile',method:'get',toolbar:toolbar">
+    <thead>
+        <tr>
+            <th data-options="field:'userid',width:80">用户ID</th>
+            <th data-options="field:'username',width:100">用户名称</th>
+            <th data-options="field:'password',width:80,align:'right'">用户密码</th>
+        </tr>
+    </thead>
+</table>
+
+    <div id="userInfo" style="display:none;">
+            <table class="reg_table" align="center">
+                <tr>
+                    <td class="td1"><span style="color:red">*</span>用户名：</td>
+                    <td><input id="username" type="text"/></td>
+                    @*<td class="td3">长度为6-10位的字母或数字</td>*@
+                </tr>
+                <tr>
+                    <td class="td1"><span style="color:red">*</span>密码：</td>
+                    <td class="td2"><input type="text" /></td>
+                    @*<td class="td3" style="line-height : 30px">长度为6-10位的字符、支持数字、大小写字母和标点符号，不允许有空格</td>*@
+                </tr>
+                <tr>
+                    <td class="td1"><span style="color:red">*</span>确认密码：</td>
+                    <td><input type="text" /></td>
+                    @*<td class="td3">确认密码和密码一致</td>*@
+                </tr>
+                <tr>
+                    <td colspan="2"> <button onclick="onButtonOk()"> 确定</button> <button> 取消</button></td>
+                </tr>
+            </table>
+
+        </div>
+}
+
+
+
+
+

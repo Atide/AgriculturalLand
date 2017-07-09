@@ -12,7 +12,7 @@
 
                 <li><a  class="fa fa-university"  onclick="" href="#">监管核查</a></li>
 
-                <li><a class="fa fa-user-circle" href="#">用户管理</a></li>
+                <li><a class="fa fa-user-circle" onclick="popUserManage()" href="#">用户管理</a></li>
             </ul>
 
         </nav>
@@ -67,6 +67,14 @@
 
     }
 
-
+    function popUserManage() {
+        layer.open({
+            type: 2,
+            title: '用户管理',
+            maxmin: true,
+            area: ['800px', '500px'],
+            content: '/MapSystem/UserView'
+        });
+    }
 
 </script>

@@ -1,0 +1,31 @@
+﻿.reg_table {
+	width : 80%;
+	margin-left : 100px;
+}
+
+.reg_table .td1 {
+	font-size  :20px;
+	height : 60px;
+	line-height : 60px;
+	/*float : right;*/
+    width :20%; 
+}
+
+.reg_table .td2 {
+	margin-left : 10px;
+	width :300px; 
+}
+
+.reg_table .td3 {
+    width:80%;
+	min-width : 260px;
+	font-size : 14px;
+	color : #7F7F7F;
+	line-height : 60px;
+	margin-left : 10px;
+}
+
+.reg_table input {
+	width : 275px;
+	height : 43px;
+}

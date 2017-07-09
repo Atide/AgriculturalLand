@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Atide.ReadTool;
+using System.IO;
 
 namespace Atide.GisPlatfrom.Controllers
 {
@@ -62,6 +64,49 @@ namespace Atide.GisPlatfrom.Controllers
         {
             return PartialView("_YearSelectView");
         }
+
+        //用户管理视图
+        public ActionResult UserView()
+        {
+            return PartialView("UserView");
+        }
+
+
+        #region 工具函数
+        //json文件路径："~/Content/json/test.json"
+        public ActionResult GetJsonFromFile(string path)
+        {
+            path = "~/App_Data/user.json";
+            try
+            {
+                string filepath = Server.MapPath(path);
+                string json = TextFileOper.GetFileJson(filepath);
+                return Content(json);
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+        //
+        public ActionResult SaveJsonToFile(string path, string content)
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                path = "~/App_Data/user.json";
+            }            
+
+            string fp = Server.MapPath(path);
+            if (!System.IO.File.Exists(fp))  // 判断是否已有相同文件 
+            {
+                FileStream fs1 = new FileStream(fp, FileMode.Create, FileAccess.ReadWrite);
+
+                fs1.Close();
+            }
+            System.IO.File.WriteAllText(fp, content);
+            return Content("success");
+        }
+        #endregion
 
     }
 }
