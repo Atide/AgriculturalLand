@@ -4,12 +4,8 @@
 <script src="~/Scripts/lib/bootstrap-select/js/bootstrap-select.js"></script>
 
 <div style="position:absolute;right:10px;top:10px;z-index:999;">
-    <select id="yearselect" class="selectpicker" multiple data-actions-box="true" multiple data-done-button="true" >
-
-    </select>
+    <select id="yearselect" class="selectpicker" multiple data-actions-box="true" multiple data-done-button="true" onchange="selectOnchang(this)"></select>
 </div>
-
-@*onchange="selectOnchang(this)"*@
 
 <script>
     dojo.ready(function () {
@@ -31,11 +27,11 @@
 
         //alert(obj.selectedIndex);
         //alert($("#yearselect").val());
-        var selStr = String($("#yearselect").val());
-        var arr = selStr.split(',');
-        for (var i = 0; i < arr.length; i++) {
-            alert(arr[i]);
-        }
+        //var selStr = String($("#yearselect").val());
+        //var arr = selStr.split(',');
+        //for (var i = 0; i < arr.length; i++) {
+        //    alert(arr[i]);
+        //}
 
     }
 
