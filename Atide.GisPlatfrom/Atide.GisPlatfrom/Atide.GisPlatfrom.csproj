@@ -337,6 +337,8 @@
     <Content Include="Scripts\lib\bootstrap-3.3.5\js\plugins\validate\jquery.validate.min.js" />
     <Content Include="Scripts\lib\bootstrap-3.3.5\js\plugins\validate\messages_zh_CN.min.js" />
     <Content Include="Scripts\lib\bootstrap-3.3.5\js\plugins\validate\插件说明.txt" />
+    <Content Include="Scripts\lib\bootstrap-select\css\bootstrap-select.css" />
+    <Content Include="Scripts\lib\bootstrap-select\js\bootstrap-select.js" />
     <Content Include="Scripts\lib\echarts\3.4.0\echarts.common.min.js" />
     <Content Include="Scripts\lib\echarts\3.5.4\echarts.min.js" />
     <Content Include="Scripts\lib\jquery-toolbar20160918\css\default.css" />
@@ -1314,6 +1316,12 @@
     <Content Include="Scripts\lib\bootstrap-3.3.5\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Scripts\lib\bootstrap-3.3.5\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Scripts\lib\bootstrap-3.3.5\js\plugins\layer\mobile\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MapSystem\_StatisticsAnalysisView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MapSystem\_YearSelectView.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

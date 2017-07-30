@@ -145,8 +145,8 @@ body,
     text-align: center;
     height: 25px;
     line-height: 25px;
-    -moz-box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.9); /* 老的 Firefox */
-    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.9);
+    -moz-box-shadow: 2px 2px 2px rgba(52, 108, 147, 0.5); /* 老的 Firefox */
+    box-shadow: 2px 2px 2px rgba(52, 108, 147, 0.5);
 }
 
 .basemapnormal {
@@ -156,8 +156,8 @@ body,
     text-align: center;
     height: 25px;
     line-height: 25px;
-    -moz-box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.9); /* 老的 Firefox */
-    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.9);
+    -moz-box-shadow: 2px 2px 2px rgba(52, 108, 147, 0.9); /* 老的 Firefox */
+    box-shadow: 2px 2px 2px rgba(52, 108, 147, 0.9);
 }
 .tool-common {
     position: absolute;

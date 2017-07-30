@@ -1,0 +1,42 @@
+﻿<link rel="stylesheet" href="~/Scripts/lib/bootstrap-3.3.5/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="~/Scripts/lib/bootstrap-select/css/bootstrap-select.css" type="text/css">
+<script src="~/Scripts/lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="~/Scripts/lib/bootstrap-select/js/bootstrap-select.js"></script>
+
+<div style="position:absolute;right:10px;top:10px;z-index:999;">
+    <select id="yearselect" class="selectpicker" multiple data-actions-box="true" multiple data-done-button="true" >
+
+    </select>
+</div>
+
+@*onchange="selectOnchang(this)"*@
+
+<script>
+    dojo.ready(function () {
+        //$('"#yearselect').selectpicker('val', '2017');
+       
+        var date = new Date;
+        var year = date.getFullYear();
+        for (var i = 2014; i <= year; i++) {
+            $('#yearselect').append("<option value=" + i + ">" + i + "</option>");
+        }
+        $('#yearselect').selectpicker('refresh');
+        $('#yearselect').selectpicker('val', year);   
+       
+    })
+
+    function selectOnchang(obj) {
+
+        //获取被选中的option标签选项
+
+        //alert(obj.selectedIndex);
+        //alert($("#yearselect").val());
+        var selStr = String($("#yearselect").val());
+        var arr = selStr.split(',');
+        for (var i = 0; i < arr.length; i++) {
+            alert(arr[i]);
+        }
+
+    }
+
+</script>

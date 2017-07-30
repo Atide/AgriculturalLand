@@ -39,18 +39,29 @@ namespace Atide.GisPlatfrom.Controllers
             return PartialView("_ToolBarView");
         }
 
+        //时间轴视图
         public ActionResult TimelineView()
         {
             return PartialView("_TimelineView");
         }
 
+        //底部结果视图
         public ActionResult BottomResultView()
         {
             return PartialView("_BottomResultView");
         }
 
-   
+        //查询统计视图
+        public ActionResult StatisticsAnalysisView()
+        {
+            return PartialView("_StatisticsAnalysisView");
+        }
 
+        //年份选择下拉视图
+        public ActionResult YearSelectView()
+        {
+            return PartialView("_YearSelectView");
+        }
 
     }
 }
