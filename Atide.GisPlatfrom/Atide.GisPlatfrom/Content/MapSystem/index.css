@@ -1,0 +1,185 @@
+﻿html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+#borderContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.floatPane {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    width: 1000px;
+    height:200px;
+    /*height: 700px;*/
+    z-index: 999;
+}
+
+.headerCls {
+    background-color: rgba(255, 106, 0, 0.75) !important;
+}
+.bodyCls{
+    background-color: rgba(255, 106, 0, 0.75) !important;
+}
+.floatMenu{
+    position:absolute;
+    top:0;
+    right:0;
+    width:300px;
+    height:700px;
+    background-color:antiquewhite;
+    z-index:999;
+}
+
+.clear {
+    clear: both;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+
+.tool-xzqtree {
+    position: absolute;
+    top: 0;
+    right: 70px;
+    z-index: 999;
+}
+
+.tool-result {
+    position: absolute;
+    top: 0;
+    right: 130px;
+    z-index: 999;
+}
+.btn-toolbar {
+    margin: 30px 30px;
+}
+
+.navbar-right {
+    float: right !important
+}
+.nav {
+    padding-left: 0;
+    list-style: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+
+.tundra .dijitTitlePaneTitle {
+    /*background: #98d361;*/
+}
+
+.yp-chart-panel {
+    bottom: 200px;
+    position: absolute;
+    left: 50%;
+    margin-left: -30px;
+    width: 60px;
+    height: 10px;
+    /* background-color: #fff; */
+    border: solid 1px #ccc;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    z-index: 999;
+}
+.yp-chart-panel-unfold {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -30px;
+    width: 60px;
+    height: 10px;
+    /* background-color: #fff; */
+    border: solid 1px #ccc;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    z-index:999;
+}
+.svgRoate {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+
+.basemaphigh {
+    margin-top: 10px;
+    color: orange;
+    border: 1px solid white;
+    text-align: center;
+    height: 25px;
+    line-height: 25px;
+    -moz-box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.9); /* 老的 Firefox */
+    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.9);
+}
+
+.basemapnormal {
+    margin-top: 10px;
+    color: white;
+    border: 1px solid white;
+    text-align: center;
+    height: 25px;
+    line-height: 25px;
+    -moz-box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.9); /* 老的 Firefox */
+    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.9);
+}
+.tool-common {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    z-index: 999;
+}
+
+#tool-common a {
+    padding: 10px;
+    font-size: 15px;
+}
+
+    /*#tool-common ul {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }*/
+
+#tool-common ul li {
+    /*font-size: 14px;*/
+    padding: 5px;
+    text-align: center;
+    color: rgb(52, 108, 147)
+}
+            #tool-common ul li span {
+                padding-left: 5px;
+            }
+#tool-common ul li:hover {
+                /*border-bottom: 2px solid #21b0eb;*/
+                background-color: #cccccc;
+                cursor: pointer;
+            }
+
+            #tool-common ul li:disabled {
+                /*border-bottom: 2px solid #21b0eb;*/
+                background-color: yellow;
+            }
+.disbale {
+    background-color: #FCCD5B;
+}
+
+.emphasis {
+    background-color: #DDD;
+}

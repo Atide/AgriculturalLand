@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MapSystemLayout.cshtml";
+}
+
+@section TitleSection{
+    云南省设施农用地备案监管系统
+}
+
+@section HeaderSection{
+<link rel="stylesheet" href="~/Content/MapSystem/index.css" />
+<link rel="stylesheet" href="~/Content/MapSystem/head.css" />
+<link rel="stylesheet" href="~/Content/MapSystem/timeline.css" />
+
+<link href="~/Scripts/lib/jquery-toolbar20160918/css/jquery.toolbar.css" rel="stylesheet" />
+<script src="~/Scripts/lib/jquery-toolbar20160918/js/jquery.toolbar.min.js"></script>
+<script type="text/javascript">
+        require(["dojo/parser", 'dojo/dom', 'atide/gis/main', "dojox/layout/FloatingPane", "dijit/form/Button", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dijit/layout/TabContainer", "dijit/layout/AccordionContainer", "dijit/layout/AccordionPane"]);
+</script>
+
+<script>
+     var g_main = null;
+    dojo.ready(function () {
+        g_main = new atide.gis.main();
+
+    });
+</script>
+
+}
+
+@section ContentBody{
+
+<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:false,liveSplitters:false" id="borderContainer">
+    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top',splitter:false" style="height:60px;">
+        @Html.Partial("_HeadView")
+    </div>
+    <div id="leftPane" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'left',splitter:true" style="width:200px;padding:0px;margin:0px;">
+        @Html.Partial("_LeftTreeView")
+    </div>
+    <div  data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'right'" style="width:100px;padding:0px;margin:0px;background-color:rgb(52, 108, 147)">
+        @Html.Partial("_TimelineView")
+    </div>
+
+    <div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center',splitter:false" >
+
+     
+        @Html.Partial("_ToolBarView")
+
+        
+        @Html.Partial("_BottomResultView")
+
+
+    </div>
+
+</div>
+
+}
+

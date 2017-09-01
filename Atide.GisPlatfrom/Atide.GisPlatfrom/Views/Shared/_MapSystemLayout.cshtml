@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@RenderSection("TitleSection")</title>
+
+
+    <link href="~/Content/lib/font-awesome-4.7.0 1/css/font-awesome.min.css" rel="stylesheet" media="screen">
+
+    @Scripts.Render("~/Scripts/lib/jquery/jquery.min.js")
+
+
+
+    <script type="text/javascript">
+        // var baseUrl = "http://" + window.location.host;
+        var baseUrl = '@Url.Content("~/")'; //全局的URl，解决iis中路径的问题
+    </script>
+
+    @* Arcgis相关引入 *@
+    @Styles.Render("http://172.16.1.143:6080/arcgis/api/3.20/esri/css/esri.css")
+    @Styles.Render("http://172.16.1.143:6080/arcgis/api/3.20/dijit/themes/claro/claro.css")
+    <link rel="stylesheet" href="http://172.16.1.143:6080/arcgis/api/3.20/dijit/themes/tundra/tundra.css">
+    <link rel="stylesheet" href="http://172.16.1.143:6080/arcgis/api/3.20/dojox/layout/resources/FloatingPane.css">
+    <link rel="stylesheet" href="http://172.16.1.143:6080/arcgis/api/3.20/dojox/layout/resources/ResizeHandle.css">
+
+    <script type="text/javascript">
+        var dojoConfig = {
+            parseOnLoad: true,
+            async: true,
+            packages: [{
+                name: "atide",
+                location: baseUrl + 'Scripts/MapSystem'
+            }]
+        };
+    </script>
+
+    @Scripts.Render("http://172.16.1.143:6080/arcgis/api/3.20/init.js")
+
+
+    @RenderSection("HeaderSection", false)
+
+</head>
+<body class="tundra">
+
+    @RenderSection("ContentBody")
+
+</body>
+</html>

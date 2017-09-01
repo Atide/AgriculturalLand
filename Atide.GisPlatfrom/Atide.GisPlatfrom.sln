@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{ACB3AD50-A808-4EBD-B9F6-C90AF4339E63}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{82FE7C5D-3333-49D0-B903-8A1345D9E23E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atide.GisPlatfrom", "Atide.GisPlatfrom\Atide.GisPlatfrom.csproj", "{D5C23FB4-2871-489B-BCC0-684D079C3BED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5C23FB4-2871-489B-BCC0-684D079C3BED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5C23FB4-2871-489B-BCC0-684D079C3BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5C23FB4-2871-489B-BCC0-684D079C3BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5C23FB4-2871-489B-BCC0-684D079C3BED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
