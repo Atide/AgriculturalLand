@@ -19,11 +19,21 @@
     </script>
 
     @* Arcgis相关引入 *@
-    @Styles.Render("http://172.16.1.143:6080/arcgis/api/3.20/esri/css/esri.css")
+    @*公司内网*@
+    @*@Styles.Render("http://172.16.1.143:6080/arcgis/api/3.20/esri/css/esri.css")
     @Styles.Render("http://172.16.1.143:6080/arcgis/api/3.20/dijit/themes/claro/claro.css")
     <link rel="stylesheet" href="http://172.16.1.143:6080/arcgis/api/3.20/dijit/themes/tundra/tundra.css">
     <link rel="stylesheet" href="http://172.16.1.143:6080/arcgis/api/3.20/dojox/layout/resources/FloatingPane.css">
-    <link rel="stylesheet" href="http://172.16.1.143:6080/arcgis/api/3.20/dojox/layout/resources/ResizeHandle.css">
+    <link rel="stylesheet" href="http://172.16.1.143:6080/arcgis/api/3.20/dojox/layout/resources/ResizeHandle.css">*@
+
+    @*公司外网*@
+    @Styles.Render("http://220.165.247.91:6080/arcgis/api/3.20/esri/css/esri.css")
+    @Styles.Render("http://220.165.247.91:6080/arcgis/api/3.20/dijit/themes/claro/claro.css")
+    <link rel="stylesheet" href="http://220.165.247.91:6080/arcgis/api/3.20/dijit/themes/tundra/tundra.css">
+    <link rel="stylesheet" href="http://220.165.247.91:6080/arcgis/api/3.20/dojox/layout/resources/FloatingPane.css">
+    <link rel="stylesheet" href="http://220.165.247.91:6080/arcgis/api/3.20/dojox/layout/resources/ResizeHandle.css">
+
+    
 
     <script type="text/javascript">
         var dojoConfig = {
@@ -35,9 +45,10 @@
             }]
         };
     </script>
-
-    @Scripts.Render("http://172.16.1.143:6080/arcgis/api/3.20/init.js")
-
+    @*公司内网*@
+    @*@Scripts.Render("http://172.16.1.143:6080/arcgis/api/3.20/init.js")*@
+    @*公司外网*@
+    @Scripts.Render("http://220.165.247.91:6080/arcgis/api/3.20/init.js")
 
     @RenderSection("HeaderSection", false)
 

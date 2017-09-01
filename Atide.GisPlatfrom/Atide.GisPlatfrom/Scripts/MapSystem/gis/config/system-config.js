@@ -3,7 +3,7 @@
  * 系统相关配置
  */
 define(["dojo/_base/declare"], function (declare) {
-    var servicesHost = "172.17.204.200:6080";   //200 GIS服务器地址
+    var servicesHost = "220.165.247.91:6080";   //公司外网GIS服务器映射地址：220.165.247.91  公司内网：172.16.1.143
     return {
         baseMapConfig: {//地图底图配置
             mapChangeKeepExtent: true,//地图切换后是否保留原有位置
@@ -31,8 +31,8 @@ define(["dojo/_base/declare"], function (declare) {
             ]
         },
         urlConfig: {//地图服务配置
-            //几何服务地址
-            geometryService: "http://" + servicesHost + "/arcgis/rest/services/Utilities/Geometry/GeometryServer",//http://172.17.204.200:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer
+            //几何服务地址 http://172.17.204.200:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer
+            geometryService: "http://" + servicesHost + "/arcgis/rest/services/Utilities/Geometry/GeometryServer",
             //打印服务地址
             printService: "http://" + servicesHost + "/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task"
         },
