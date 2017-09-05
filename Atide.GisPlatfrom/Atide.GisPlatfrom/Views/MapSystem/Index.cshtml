@@ -12,6 +12,24 @@
 <link rel="stylesheet" href="~/Content/MapSystem/index.css" />
 <link rel="stylesheet" href="~/Content/MapSystem/head.css" />
 <link rel="stylesheet" href="~/Content/MapSystem/timeline.css" />
+ 
+<link rel="stylesheet" href="~/Scripts/lib/ztree.3.5.26/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.exedit.js"></script>
+<script src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.exhide.js"></script>
+
+@*自定义JS*@
+
+<script src="~/Scripts/MapSystem/gis/tool/tool-arcgis.js"></script>
+<script src="~/Scripts/MapSystem/gis/tool/tool-layerOperation.js"></script>
+<script src="~/Scripts/MapSystem/gis/operation-infoQuery.js"></script>
+<script src="~/Scripts/MapSystem/gis/operation-displayTree"></script>
+
+
+
+
+
 
 <link href="~/Scripts/lib/jquery-toolbar20160918/css/jquery.toolbar.css" rel="stylesheet" />
 <script src="~/Scripts/lib/jquery-toolbar20160918/js/jquery.toolbar.min.js"></script>
@@ -20,11 +38,23 @@
 </script>
 
 <script>
+    var g_Tree;
      var g_main = null;
     dojo.ready(function () {
         g_main = new atide.gis.main();
+        require(["atide/gis/operation-displayTree"], function (myZtree) {
 
+            g_Tree = myZtree();
+
+
+        });
     });
+
+
+
+
+
+
 </script>
 
 }
