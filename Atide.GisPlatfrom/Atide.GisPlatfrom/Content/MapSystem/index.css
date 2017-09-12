@@ -5,6 +5,26 @@
     overflow: hidden;
 }
 
+/*html,
+body,
+#myTableNode {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#top,
+#bot {
+    margin: 0;
+    padding: 0;
+}*/
+.claro .dijitContentPane {
+    padding: 0px;
+    margin: 0px;
+}
+
+
 #borderContainer {
     width: 100%;
     height: 100%;
@@ -79,9 +99,8 @@
 }
 
 
-.tundra .dijitTitlePaneTitle {
-    /*background: #98d361;*/
-}
+
+
 
 .yp-chart-panel {
     bottom: 200px;

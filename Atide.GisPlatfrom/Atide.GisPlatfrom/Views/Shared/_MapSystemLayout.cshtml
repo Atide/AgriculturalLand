@@ -26,14 +26,11 @@
     <link rel="stylesheet" href="http://172.16.1.143:6080/arcgis/api/3.20/dojox/layout/resources/FloatingPane.css">
     <link rel="stylesheet" href="http://172.16.1.143:6080/arcgis/api/3.20/dojox/layout/resources/ResizeHandle.css">*@
 
-    @*公司外网*@
-    @Styles.Render("http://220.165.247.91:6080/arcgis/api/3.20W/esri/css/esri.css")
-    @Styles.Render("http://220.165.247.91:6080/arcgis/api/3.20W/dijit/themes/claro/claro.css")
-    <link rel="stylesheet" href="http://220.165.247.91:6080/arcgis/api/3.20W/dijit/themes/tundra/tundra.css">
+    @*公司外网*@   
     <link rel="stylesheet" href="http://220.165.247.91:6080/arcgis/api/3.20W/dojox/layout/resources/FloatingPane.css">
     <link rel="stylesheet" href="http://220.165.247.91:6080/arcgis/api/3.20W/dojox/layout/resources/ResizeHandle.css">
-
-    
+    @Styles.Render("http://220.165.247.91:6080/arcgis/api/3.20W/dijit/themes/claro/claro.css")
+    @Styles.Render("http://220.165.247.91:6080/arcgis/api/3.20W/esri/css/esri.css")    
 
     <script type="text/javascript">
         var dojoConfig = {
@@ -53,7 +50,7 @@
     @RenderSection("HeaderSection", false)
 
 </head>
-<body class="tundra">
+<body class="claro esri">
 
     @RenderSection("ContentBody")
 
