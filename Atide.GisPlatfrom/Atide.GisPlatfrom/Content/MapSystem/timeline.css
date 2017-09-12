@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+﻿/*@charset "utf-8";*/
 /* CSS 定制的公共样式 */
 * {
     margin: 0;
@@ -58,7 +58,7 @@ a {
 }*/
 
 /* 时间轴样式 */
-.course_nr {
+/*.course_nr {
     height: 80px;
     background: url(./images/ico9.gif) repeat-x center;
 }
@@ -73,7 +73,7 @@ a {
         margin-top: 25px;
         margin-left:30px;
 
-        /*border:1px solid red;*/
+
     }
 
 .shiji {
@@ -97,6 +97,6 @@ a {
     .shiji p {
         line-height: 14px;
         color: #999;
-    }
+    }*/
 
 

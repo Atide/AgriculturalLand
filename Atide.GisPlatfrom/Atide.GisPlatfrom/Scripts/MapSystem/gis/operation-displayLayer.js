@@ -54,12 +54,14 @@ function displayTB(year,where)
 }
 
 
+var myFeatureTable = null;
 
 function displayBAXM(where) {
+    
     require(["esri/layers/FeatureLayer", "esri/InfoTemplate", "esri/layers/TableDataSource",
           "esri/layers/LayerDataSource", "esri/symbols/SimpleFillSymbol", "esri/renderers/SimpleRenderer","esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol",
-    "esri/Color", "esri/dijit/FeatureTable", "dojo/domReady!"],
-        function (FeatureLayer, InfoTemplate, TableDataSource, LayerDataSource, SimpleFillSymbol, SimpleRenderer, SimpleMarkerSymbol, SimpleLineSymbol, Color, FeatureTable) {
+        "esri/Color", "esri/dijit/FeatureTable", "dojo/dom-construct","dojo/domReady!"],
+        function (FeatureLayer, InfoTemplate, TableDataSource, LayerDataSource, SimpleFillSymbol, SimpleRenderer, SimpleMarkerSymbol, SimpleLineSymbol, Color, FeatureTable, domConstruct) {
             if (g_main._mapControl._map.getLayer("BAXMlayer") != null) {
                 g_main._mapControl._map.removeLayer(g_main._mapControl._map.getLayer("BAXMlayer"));
 
@@ -77,7 +79,9 @@ function displayBAXM(where) {
             var layerSource = new LayerDataSource();
             layerSource.dataSource = dataSource;
 
-            var Flayer = new FeatureLayer("http://172.16.1.141:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer", {
+            //http://172.16.1.141:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer 内网网址
+            //外网地址 http://220.165.247.91:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer
+            var Flayer = new FeatureLayer("http://220.165.247.91:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer", {
                 id: "BAXMlayer",
                 mode: FeatureLayer.MODE_ONDEMAND,
                 outFields: ["*"],
@@ -97,25 +101,24 @@ function displayBAXM(where) {
                        new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([0, 255, 197, 1])));
 
 
-            Flayer.setSelectionSymbol(selectionSymbol);
-            Flayer.setRenderer(renderer);
-            Flayer.refresh();
-            g_main._mapControl._map.addLayer(Flayer);
+            //Flayer.setSelectionSymbol(selectionSymbol);
+            //Flayer.setRenderer(renderer);
+            //Flayer.refresh();
+            //g_main._mapControl._map.addLayer(Flayer);
 
 
 
             loadTable();
 
-
-
-
-
             function loadTable() {
-             
 
+                if (myFeatureTable != null) {
+                    myFeatureTable.destroy();
+                    myFeatureTable = null;
+                }
 
                 // create new FeatureTable and set its properties 
-                var myFeatureTable = new FeatureTable({
+                myFeatureTable = new FeatureTable({
                     featureLayer: Flayer,
                     map:g_main._mapControl._map,
                     showAttachments: true,
@@ -161,7 +164,7 @@ function displayBAXM(where) {
                     //      }
                     //  }
                     //],
-                }, 'myTableNode');
+                }, domConstruct.create('div', { id: 'myTableNode' }, 'floatPane'));
 
                 myFeatureTable.startup();
 

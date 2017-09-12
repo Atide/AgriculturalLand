@@ -1,14 +1,14 @@
-﻿<link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/default/easyui.css">
+﻿@*<link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/icon.css">
-<script type="text/javascript" src="~/Scripts/lib/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
-<div id="test" class="yp-chart-panel-unfold" title="收起面板" onclick="showResultPane()">
+<script type="text/javascript" src="~/Scripts/lib/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>*@
+<div id="test" class="yp-chart-panel-unfold" title="收起面板" onclick="showHideResultPane()">
         <i class="fa fa-angle-up" style="margin:1px auto;padding:0px;position:inherit;bottom:-2px;width:100%"></i>
 </div>
 
-<div id="floatPane" class="floatPane" style="display:none;">
-    <div class="easyui-panel " title="属性视图"  data-options="fit:true ">
+<div id="floatPane" class="floatPane" style="display:none;background-color:white;">
+    @*<div class="easyui-panel " title="属性视图"  data-options="fit:true ">*@
         <div id="myTableNode"></div>
-    </div>
+    @*</div>*@
 </div>
 <script>
     dojo.ready(function () {
@@ -16,7 +16,7 @@
         $("#floatPane div").css("width", $("#map").width() - 10);
     })
 
-    function showResultPane() {
+    function showHideResultPane() {
         if ($("#test").hasClass("yp-chart-panel-unfold")) {
             $("#floatPane").css("display", "block");
             $("#test").removeClass("yp-chart-panel-unfold");
@@ -34,6 +34,21 @@
             $("#test i").addClass("fa-angle-up");
         }
         
+    }
+
+    function showResultPane() {
+        //$("#myTableNode").remove();
+        //var div = $('<div></div>');        //创建一个父div
+        //div.attr('id', 'myTableNode');        //给父div设置id
+        //$("#floatPane").append(div);         // 追加新元素
+        if ($("#test").hasClass("yp-chart-panel-unfold")) {
+            $("#floatPane").css("display", "block");
+            $("#test").removeClass("yp-chart-panel-unfold");
+
+            $("#test").addClass("yp-chart-panel");
+            $("#test i").addClass("fa-angle-down");
+            $("#test i").removeClass("fa-angle-up");
+        }
     }
 </script>
 

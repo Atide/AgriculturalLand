@@ -36,7 +36,7 @@
                 color: white;
             }
 		
-		#issues {
+		/*#issues {
 			width: 400px;
 			height: 600px;
 			overflow: hidden;
@@ -107,4 +107,4 @@
 				#next.disabled,
 				#prev.disabled {
 					opacity: 0.2;
-				}
+				}*/
