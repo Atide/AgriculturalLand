@@ -200,7 +200,8 @@ define(["dojo/_base/declare",
                 return tree;
             },
             treenodeClicked: function (event, treeId, treeNode, clickFlag) {    
-                    queryNodebyCode(treeNode.id)        
+                    queryNodebyCode(treeNode.id)  
+                
 
             },
         })

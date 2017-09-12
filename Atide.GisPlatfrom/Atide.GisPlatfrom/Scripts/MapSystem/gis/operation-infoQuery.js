@@ -1,10 +1,12 @@
-﻿
-
+﻿var selectYear = 2015;
+var selectCode;
 
 
 function queryNodebyCode(code)    //树于行政区列表 点击触发
 {
-    
+    cleanALL();
+    selectCode = code;
+
     //query XZQ feature
 
     require(["esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",
@@ -19,14 +21,10 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
           SimpleFillSymbol.STYLE_SOLID,
           new SimpleLineSymbol(SimpleLineSymbol.STYLE_SHORTDASHDOT,
               new Color([122, 55, 139]), 1),
-                 new Color([216, 23, 232, 0.3]));
+                 new Color([216, 23, 232, 0.1]));
 
 
-             var infoTemplate = new InfoTemplate();//信息模板
 
-           
-
-           
 
 
              var url1 = "http://220.165.247.91:6080/arcgis/rest/services/XZQH/MapServer/0";
@@ -42,6 +40,9 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
 
                  displayFeature(pointlayers, g_main._mapControl._map, feature, fillsymbol,null,false);
                  centerShowGraphic(feature);
+                 displayBAXM(code);
+
+               
 
              })
 
@@ -58,3 +59,9 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
 
 }
 
+function cleanALL()
+{
+    g_main._mapControl._map.graphics.clear();
+    g_main._mapControl._map.infoWindow.hide();
+    selectCode = null;
+}

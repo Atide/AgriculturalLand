@@ -1017,6 +1017,7 @@
     <Content Include="Scripts\MapSystem\gis\config\system-config.js" />
     <Content Include="Scripts\MapSystem\gis\main.js" />
     <Content Include="Scripts\MapSystem\gis\mapcontrol.js" />
+    <Content Include="Scripts\MapSystem\gis\operation-displayLayer.js" />
     <Content Include="Scripts\MapSystem\gis\operation-displayTree.js" />
     <Content Include="Scripts\MapSystem\gis\operation-infoQuery.js" />
     <Content Include="Scripts\MapSystem\gis\tdt\TDTYXAnnoLayer.js" />
