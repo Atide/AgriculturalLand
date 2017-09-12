@@ -6,7 +6,6 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
 {
     cleanALL();
     selectCode = code;
-
     //query XZQ feature
 
     require(["esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",

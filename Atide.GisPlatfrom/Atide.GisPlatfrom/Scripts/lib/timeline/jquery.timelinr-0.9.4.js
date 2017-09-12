@@ -61,7 +61,8 @@ jQuery.fn.timelinr = function(options){
 		$(settings.datesDiv+' a').click(function(event){
 			event.preventDefault();
 			// first vars
-			var whichIssue = $(this).text();
+            var whichIssue = $(this).text();
+            g_Year = whichIssue;
 			var currentIndex = $(this).parent().prevAll().length;
 
 			// moving the elements
