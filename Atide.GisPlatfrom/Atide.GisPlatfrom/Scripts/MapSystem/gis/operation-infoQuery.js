@@ -10,8 +10,8 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
 
     require(["esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",
     "esri/layers/GraphicsLayer", "esri/symbols/SimpleLineSymbol", "esri/symbols/CartographicLineSymbol", "esri/tasks/query",
-    "esri/tasks/QueryTask", "esri/Color", "atide/gis/config/system-config", "esri/symbols/SimpleMarkerSymbol", "esri/Color", "esri/symbols/SimpleFillSymbol", "esri/symbols/CartographicLineSymbol", "dojo/domReady!"],
-         function (Graphic, InfoTemplate, SpatialReference, Extent, GraphicsLayer, SimpleLineSymbol, CartographicLineSymbol, Query, QueryTask, Color, SystemConfig, SimpleMarkerSymbol, Color, SimpleFillSymbol, CartographicLineSymbol) {
+    "esri/tasks/QueryTask", "atide/gis/config/system-config", "esri/symbols/SimpleMarkerSymbol", "esri/Color", "esri/symbols/SimpleFillSymbol", "esri/symbols/CartographicLineSymbol", "dojo/domReady!"],
+         function (Graphic, InfoTemplate, SpatialReference, Extent, GraphicsLayer, SimpleLineSymbol, CartographicLineSymbol, Query, QueryTask, SystemConfig, SimpleMarkerSymbol, Color, SimpleFillSymbol, CartographicLineSymbol) {
 
 
            
@@ -34,15 +34,20 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
              query1.outSpatialReference = { "wkid": 4326 };
              query1.where = "CODE='" + code + "'";//查询的sql语句
              queryTask1.execute(query1);
-             queryTask1.on("complete", function (event) {
+             queryTask1.on("complete", function (event) {       
                  var feature = event.featureSet.features[0];
 
                  displayFeature(pointlayers, g_main._mapControl._map, feature, fillsymbol, null, false);
                  showResultPane();
                  centerShowGraphic(feature);
-                 displayBAXM(code);
+                 displayBAXMtable(code);
+                 displayBAXMlayer(code);
+ 
 
-               
+
+
+           
+
 
              })
 
