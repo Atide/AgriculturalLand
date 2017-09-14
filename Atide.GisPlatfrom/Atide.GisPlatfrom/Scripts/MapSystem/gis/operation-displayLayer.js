@@ -10,8 +10,8 @@ function displayTB(code)   //点击核查后
     var where = "XZQDM= '" + code + "'";
     displayTBtable(where);  //展示图斑表
     displayTBlayer(where);//展示图斑 动态图层
-    showHideYghcTable(1)
-    displayBAXM(code)
+    showHideYghcTable(1);
+    displayBAXM(code);
 }
 //展示备案项目
 function displayBAXM(code)   
@@ -502,7 +502,7 @@ function displayBYfeature(feature,kind)
                    "备注: ${BJ}<br/>"
 
 
-                var infoTemplate = new InfoTemplate("标题", content);
+                var infoTemplate = new InfoTemplate("备案信息详细", content);
                 displayFeature(BAXMfeatureLayers, g_main._mapControl._map, feature, sms, infoTemplate);
                 break;
 
@@ -511,7 +511,19 @@ function displayBYfeature(feature,kind)
                     delLayers(TBfeatureLayers);
                 }
                 var sms = SystemConfig.colorConfig.TBfeatureColor;
-                var infoTemplate = new InfoTemplate("标题", "${*}");
+                var content = "要素代码: ${YSDM}<br/>" +
+                  "标识码: ${BSM}<br/>" +
+                  "行政区代码: ${XZQDM}<br/>" +
+                  "项目名称: ${XMMC}<br/>" +
+                  "变更前地类: ${BGQDL}<br/>" +
+                  "变更后地类: ${BGHDL}<br/>" +
+                  "变更范围: ${BGFW}<br/>" +
+                  "监测变更面积: ${JCMJ}<br/>" +
+                  "监测图斑编号: ${JCTBBH}<br/>" +
+                  "土地变更描述: ${BGMS}<br/>" +
+                  "监测年度: ${JCND}<br/>" +           
+                  "备注: ${BZ}<br/>"
+                var infoTemplate = new InfoTemplate("遥感核查详细信息", content);
                 displayFeature(TBfeatureLayers, g_main._mapControl._map, feature, sms, infoTemplate);
                 break;
         }

@@ -41,8 +41,8 @@ define(["dojo/_base/declare", "esri/symbols/SimpleFillSymbol", "esri/symbols/Sim
         
           BAXMfeatureColor:  new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 15,           //备案项目 单选高亮情况
                         new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
-                        new Color([100, 100, 100]), 7),
-                         new Color([13, 203, 242])).setStyle(SimpleMarkerSymbol.STYLE_CIRCLE),
+                        new Color([100, 100, 100]), 6),
+                         new Color([13, 203, 242,0])).setStyle(SimpleMarkerSymbol.STYLE_CIRCLE),
           TBfeatureColor: new SimpleFillSymbol("solid", null, new Color([10, 255, 10, 0.85])), //图斑 单选高亮情况
  
 
