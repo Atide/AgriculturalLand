@@ -1,0 +1,3 @@
+﻿该树控件为为Bootstrap Tree View，是基于Bootstrap框架下的树控件结构, Bootstrap Tree View 简介
+Bootstrap Tree View 是一个简单而优雅的Bootstrap树形视图解决方案。
+您可以访问作者的 GitHub页面(https://github.com/jonmiles/bootstrap-treeview) 了解其用法及更多信息。

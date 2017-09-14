@@ -1,0 +1,46 @@
+﻿控件增加人：刘从怀
+
+该控件为下拉列表控件chosen，是基于Bootstrap框架下的下拉列表控件, chosen 简介
+这个比较有名气啦，可以访问网站。已经经过改造，不要进行删除处理。
+您可以访问作者的 GitHub页面(http://harvesthq.github.io/chosen/) 了解其用法及更多信息。
+说明较全的网址：https://github.com/amazeui/chosen/blob/master/docs/options.md
+
+基本使用可以参考如下网址：
+http://www.thinksaas.cn/topics/0/89/89554.html
+http://www.bubuko.com/infodetail-435025.html
+http://www.sharejs.com/jquery/jquery/9804
+
+注意：
+1、给控件赋值,需要控件引用chosen-select类：
+for(var i=0;i<data.length;i++)
+{
+    $("#selRoleInfo").append($("<option>").val(data[i].ROLEID).text(data[i].ROLENAME));
+}
+或
+for(var i=0;i<data.length;i++)
+{
+    $("#selRoleInfo").append("<option value='" + data[i].ROLEID + "'>" + data[i].ROLENAME + "</option>");
+}
+
+2、初始化选中值时，需要如下调用：
+$("#selPrjInfo").chosen("destroy"); //这句一定要加上,否则初始化不出来
+$("#selPrjInfo").val("2");
+
+3、如果要让下拉列表多选，需要在select里增加multiple，代码如下：
+<select data-placeholder="选择省份" class="chosen-select" multiple style="width:350px;" tabindex="4">
+    <option value="">请选择省份</option>
+    <option value="110000">北京</option>
+    <option value="120000">天津</option>
+    <option value="130000">河北省</option>
+</select>
+
+
+4、~/Content/bootstrap-3.3.5/js/plugins/chosen/chosenLoad.js 这个js的引用要放到后面。
+
+5.关于动态绑定值的问题
+（1） $("#selSection").chosen("destroy");这一步是必须的，不然绑定后无效果
+（2） var $evalSection= eval(data);
+                    for (var i = 0; i < $evalSection.length; i++) {
+                        $("<option value='" + $evalSection[i].value + "'>" + $evalSection[i].label + "</option>").appendTo("#selSection");
+                }
+（3）  $("#selSection").chosen()这一步是必须的，不然绑定后无效果

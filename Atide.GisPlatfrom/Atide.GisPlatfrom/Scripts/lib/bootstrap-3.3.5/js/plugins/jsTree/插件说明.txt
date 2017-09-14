@@ -1,0 +1,9 @@
+﻿jsTree是一个基于jQuery的Tree控件。支持 XML，JSON，Html三种数据源。
+提供创建，重命名，移动，删除，拖放节点操作。
+可以自己自定义创建，删除，嵌套，重命名，选择节点的规则。在这些操作上可以添加多种监听事件。
+更多信息请访问： http://www.jstree.com/
+
+	引用如下：
+@Styles.Render("~/Content/bootstrap-3.3.5/js/plugins/jsTree/themes/bootstrap/style.min.css")
+@Scripts.Render("~/Content/bootstrap-3.3.5/js/plugins/jsTree/jstree.min.js")
+@Scripts.Render("~/Content/bootstrap-3.3.5/js/plugins/jsTree/JSTreeBind.js")

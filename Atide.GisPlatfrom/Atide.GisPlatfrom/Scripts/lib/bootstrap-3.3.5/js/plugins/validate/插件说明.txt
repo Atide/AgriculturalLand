@@ -1,0 +1,11 @@
+﻿该控件为为Bootstrap 表单校验插件，是基于Bootstrap框架下的表单提交校验插件, jquery.validate.min 简介
+jquery.validate.js 是一款优秀的jQuery表单验证插件。它具有如下特点：
+
+    安装简单
+    内置超过20种数据验证方法
+    直列错误提示信息
+    可扩展的数据验证方法
+    使用内置的元数据或插件选项来指定您的验证规则
+    优雅的交互设计
+
+您可以访问(http://jqueryvalidation.org/) 和(http://www.w3cschool.cc/jquery/jquery-plugin-validate.html)了解其用法及更多信息。

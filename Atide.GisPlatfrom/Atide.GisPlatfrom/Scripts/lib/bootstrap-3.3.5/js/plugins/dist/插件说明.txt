@@ -1,0 +1,9 @@
+﻿可以替换JavaScript中alert的插件
+
+Sweet Alert 是一个替代传统的 JavaScript Alert 的漂亮提示效果。
+SweetAlert 自动居中对齐在页面中央，不管您使用的是台式电脑，手机或平板电脑看起来效果都很棒。
+另外提供了丰富的自定义配置选择，可以灵活控制。项目主页： http://t4t5.github.io/sweetalert/ 
+
+	引用如下：
+@Styles.Render("~/Content/bootstrap-3.3.5/js/plugins/dist/sweetalert.css")
+@Scripts.Render("~/Content/bootstrap-3.3.5/js/plugins/dist/sweetalert-dev.js")

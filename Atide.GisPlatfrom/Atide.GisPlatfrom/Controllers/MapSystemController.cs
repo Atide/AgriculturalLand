@@ -11,7 +11,18 @@ namespace Atide.GisPlatfrom.Controllers
         // GET: MapSystem
         public ActionResult Index()
         {
-            return View();
+            if (Session["UserInfo"] != null)
+            {
+                var userEntity = (UserInfo)(Session["UserInfo"]);
+                // login maintain
+                ViewBag.UserName = userEntity == null ? string.Empty : userEntity.USERNAME;
+
+                return View();
+            }
+            else
+            {
+                return Redirect("/Account/Login");// RedirectToAction("Login");
+            }
         }
 
         public ActionResult HeadView() {
