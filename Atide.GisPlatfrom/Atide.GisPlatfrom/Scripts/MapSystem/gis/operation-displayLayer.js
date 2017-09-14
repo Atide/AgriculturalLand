@@ -143,7 +143,7 @@ function displayBAXMtable(where) {
                     //      }
                     //  }
                     //],
-                }, domConstruct.create('div', { id: 'myTableNode' }, 'floatPane'));
+                }, domConstruct.create('div', null, 'myTableNodeDiv'));
 
             
           

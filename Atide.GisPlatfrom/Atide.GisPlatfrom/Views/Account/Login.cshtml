@@ -1,0 +1,138 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width" />
+    @Scripts.Render("~/Scripts/lib/jquery/jquery.min.js")
+    @Styles.Render("~/Content/Account/icon.css")
+    @Scripts.Render("~/Scripts/lib/bootstrap-3.3.5/js/plugins/validate/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/lib/bootstrap-3.3.5/js/plugins/validate/messages_zh_CN.min.js")
+
+    @* sweetaler插件 *@
+    @Styles.Render("~/Scripts/lib/bootstrap-3.3.5/js/plugins/dist/sweetalert.css")
+    @Scripts.Render("~/Scripts/lib/bootstrap-3.3.5/js/plugins/dist/sweetalert-dev.js")
+
+
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+         body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 13px;
+            color:#36a9b8;
+        }
+        .input {
+            margin-top: 25px;
+            width: 320px;
+            height: 50px
+        }
+
+        .input_all {
+            border: none;
+            color: #555;
+            font-size: 14px;
+            line-height: 30px;
+            padding: 0px 0 10px 46px;
+            vertical-align: middle;
+            width: 310px;
+            height: 50px;
+        }
+
+        .users {
+            background: url("/Content/Account/Image/input_users.png") no-repeat top left;
+        }
+
+        .users_now {
+            background: url("/Content/Account/Image/input_users_hover.png") no-repeat top left;
+        }
+
+        .password {
+            background: url("/Content/Account/Image/input_password.png") no-repeat top left;
+        }
+
+        .password_now {
+            background: url("/Content/Account/Image/input_password_hover.png") no-repeat top left;
+        }
+    </style>
+
+    <script>
+        $(function () {
+                $("#FrmLogin").validate({
+                    submitHandler: function (form) {
+                        $.ajax({
+                            type: 'POST', data: $("#FrmLogin").serialize(), url: "/Account/LoginIntoMain",
+                            async: false, //这是重要的一步，防止重复提交的
+                            success: function (data) {
+                                if (data.boolResult) {
+                                    location.href = data.returnMsg;
+                                    return;
+                                } else {
+                                    sweetAlert('提示', data.returnMsg, 'error');
+                                    return;
+                                }
+                            },
+                            error: function () {
+                                sweetAlert('提示', '登录出错！', 'error');
+                                return;
+                            }
+                        });
+                    }
+                });
+            });
+
+    </script>
+</head>
+<body>
+
+    <div style="background-color:rgba(1, 56, 95, 0.90);width:100%;height:100%">
+        <div style="width: 100%; height: 20%;"><img src="~/Content/Account/Image/login_top.png" style="margin-top:30px" /></div>
+        <div style="background: url('../../Content/Account/Image/login_background.jpg') no-repeat center; background-color:#74B7FB; width: 100%; height: 58%; ">
+            <div style="width: 320px; height: 300px; float: right; margin-top: 14px; margin-right: 12%; background-color: white; padding: 20px;">
+                <form id="FrmLogin" name="FrmLogin" method="post" role="form">
+                    <div>
+                        <span style="color: #36a9b8; font-size: 25px; font-family: 微软雅黑; margin: 50px 105px 30px 105px; ">账户登录</span>
+                    </div>
+
+
+                    <div class="input form-group">
+                        <input type="hidden" id="hidReturnUrl" name="hidReturnUrl" value="@ViewBag.ReturnUrl" />
+                        <input class="input_all users form-control" name="txtREGNAME" required="" id="txtREGNAME" placeholder="用户名" type="text" value="administrator" aria-required="true" onfocus="this.className = 'input_all users_now';" onblur="this.className = 'input_all users'" maxlength="30" />
+                    </div>
+
+                    <div class="input form-group">
+                        <input class="input_all password form-control" name="txtUserPwd" required="" id="txtUserPwd" type="password" placeholder="密码" onfocus="this.className='input_all password_now';" onblur="this.className='input_all password'" maxlength="30" />
+                    </div>
+
+                    <button type="submit" class="button1 logbt" style=" width:310px; height:40px; margin-top:25px">登 录</button>
+                </form>
+            </div>
+        </div>
+        <div style="text-align: center;font-size:12px">
+            <div style="padding-top:32px">云南省国土厅版权所有</div>
+            <div>主办:云南省国土厅<span style="margin-left:10px">&nbsp;</span>承办:云南省规划院</div>
+            <div>地址:北京路1018<span style="margin-left:10px">&nbsp;</span>电话: 0871-65747301</div>
+        </div>
+        @*<div style="text-align: center; margin-top: 50px; font-size:15px">
+                <p>Copyright  ©  2015  云南省交通运输厅  版权所有</p>
+            </div>*@
+    </div>
+
+</body>
+</html>

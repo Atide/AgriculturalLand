@@ -1,0 +1,51 @@
+.user-icon {
+	border:solid 2px #ccc;
+	width:252px;
+	height:42px;
+	background:url("./Image/userName.png") no-repeat 9px center;
+	margin-top :32px;
+
+	
+}
+
+.pwd-icon {
+	border:solid 2px #ccc;
+	width:252px;
+	height:42px;
+	background:url("./Image/pwd.png") no-repeat 9px center;
+	margin-top :30px;
+}
+
+.inputAttr1 {
+	float : left;
+	border : none;
+	background : none;
+	height : 42px;
+	line-height : 30px;
+	width : 100%;
+	text-indent : 32px;
+}
+
+.inputAttr2 {
+	float : left;
+	border : none;
+	background : none;
+	height : 42px;
+	line-height : 30px;
+	width : 100%;
+	text-indent : 32px;
+}
+
+.button1 {
+	background-color : #08A4EE;
+	color : #FFFFFF;
+	
+}
+
+.logbt {
+	margin-top:42px;
+	width:252px;
+	height:42px;
+	border-radius :5px;
+}
+
