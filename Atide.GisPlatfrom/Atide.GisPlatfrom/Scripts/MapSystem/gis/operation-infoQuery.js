@@ -1,4 +1,4 @@
-﻿var selectYear = 2015;
+﻿
 var selectCode;
 
 
@@ -36,18 +36,11 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
              queryTask1.execute(query1);
              queryTask1.on("complete", function (event) {       
                  var feature = event.featureSet.features[0];
-
                  displayFeature(pointlayers, g_main._mapControl._map, feature, fillsymbol, null, false);
                  showResultPane();
                  centerShowGraphic(feature);
-                 displayBAXMtable(code);
-                 displayBAXMlayer(code);
- 
 
-
-
-           
-
+              displayBAXM(code)
 
              })
 
@@ -69,4 +62,16 @@ function cleanALL()
     g_main._mapControl._map.graphics.clear();
     g_main._mapControl._map.infoWindow.hide();
     selectCode = null;
+
+    if (BAXMfeatureLayers.length > 0) {
+        delLayers(BAXMfeatureLayers);
+    }
+
+    if (g_main._mapControl._map.getLayer("TBlayer") != null) {
+        g_main._mapControl._map.removeLayer(g_main._mapControl._map.getLayer("TBlayer"));
+
+    }
+
+    identifyControl("close", _objEvent);
+
 }

@@ -3,8 +3,8 @@
 //*********************************************************
 var linelayers = new Array();//用于删除已添加的层
 var pointlayers = new Array();//用于删除已添加的点层
-
-
+var BAXMfeatureLayers = new Array();
+var TBfeatureLayers = new Array();
 
 
 //递归删除已有层
