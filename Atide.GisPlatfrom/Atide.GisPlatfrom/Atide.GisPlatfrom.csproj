@@ -1019,6 +1019,7 @@
     <Content Include="Scripts\MapSystem\gis\mapcontrol.js" />
     <Content Include="Scripts\MapSystem\gis\operation-displayLayer.js" />
     <Content Include="Scripts\MapSystem\gis\operation-displayTree.js" />
+    <Content Include="Scripts\MapSystem\gis\operation-indentifyLayer.js" />
     <Content Include="Scripts\MapSystem\gis\operation-infoQuery.js" />
     <Content Include="Scripts\MapSystem\gis\tdt\TDTYXAnnoLayer.js" />
     <Content Include="Scripts\MapSystem\gis\tdt\TDTYXLayer.js" />
