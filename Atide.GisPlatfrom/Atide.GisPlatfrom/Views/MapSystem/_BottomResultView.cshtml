@@ -1,26 +1,38 @@
 ﻿@*<link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/icon.css">
-<script type="text/javascript" src="~/Scripts/lib/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>*@
+    <link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/icon.css">
+    <script type="text/javascript" src="~/Scripts/lib/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>*@
+<script>
+    require(["dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dojo/parser"]);
+</script>
+
 <div id="test" class="yp-chart-panel-unfold" title="收起面板" onclick="showHideResultPane()">
-        <i class="fa fa-angle-up" style="margin:1px auto;padding:0px;position:inherit;bottom:-2px;width:100%"></i>
+    <i class="fa fa-angle-up" style="margin:1px auto;padding:0px;position:inherit;bottom:-2px;width:100%"></i>
 </div>
 
-<div id="floatPane" class="floatPane" style="display:none;background-color:white;">
-    @*<div class="easyui-panel " title="属性视图"  data-options="fit:true ">*@
-        <div id="myTableNode"></div>
-    @*</div>*@
+@*<div id="floatPane" class="floatPane claro" style="display:none;background-color:white;">*@
+@*<div class="easyui-panel " title="属性视图"  data-options="fit:true ">*@
+@*<div id="myTableNode"></div>*@
+@*</div>*@
+@*</div>*@
+
+<div id="floatPane" class=" floatPane" data-dojo-type="dijit.layout.BorderContainer">
+    <div id="myTableNodeDiv" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'center'"></div>
+    <div id="yghcTableNode" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'right'" style="width:50%;background-color:aqua;"></div>
 </div>
+
 <script>
+
     dojo.ready(function () {
         $("#floatPane").css("width", $("#map").width() - 10);
         $("#floatPane div").css("width", $("#map").width() - 10);
     })
 
+    //显示或隐藏结果面板
     function showHideResultPane() {
         if ($("#test").hasClass("yp-chart-panel-unfold")) {
             $("#floatPane").css("display", "block");
             $("#test").removeClass("yp-chart-panel-unfold");
-            
+
             $("#test").addClass("yp-chart-panel");
             $("#test i").addClass("fa-angle-down");
             $("#test i").removeClass("fa-angle-up");
@@ -33,9 +45,10 @@
             $("#test i").removeClass("fa-angle-down");
             $("#test i").addClass("fa-angle-up");
         }
-        
+
     }
 
+    //显示下面结果面板
     function showResultPane() {
         //$("#myTableNode").remove();
         //var div = $('<div></div>');        //创建一个父div
@@ -49,6 +62,23 @@
             $("#test i").addClass("fa-angle-down");
             $("#test i").removeClass("fa-angle-up");
         }
+        showHideYghcTable(0);
     }
+
+    //显示或隐藏遥感核查结果
+    function showHideYghcTable(type) {
+        if (type == 1) {//显示遥感核查table
+            $("#yghcTableNode").css("width", $("#floatPane").width() / 2);
+            $("#myTableNodeDiv").css("width", $("#floatPane").width() / 2);
+            $("#yghcTableNode").css("display", "block");
+        }
+        else {//隐藏遥感核查table
+            $("#yghcTableNode").css("width", 0);
+            $("#myTableNodeDiv").css("width", $("#floatPane").width());
+            $("#yghcTableNode").css("display", "none");
+        }
+
+    }
+
 </script>
 
