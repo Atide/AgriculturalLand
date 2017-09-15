@@ -4,6 +4,13 @@
 <script>
     require(["dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dojo/parser"]);
 </script>
+<style>
+    /*.esri-feature-table-border-container {
+        height: 100%;
+        width: 100%;
+        padding: 10px;
+    }*/
+</style>
 
 <div id="test" class="yp-chart-panel-unfold" title="收起面板" onclick="showHideResultPane()">
     <i class="fa fa-angle-up" style="margin:1px auto;padding:0px;position:inherit;bottom:-2px;width:100%"></i>
@@ -15,16 +22,22 @@
 @*</div>*@
 @*</div>*@
 
-<div id="floatPane" class=" floatPane" data-dojo-type="dijit.layout.BorderContainer" >
+@*<div id="floatPane" class=" floatPane" data-dojo-type="dijit.layout.BorderContainer" >
     <div id="myTableNodeDiv" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'center'"></div>
-    <div id="yghcTableNode" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'right'" style="width:50%;background-color:aqua;"></div>
+    <div id="yghcTableNode" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'right'" style="width:50%;"></div>
+</div>*@
+
+
+<div id="floatPane" class=" floatPane">
+    <div id="myTableNodeDiv" style="float:left;width:50%;height:100%;background-color:aliceblue"></div>
+    <div id="yghcTableNode" style="float:left;width:50%;height:100%;background-color:antiquewhite"></div>
 </div>
 
 <script>
 
     dojo.ready(function () {
         $("#floatPane").css("width", $("#map").width() - 10);
-        $("#floatPane div").css("width", $("#map").width() - 10);
+        //$("#floatPane div").css("width", $("#map").width() - 10);
         $("#floatPane").css("display", "none");
     })
 
@@ -39,7 +52,7 @@
             $("#test i").removeClass("fa-angle-up");
         }
         else {
-            $("#floatPane div").css("width", $("#map").css("width") - 10);
+            //$("#floatPane div").css("width", $("#map").css("width") - 10);
             $("#floatPane").css("display", "none");
             $("#test").removeClass("yp-chart-panel");
             $("#test").addClass("yp-chart-panel-unfold");
