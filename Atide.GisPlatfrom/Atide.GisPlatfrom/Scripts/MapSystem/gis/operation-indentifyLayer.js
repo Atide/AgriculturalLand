@@ -22,8 +22,8 @@ function switchEvent(kind, where,layerinfos) {
 
 
         switch (kind) {
-            case "TB": layersId = 0; url = "http://172.16.1.141:6080/arcgis/rest/services/test/MapServer"; break;
-            case "BAXM": layersId = 0; url = "http://172.16.1.141:6080/arcgis/rest/services/BAXM/MapServer"; break;
+            case "TB": layersId = 0; url = "http://220.165.247.91:6080/arcgis/rest/services/test/MapServer"; break;
+            case "BAXM": layersId = 0; url = "http://220.165.247.91:6080/arcgis/rest/services/BAXM2/MapServer"; break;
 
 
         }

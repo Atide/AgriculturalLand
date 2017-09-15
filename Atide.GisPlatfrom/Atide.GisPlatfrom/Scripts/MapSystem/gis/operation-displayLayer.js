@@ -43,7 +43,7 @@ function displayTBtable(where)
                 var layerSource = new LayerDataSource();            
                 layerSource.dataSource = dataSource;
             
-                var Flayer = new FeatureLayer("http://172.16.1.141:6080/arcgis/rest/services/test/MapServer/dynamicLayer", {
+                var Flayer = new FeatureLayer("http://220.165.247.91:6080/arcgis/rest/services/test/MapServer/dynamicLayer", {
                     id:"TBtable",
                     mode: FeatureLayer.MODE_ONDEMAND,
                     outFields: ["*"],
@@ -151,7 +151,7 @@ function displayTBlayer(where) {
 
 
 
-        TBlayer = new ArcGISDynamicMapServiceLayer("http://172.16.1.141:6080/arcgis/rest/services/test/MapServer", {
+        TBlayer = new ArcGISDynamicMapServiceLayer("http://220.165.247.91:6080/arcgis/rest/services/test/MapServer", {
             "id": "TBlayer"
         });
 
@@ -227,7 +227,7 @@ function displayBAXMtable(where) {
 
             //http://172.16.1.141:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer 内网网址
             //外网地址 http://220.165.247.91:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer
-            var Flayer = new FeatureLayer("http://172.16.1.141:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer", {
+            var Flayer = new FeatureLayer("http://220.165.247.91:6080/arcgis/rest/services/BAXM2/MapServer/dynamicLayer", {
                 id: "BAXMtable",
                 mode: FeatureLayer.MODE_SNAPSHOT,
                 outFields: ["*"],
@@ -303,14 +303,17 @@ function displayBAXMtable(where) {
                                {
                                    name: 'ZXZB',
                                    alias: '界址点坐标中心位置',
+                                   visible: false,
                                },
                                  {
                                      name: 'JD',
                                      alias: '中心经度',
+                                     visible: false,
                                  },
                                    {
                                        name: 'WD',
                                        alias: '中心纬度',
+                                       visible: false,
                                    },
                                      {
                                          name: 'YXQX',
@@ -319,6 +322,7 @@ function displayBAXMtable(where) {
                                        {
                                            name: 'BACL',
                                            alias: '备案材料',
+                                           visible: false,
                                        },
                                          {
                                              name: 'BASJ',
@@ -391,7 +395,7 @@ function displayBAXMlayer(where)     //展示备案项目 动态图层
 
 
 
-        BAXMlayer = new ArcGISDynamicMapServiceLayer("http://172.16.1.141:6080/arcgis/rest/services/BAXM/MapServer", {
+        BAXMlayer = new ArcGISDynamicMapServiceLayer("http://220.165.247.91:6080/arcgis/rest/services/BAXM2/MapServer", {
             "id": "BAXMlayer"
         });
 
@@ -425,14 +429,16 @@ function displayBAXMlayer(where)     //展示备案项目 动态图层
 
         var defaultSymbol = SystemConfig.colorConfig.BAXMlayerColor;
         var renderer = new UniqueValueRenderer(defaultSymbol, "SSNYDLX");
-        renderer.addValue("生产设施用地", SystemConfig.colorConfig.BAXMlayerColor);
-        renderer.addValue("附属设施用地", SystemConfig.colorConfig.BAXMlayerColor2);
-        renderer.addValue("配套设施用地", SystemConfig.colorConfig.BAXMlayerColor3);
+        renderer.addValue("1", SystemConfig.colorConfig.BAXMlayerColor);
+        renderer.addValue("2", SystemConfig.colorConfig.BAXMlayerColor2);
+        renderer.addValue("3", SystemConfig.colorConfig.BAXMlayerColor3);
 
 
 
         var drawingOptions = new LayerDrawingOptions();
         drawingOptions.renderer = renderer;
+
+        //drawingOptions.renderer = new SimpleRenderer(SystemConfig.colorConfig.BAXMlayerColor);
 
 
         var options = [];
