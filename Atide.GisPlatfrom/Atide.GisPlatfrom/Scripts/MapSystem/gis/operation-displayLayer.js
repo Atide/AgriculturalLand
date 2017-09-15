@@ -428,9 +428,9 @@ function displayBAXMlayer(where)     //展示备案项目 动态图层
 
         var defaultSymbol = SystemConfig.colorConfig.BAXMlayerColor;
         var renderer = new UniqueValueRenderer(defaultSymbol, "SSNYDLX");
-        renderer.addValue("1", SystemConfig.colorConfig.BAXMlayerColor);
-        renderer.addValue("2", SystemConfig.colorConfig.BAXMlayerColor2);
-        renderer.addValue("3", SystemConfig.colorConfig.BAXMlayerColor3);
+        renderer.addValue("生产设施用地", SystemConfig.colorConfig.BAXMlayerColor);
+        renderer.addValue("附属设施用地", SystemConfig.colorConfig.BAXMlayerColor2);
+        renderer.addValue("配套设施用地", SystemConfig.colorConfig.BAXMlayerColor3);
 
 
 
