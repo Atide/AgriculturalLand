@@ -7,25 +7,24 @@ function displayTB(code)   //点击核查后
         alert("请选择行政区");
         return;
     }
-    var where = "XZQDM= '" + code + "'";
+    var where = "XZQDM like '" + code + "%'";
     displayTBtable(where);  //展示图斑表
     displayTBlayer(where);//展示图斑 动态图层
     showHideYghcTable(1);
     displayBAXM(code);
 }
 //展示备案项目
-function displayBAXM(code)   
-{
+function displayBAXM(code) {
 
     if (code == null) {
         alert("请选择行政区");
         return;
     }
-    var where = "XZQDM='" + code + "' and BASJ=" + g_Year;
+    var where = "XZQDM like'" + code + "%' and BASJ=" + g_Year;
     displayBAXMtable(where);  //展示备案项目 表
     displayBAXMlayer(where);  //展示备案项目 图层
-  
-  
+
+
 }
 
 function displayTBtable(where)    
