@@ -32,12 +32,13 @@ body,
 
 .floatPane {
     position: absolute;
-    bottom: 5px;
-    left: 5px;
+    bottom: 0px;
+    left: 0px;
     width: 1000px;
     height:200px;
     /*height: 700px;*/
     z-index: 999;
+    background-color:white;
 }
 
 .headerCls {

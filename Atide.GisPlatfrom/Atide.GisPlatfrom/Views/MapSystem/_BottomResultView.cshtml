@@ -4,16 +4,9 @@
 <script>
     require(["dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dojo/parser"]);
 </script>
-<style>
-    /*.esri-feature-table-border-container {
-        height: 100%;
-        width: 100%;
-        padding: 10px;
-    }*/
-</style>
 
 <div id="test" class="yp-chart-panel-unfold" title="收起面板" onclick="showHideResultPane()">
-    <i class="fa fa-angle-up" style="margin:1px auto;padding:0px;position:inherit;bottom:-2px;width:100%"></i>
+    <i class="fa fa-angle-up" style="top: -5px;position: relative;"></i>
 </div>
 
 @*<div id="floatPane" class="floatPane claro" style="display:none;background-color:white;">*@
@@ -29,14 +22,14 @@
 
 
 <div id="floatPane" class=" floatPane">
-    <div id="myTableNodeDiv" style="float:left;width:50%;height:100%;background-color:aliceblue"></div>
-    <div id="yghcTableNode" style="float:left;width:50%;height:100%;background-color:antiquewhite"></div>
+    <div id="myTableNodeDiv" style="float:left;width:50%;height:100%;"></div>
+    <div id="yghcTableNode" style="float:left;width:50%;height:100%;"></div>
 </div>
 
 <script>
 
     dojo.ready(function () {
-        $("#floatPane").css("width", $("#map").width() - 10);
+        $("#floatPane").css("width", $("#map").width());
         //$("#floatPane div").css("width", $("#map").width() - 10);
         $("#floatPane").css("display", "none");
     })
