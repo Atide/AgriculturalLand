@@ -11,7 +11,7 @@ function displayTB(code)   //点击核查后
     displayTBtable(where);  //展示图斑表
     displayTBlayer(where);//展示图斑 动态图层
     showHideYghcTable(1);
-    displayBAXM(code);
+   //displayBAXM(code);
 }
 //展示备案项目
 function displayBAXM(code) {
@@ -124,7 +124,7 @@ function displayTBlayer(where) {
     }
     var TBlayer;
     require([
-    "esri/layers/ArcGISDynamicMapServiceLayer","atide/gis/config/system-config",
+    "esri/layers/ArcGISDynamicMapServiceLayer","esri/renderers/UniqueValueRenderer","atide/gis/config/system-config",
     "esri/layers/DynamicLayerInfo", "esri/layers/LayerDataSource",
     "esri/layers/LayerDrawingOptions", "esri/layers/TableDataSource",
     "esri/Color", "esri/renderers/SimpleRenderer",
@@ -134,7 +134,7 @@ function displayTBlayer(where) {
     "dojo/parser", "dojo/_base/array", "dojo/dnd/Source", "dijit/registry", "esri/symbols/SimpleMarkerSymbol",
     "dijit/form/Button", "dojo/domReady!"
     ], function (
-       ArcGISDynamicMapServiceLayer, SystemConfig,
+       ArcGISDynamicMapServiceLayer,UniqueValueRenderer, SystemConfig,
        DynamicLayerInfo, LayerDataSource,
        LayerDrawingOptions, TableDataSource,
        Color, SimpleRenderer,
@@ -184,13 +184,18 @@ function displayTBlayer(where) {
         switchEvent("TB", where, dynamicLayerInfos);  //添加点击查询图层
 
 
+        var defaultSymbol = SystemConfig.colorConfig.TBlayerColor;
+        var renderer = new UniqueValueRenderer(defaultSymbol, "SSNYDLX");
+        renderer.addValue("生产设施用地", SystemConfig.colorConfig.TBlayerColor2);
+        renderer.addValue("附属设施用地", SystemConfig.colorConfig.TBlayerColor3);
+        renderer.addValue("配套设施用地", SystemConfig.colorConfig.TBlayerColor4);
 
 
-       var drawingOptions = new LayerDrawingOptions();
+
+        var drawingOptions = new LayerDrawingOptions();
+        drawingOptions.renderer = renderer;
 
 
-
-       drawingOptions.renderer = new SimpleRenderer(SystemConfig.colorConfig.TBlayerColor);
         var options = [];
 
         options[0] = drawingOptions;

@@ -40,9 +40,10 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
                  showResultPane();
                  var ext = feature.geometry.getExtent();
                  var res = g_main._mapControl._map.setExtent(ext.expand(1.5));
-              displayBAXM(code)
+             
               res.promise.then(function (results) {
-                  displayBAXM(code)
+                  //displayBAXM(code)
+                  displayTB(code)
               });
              })
 

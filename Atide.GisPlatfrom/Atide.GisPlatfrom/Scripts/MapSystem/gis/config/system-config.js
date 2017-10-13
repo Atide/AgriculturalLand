@@ -42,11 +42,14 @@ define(["dojo/_base/declare", "esri/symbols/SimpleFillSymbol", "esri/symbols/Sim
           BAXMfeatureColor:  new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 15,           //备案项目 单选高亮情况
                         new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
                         new Color([100, 100, 100]), 6),
-                         new Color([13, 203, 242,0])).setStyle(SimpleMarkerSymbol.STYLE_CIRCLE),
-          TBfeatureColor: new SimpleFillSymbol("solid", null, new Color([10, 255, 10, 0.85])), //图斑 单选高亮情况
- 
+                         new Color([13, 203, 242, 0])).setStyle(SimpleMarkerSymbol.STYLE_CIRCLE),
+//图斑颜色
+          TBfeatureColor: new SimpleFillSymbol("solid", null, new Color([113, 169, 254, 1])), //图斑 单选高亮情况
 
-          TBlayerColor: new SimpleFillSymbol("solid", null, new Color([0, 150, 255, 1])),   //图斑图层 全部显示情况
+          TBlayerColor: new SimpleFillSymbol("solid", null, new Color([111, 111, 111, 1])),   //分类为空  全部显示情况
+          TBlayerColor2: new SimpleFillSymbol("solid", null, new Color([0, 0, 255, 1])),   //生产设施用地 全部显示情况
+          TBlayerColor3: new SimpleFillSymbol("solid", null, new Color([0, 255, 0, 1])),   //附属设施用地 全部显示情况
+          TBlayerColor4: new SimpleFillSymbol("solid", null, new Color([255, 0, 0, 1])),   //配套设施用地 全部显示情况
 
           BAXMlayerColor:  new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 15,                        //备案项目 全部显示  生成设施
 new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
