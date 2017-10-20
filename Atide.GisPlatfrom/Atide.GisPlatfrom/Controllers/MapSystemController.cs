@@ -48,5 +48,9 @@ namespace Atide.GisPlatfrom.Controllers
         {
             return PartialView("_BottomResultView");
         }
+
+   
+
+
     }
 }

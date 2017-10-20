@@ -5,6 +5,7 @@
     <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center',splitter:false">
         <nav class="nav right">
             <ul>
+                <li><a class="fa fa-database" onclick="popQuerylayer()" href="#">查询分析</a></li>             
                 <li ><a class="fa fa-database" href="#">数据管理</a></li>
 
                 <li><a  class="fa fa-bar-chart" href="#">查询统计</a></li> @*line-chart*@
@@ -22,3 +23,50 @@
         <span style="display:block">@ViewBag.UserName</span>
         </div>
     </div>
+
+<script>
+
+    function popQuerylayer()
+    {
+       
+        require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+                        function (registry, on) {
+                           
+                            var a = registry.byId("dFloatingPane");
+                           
+                            a.show();
+                            a.bringToTop();
+                        
+                        });
+        document.getElementById("TC2").style.display = 'none';
+        document.getElementById("TC3").style.display = 'none';
+        document.getElementById("TC4").style.display = 'none';
+     
+    }
+
+
+
+    function switchTAB(index) {
+        var q1 = document.getElementById("TC1");
+        var q2 = document.getElementById("TC2");
+        var q3 = document.getElementById("TC3");
+        var q4 = document.getElementById("TC4");
+       switch(index)
+       {
+           case 1: q1.style.display = 'block'; q2.style.display = 'none'; q3.style.display = 'none'; q4.style.display = 'none'; break;
+           case 2: q1.style.display = 'none'; q2.style.display = 'block'; q3.style.display = 'none'; q4.style.display = 'none'; break;
+           case 3: q1.style.display = 'none'; q2.style.display = 'none'; q3.style.display = 'block'; q4.style.display = 'none'; break;
+           case 4: q1.style.display = 'none'; q2.style.display = 'none'; q3.style.display = 'none'; q4.style.display = 'block'; break;
+
+       }
+
+
+
+
+
+
+    }
+
+
+
+</script>

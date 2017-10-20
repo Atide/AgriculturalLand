@@ -19,6 +19,13 @@
 <script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.exedit.js"></script>
 <script src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.exhide.js"></script>
 
+
+
+@*layer JS*@
+
+
+@*EChart JS*@
+@*<script src="~/Scripts/lib/echarts/3.5.4/echarts.min.js"></script>*@
 @*自定义JS*@
 
 <script src="~/Scripts/MapSystem/gis/tool/tool-arcgis.js"></script>
@@ -62,6 +69,78 @@
 }
 
 @section ContentBody{
+<div data-dojo-type="dojox.layout.FloatingPane" id="dFloatingPane"
+     data-dojo-props="resizable:true, dockable:false,  closable:false,title:'查询分析'"
+     style="position:absolute;top:100px;left:100px;width:400px;height:500px;visibility:hidden;">
+    <span>
+        <button data-dojo-type="dijit.form.Button" data-dojo-props="label:'空间查询'" onclick="switchTAB(1)"></button>
+        <button data-dojo-type="dijit.form.Button" data-dojo-props="label:'空间统计'" onclick="switchTAB(2)"></button>
+        <button data-dojo-type="dijit.form.Button" data-dojo-props="label:'属性查询'" onclick="switchTAB(3)" ></button>
+        <button data-dojo-type="dijit.form.Button" data-dojo-props="label:'属性统计'" onclick="switchTAB(4)"></button>
+    <button data-dojo-type="dijit.form.Button" data-dojo-props="label:'关闭', onClick:function(){dijit.byId('dFloatingPane').hide();}"></button><br /></span>  
+
+
+    <div data-dojo-type="dijit/layout/TabContainer" id="TC1" style="width: 100%; height: 100%;">
+        <div data-dojo-type="dijit/layout/ContentPane" id="QU1" title="查询" data-dojo-props="selected:true">
+            <button  onclick="queryTool('Point')">单点</button>        
+            <button  onclick="queryTool('Freehand_Polyline')">自由曲线</button>
+            <button  onclick="queryTool('Freehand_Polygon')">自由曲面</button>
+            <button  onclick="queryTool('Circle')">圆形</button>
+            <div id="QU11"></div>
+        </div>
+
+        <div data-dojo-type="dijit/layout/ContentPane" id="RES1" title="结果">
+         
+        </div>
+    </div>
+
+    <div data-dojo-type="dijit/layout/TabContainer" id="TC2" style="width: 100%; height: 100%;">
+        <div data-dojo-type="dijit/layout/ContentPane" id="QU2" title="统计" data-dojo-props="selected:true">
+            <button  onclick="queryTool('Point',1)">单点</button>
+            <button  onclick="queryTool('Freehand_Polyline',1)">自由曲线</button>
+            <button  onclick="queryTool('Freehand_Polygon',1)">自由曲面</button>
+            <button  onclick="queryTool('Circle',1)">圆形</button>
+        </div>
+        <div data-dojo-type="dijit/layout/ContentPane" id="RES2" title="结果">
+        
+        </div>
+    </div>
+    <div data-dojo-type="dijit/layout/TabContainer" id="TC3" style="width: 100%; height: 100%;">
+        <div data-dojo-type="dijit/layout/ContentPane" id="QU3" title="查询" data-dojo-props="selected:true">
+           <label>选择查询字段：</label> <select name=" selectQ1" id="selectQ1">
+    <option value="BSM" selected="selected">标识码</option>
+    <option value="SSNYDLX">土地类型</option>
+    <option value="XZQDM">行政区代码</option>
+</select>
+            <label>输入查询值：</label>   <input id="QUvalue1" name="QUvalue1">        
+            <button data-dojo-type="dijit/form/Button" onclick="queryAtt(QUvalue1.value, selectQ1.value, 0)">查询</button>
+            <div id="QU31"></div>
+        </div>
+        <div data-dojo-type="dijit/layout/ContentPane" id="RES3" title="结果">
+        
+        </div>
+    </div>
+    <div data-dojo-type="dijit/layout/TabContainer" id="TC4" style="width: 100%; height: 100%;">
+        <div data-dojo-type="dijit/layout/ContentPane" id="QU4" title="查询" data-dojo-props="selected:true">
+            <label>选择查询字段：</label> <select name=" selectQ2" id="selectQ2">
+                <option value="BSM" selected="selected">标识码</option>
+                <option value="SSNYDLX">土地类型</option>
+                <option value="XZQDM">行政区代码</option>
+            </select>
+            <label>输入查询值：</label>   <input id="QUvalue2" name="QUvalue2">
+            <button data-dojo-type="dijit/form/Button" onclick="queryAtt(QUvalue2.value, selectQ2.value,1)">查询</button>
+        </div>
+        <div data-dojo-type="dijit/layout/ContentPane" id="RES4" title="结果">
+        
+        </div>
+    </div>
+
+
+
+    
+
+</div>
+
 
 <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:false,liveSplitters:false" id="borderContainer">
     <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top',splitter:false" style="height:60px;">
@@ -75,15 +154,17 @@
     </div>
 
     <div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center',splitter:false" >
-
-     
+  
+  
         @Html.Partial("_ToolBarView")
 
         
         @Html.Partial("_BottomResultView")
-
+ 
 
     </div>
+
+
     @*<div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom'" style="height:200px;">
         <div id="myTableNode"></div>
     </div>*@

@@ -1,5 +1,6 @@
 ﻿var myFeatureTable = null;
 var myFeatureTable2 = null;
+var myFeatureLayer = null;
 //展示图斑
 function displayTB(code)   //点击核查后
 {
@@ -56,6 +57,7 @@ function displayTBtable(where)
                     myFeatureTable2 = null;
                 }
 
+                myFeatureLayer = Flayer;
             // create new FeatureTable and set its properties 
                 myFeatureTable2 = new FeatureTable({
                     featureLayer: Flayer,

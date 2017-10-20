@@ -337,6 +337,8 @@
     <Content Include="Scripts\lib\bootstrap-3.3.5\js\plugins\validate\jquery.validate.min.js" />
     <Content Include="Scripts\lib\bootstrap-3.3.5\js\plugins\validate\messages_zh_CN.min.js" />
     <Content Include="Scripts\lib\bootstrap-3.3.5\js\plugins\validate\插件说明.txt" />
+    <Content Include="Scripts\lib\echarts\3.4.0\echarts.common.min.js" />
+    <Content Include="Scripts\lib\echarts\3.5.4\echarts.min.js" />
     <Content Include="Scripts\lib\jquery-toolbar20160918\css\default.css" />
     <Content Include="Scripts\lib\jquery-toolbar20160918\css\documentation.css" />
     <Content Include="Scripts\lib\jquery-toolbar20160918\css\font-awesome.min.css" />
@@ -1123,6 +1125,15 @@
     <Content Include="Scripts\lib\jquery-easyui-1.5.2\themes\metro\validatebox.css" />
     <Content Include="Scripts\lib\jquery-easyui-1.5.2\themes\metro\window.css" />
     <Content Include="Scripts\lib\jquery-easyui-1.5.2\themes\mobile.css" />
+    <Content Include="Scripts\lib\layer\2.4\layer.js" />
+    <Content Include="Scripts\lib\layer\2.4\skin\default\icon-ext.png" />
+    <Content Include="Scripts\lib\layer\2.4\skin\default\icon.png" />
+    <Content Include="Scripts\lib\layer\2.4\skin\default\loading-0.gif" />
+    <Content Include="Scripts\lib\layer\2.4\skin\default\loading-1.gif" />
+    <Content Include="Scripts\lib\layer\2.4\skin\default\loading-2.gif" />
+    <Content Include="Scripts\lib\layer\2.4\skin\layer.css" />
+    <Content Include="Scripts\lib\layer\DialogBySHF.css" />
+    <Content Include="Scripts\lib\layer\DialogBySHF.js" />
     <Content Include="Scripts\lib\timeline\jquery.timelinr-0.9.4.js" />
     <Content Include="Scripts\lib\ztree.3.5.26\css\awesomeStyle\awesome.css" />
     <Content Include="Scripts\lib\ztree.3.5.26\css\awesomeStyle\img\loading.gif" />
