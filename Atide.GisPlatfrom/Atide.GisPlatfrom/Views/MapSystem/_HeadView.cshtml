@@ -2,17 +2,17 @@
     <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'left',splitter:false" style="width:500px;line-height:60px;font-family: 'Dosis';font-size: 30px;font-weight: 600;color: #fff;margin-left:10px;text-transform: uppercase;">
         云南省设施农用地备案监管系统
     </div>
-    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center',splitter:false">
+    <div id="systemmenu" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center',splitter:false">
         <nav class="nav right">
             <ul>
-                <li><a class="fa fa-database" onclick="popQuerylayer()" href="#">查询分析</a></li>             
-                <li ><a class="fa fa-database" href="#">数据管理</a></li>
+                           
+                <li id="datamanage"><a class="fa fa-database" href="javascript:void(0)">数据管理</a></li>
 
-                <li><a  class="fa fa-bar-chart" href="#">查询统计</a></li> @*line-chart*@
+                <li id=""><a class="fa fa-bar-chart" onclick="popQuerylayer()" href="javascript:void(0)">查询统计</a></li> @*line-chart*@
 
-                <li><a  class="fa fa-university"  onclick="" href="#">监管核查</a></li>
+                <li><a class="fa fa-university" onclick="" href="javascript:void(0)">监管核查</a></li>
 
-                <li><a class="fa fa-user-circle" onclick="popUserManage()" href="#">用户管理</a></li>
+                <li id="usermanage"><a class="fa fa-user-circle" onclick="popUserManage()" href="javascript:void(0)">用户管理</a></li>
             </ul>
 
         </nav>
@@ -25,23 +25,37 @@
     </div>
 
 <script>
+    $(function () {
+        var authority = "@ViewBag.authority";
+        if (authority == "2") {
+            $('#datamanage a').removeAttr('href');//去掉a标签中的href属性
+            $('#datamanage a').removeAttr('onclick');//去掉a标签中的onclick事件
+
+            $('#usermanage a').removeAttr('href');//去掉a标签中的href属性
+            $('#usermanage a').removeAttr('onclick');//去掉a标签中的onclick事件
+        }
+        else if (authority == "3") {
+            $('#systemmenu li a').removeAttr('href');//去掉a标签中的href属性
+            $('#systemmenu li a').removeAttr('onclick');//去掉a标签中的onclick事件
+        }
+    })
 
     function popQuerylayer()
     {
-       
+
         require(["dijit/registry", "dojo/on", "dojo/domReady!"],
                         function (registry, on) {
-                           
+
                             var a = registry.byId("dFloatingPane");
-                           
+
                             a.show();
                             a.bringToTop();
-                        
+
                         });
         document.getElementById("TC2").style.display = 'none';
         document.getElementById("TC3").style.display = 'none';
         document.getElementById("TC4").style.display = 'none';
-     
+
     }
 
 

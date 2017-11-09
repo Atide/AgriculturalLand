@@ -260,3 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 Atide.GisPlatfrom/.vs/Atide.GisPlatfrom/v15/.suo
+Atide.GisPlatfrom/Atide.GisPlatfrom/Scripts/.DS_Store
+.DS_Store

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Atide.ReadTool;
 using System.IO;
+using Atide.GisPlatfrom.Models;
 
 namespace Atide.GisPlatfrom.Controllers
 {
@@ -17,7 +18,8 @@ namespace Atide.GisPlatfrom.Controllers
             {
                 var userEntity = (UserInfo)(Session["UserInfo"]);
                 // login maintain
-                ViewBag.UserName = userEntity == null ? string.Empty : userEntity.USERNAME;
+                ViewBag.UserName = userEntity == null ? string.Empty : userEntity.username;
+                ViewBag.authority = userEntity == null ? string.Empty : userEntity.authority;
 
                 return View();
             }

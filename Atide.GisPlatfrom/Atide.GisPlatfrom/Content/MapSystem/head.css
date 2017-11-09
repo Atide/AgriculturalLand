@@ -30,7 +30,8 @@
         padding-left:10px;
         padding-right:10px;
         text-decoration: none;
-        color: #eaffd6 !important;
+        //color: #eaffd6 !important;
+       color: white !important;
         line-height: 100%;
         font-size: 18px;
     }

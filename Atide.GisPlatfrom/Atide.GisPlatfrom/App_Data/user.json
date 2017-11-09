@@ -1,1 +1,1 @@
-{"total":1,"rows":[{"username":"test"}]}
+{"total":3,"rows":[{"username":"一般用户","logionname":"common","password":"123","company":"","telephone":"","email":"","authority":"2","state":"1"},{"username":"普通用户","logionname":"user","password":"123","company":"","telephone":"","email":"","authority":"3","state":"1"},{"username":"超级管理员用户","logionname":"administrator","company":"","telephone":"","email":"","password":"123","authority":"1","state":"1"}]}

@@ -4,11 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Atide.GisPlatfrom.Models;
+using Atide.ReadTool;
+using Newtonsoft.Json;
 
 namespace Atide.GisPlatfrom.Controllers
 {
     public class AccountController : Controller
     {
+
+        UserInfo loginUserInfo = new UserInfo();//当前登陆用户信息
+
         // GET: Account
         public ActionResult Index()
         {
@@ -30,6 +36,7 @@ namespace Atide.GisPlatfrom.Controllers
             return View();
         }
 
+        #region 工具函数
 
         /// <summary>
         /// 登录系统校验
@@ -55,29 +62,33 @@ namespace Atide.GisPlatfrom.Controllers
             {
                 strUrl = HttpUtility.UrlDecode(Request.Params["hidReturnUrl"].ToString().Trim());
             }
-            UserInfo loginUserInfo = new UserInfo();
-            loginUserInfo.USERID = "1";
-            loginUserInfo.USERNAME = RegName;
-            loginUserInfo.PASSWORD = PassWord;
+            
             bool boolLogin = true;
             string strReturn = string.Empty;
 
-            if (string.IsNullOrEmpty(RegName) || string.IsNullOrEmpty(PassWord))
+            //if (string.IsNullOrEmpty(RegName) || string.IsNullOrEmpty(PassWord))
+            //{
+            //    boolLogin = false;
+            //    strReturn = "用户名、密码不能为空！";
+            //}
+            if (!valideUserInfo(RegName, PassWord))
             {
                 boolLogin = false;
-                strReturn = "用户名、密码不能为空！";
+                strReturn = "用户名或密码不正确！";
             }
+
+            
 
 
             if (boolLogin)
             {
                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket
-                    (Convert.ToInt32(loginUserInfo.USERID),
-                        loginUserInfo.USERNAME,
+                    (Convert.ToInt32(loginUserInfo.userid),
+                        loginUserInfo.logionname,
                         DateTime.Now,
                         DateTime.Now.AddMinutes(20),
                         true,
-                        loginUserInfo.USERID,
+                        loginUserInfo.username,
                         "/"
                     );
 
@@ -99,25 +110,42 @@ namespace Atide.GisPlatfrom.Controllers
             }
 
             return Json(new { boolResult = boolLogin, returnMsg = strReturn }, JsonRequestBehavior.AllowGet);
+        } 
+
+        //验证用户信息
+        public bool valideUserInfo(string logionname, string password)
+        {
+            string path = "~/App_Data/user.json";
+            try
+            {
+                string filepath = Server.MapPath(path);
+                string json = TextFileOper.GetFileJson(filepath);
+                UserInfos lstUser = JsonConvert.DeserializeObject<UserInfos>(json);
+                if (lstUser == null || lstUser.rows == null)
+                {
+                    return false;
+                }
+                for (int i = 0; i < lstUser.rows.Count; i++)
+                {
+                    UserInfo user = lstUser.rows[i];
+                    if (user.logionname == logionname && user.password == password && user.state == "1")
+                    {
+                        loginUserInfo = user;
+                        loginUserInfo.userid = i;
+                        return true;
+                    }
+                }
+                return false;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
+       
+        #endregion
 
 
-    }
-
-    public class UserInfo
-    {
-
-        public string TableName { get; set; }
-        public string USERID { get; set; }
-        public string REGNAME { get; set; }
-        public string USERNAME { get; set; }
-        public string PASSWORD { get; set; }
-        public string UNITID { get; set; }
-        public string TELPHONE { get; set; }
-        public string ADDRESS { get; set; }
-        public string ISSTOP { get; set; }
-        public string REMARK { get; set; }
-        public string ISADMIN { get; set; }
-        public string ROLEINFO { get; set; }
     }
 }
