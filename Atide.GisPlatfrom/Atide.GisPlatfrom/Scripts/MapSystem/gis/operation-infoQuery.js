@@ -3,6 +3,7 @@ var selectCode;
 var querytoolbar;
 var display;
 var whichfun;
+var whichField;
 function queryNodebyCode(code)    //树于行政区列表 点击触发
 {
     cleanALL();
@@ -44,7 +45,8 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
              
               res.promise.then(function (results) {
                   //displayBAXM(code)
-                  displayTB(code)
+                 
+                  displayTB(code, getSelectTime())
               });
              })
 
@@ -83,8 +85,9 @@ function cleanALL()
 
 
 
-function queryTool(kind, isSta) {
+function queryTool(kind, isSta,stField) {   //空间画图工具 触发
     whichfun = isSta;
+    whichField = stField;
     require([
   "esri/toolbars/draw", "esri/symbols/SimpleLineSymbol",
     "esri/symbols/SimpleMarkerSymbol",
@@ -100,35 +103,41 @@ function queryTool(kind, isSta) {
         var tool = kind.toUpperCase().replace(/ /g, "_");
         if (querytoolbar == null) {
             querytoolbar = new Draw(g_main._mapControl._map);
-            querytoolbar.on("draw-end", addqueryToMap);
-          
-
-            function addqueryToMap(evt) {
-                var symbol;
-                querytoolbar.deactivate();
-                // this._map.showZoomSlider();
-                switch (evt.geometry.type) {
-                    case "point":
-                    case "multipoint":
-                        symbol = new SimpleMarkerSymbol();
-                        break;
-                    case "polyline":
-                        symbol = new SimpleLineSymbol();
-                        break;
-                    default:
-                        symbol = new SimpleFillSymbol();
-                        break;
-                }
-                var graphic = new Graphic(evt.geometry, symbol);
-                g_main._mapControl._map.graphics.clear();
-                g_main._mapControl._map.graphics.add(graphic);
-                queryGeo(evt.geometry)
-           
-
-            }
+            querytoolbar.on("draw-end", addqueryToMap);     
         }
 
 
+        function addqueryToMap(evt) {
+            var symbol;
+            querytoolbar.deactivate();
+
+            switch (evt.geometry.type) {
+                case "point":
+                case "multipoint":
+                    symbol = new SimpleMarkerSymbol();
+                    break;
+                case "polyline":
+                    symbol = new SimpleLineSymbol();
+                    break;
+                default:
+                    symbol = new SimpleFillSymbol();
+                    break;
+            }
+            var graphic = new Graphic(evt.geometry, symbol);
+            g_main._mapControl._map.graphics.clear();
+            g_main._mapControl._map.graphics.add(graphic);
+
+
+            if (whichfun != 1) {
+                queryByGeometry(evt.geometry)   //空间 查询
+            }
+            else {
+                StaByGeometry(evt.geometry)  //空间 统计
+            }
+          
+
+
+        }
 
 
         querytoolbar.activate(Draw[tool]);
@@ -139,39 +148,13 @@ function queryTool(kind, isSta) {
 
 }
 
-function queryGeo(geometry)
-{
-    if (whichfun != 1) {
-        queryByGeometry(geometry)
-    }
-    else {
-        StaByGeometry(geometry)
-    }
-}
-
-function queryAtt(value, field, isSta) {
-    if (myFeatureLayer == null) {
-        alert("请先选择图斑");
-        return;
-    }
-    if (value == "") {
-        alert("请输入查寻值");
-        return;
-    }
-
-    var where = field + "='" + value + "'"
-   
-    if (isSta != 1) {
-        queryByAtt(where);
-    }
-    else {
-        StaByAtt(where);
-    }
-
-}
 
 
-function queryByGeometry(geometry) {
+
+
+
+
+function queryByGeometry(geometry) {  //空间查询
 
 
     require(["dijit/registry","esri/layers/FeatureLayer","esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",
@@ -222,7 +205,7 @@ function queryByGeometry(geometry) {
 
 }
 
-function StaByGeometry(geometry) {
+function StaByGeometry(geometry) {   //空间统计
 
 
     require(["dijit/registry", "esri/layers/FeatureLayer", "esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",
@@ -246,27 +229,20 @@ function StaByGeometry(geometry) {
                    return;
                }
                var features = event;
+               for (var i = 0; i < features.length; i++) {
+                   features[i] = features[i].attributes
 
+               }
                        registry.byId("TC2").selectChild("RES2", true);
                        var div2 = document.getElementById("RES2")
                        
-                   var scN = 0;
-                   var fsN = 0;
-                   var ptN = 0;
-                   for (var i = 0; i < features.length; i++) {
-                       switch (features[i].attributes.SSNYDLX) {
-                           case "生产设施用地": scN++; break;
-                           case "附属设施用地": fsN++; break;
-                           case "配套设施用地": ptN++; break;
+                       var res = toClassify(features, whichField)   //根据所选字段 统计
+
+                       div2.innerHTML = "";
+                       for (var i = 0; i < res.length; i++) {
+                           div2.innerHTML += res[i].Field + "：" + res[i].data.length + "</br>"
+
                        }
-
-                   }
-
-
-                   div2.innerHTML = "<div>生产设施用地图斑数量：" + scN
-                       + "</br> 附属设施用地图斑数量：" + fsN
-                       + "</br> 配套设施用地图斑数量：" + ptN
-                       + "</div>";
              
 
            });
@@ -276,8 +252,18 @@ function StaByGeometry(geometry) {
 
 }
 
-function queryByAtt(where) {
+function queryByAtt(value, field) {  //属性查询
 
+
+    if (myFeatureLayer == null) {
+        alert("请先选择图斑");
+        return;
+    }
+    if (value == "") {
+        alert("请输入查寻值");
+        return;
+    }
+    var where = field + "='" + value + "'"
 
     require(["dijit/registry", "esri/layers/FeatureLayer", "esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",
   "esri/layers/GraphicsLayer", "esri/symbols/SimpleLineSymbol", "esri/symbols/CartographicLineSymbol", "esri/tasks/query",
@@ -340,8 +326,16 @@ function queryByAtt(where) {
 }
 
 
-function StaByAtt(where) {
-
+function StaByAtt(value, field, stField) {  //属性统计
+    if (myFeatureLayer == null) {
+        alert("请先选择图斑");
+        return;
+    }
+    if (value == "") {
+        alert("请输入查寻值");
+        return;
+    }
+    var where = field + "='" + value + "'"
 
     require(["dijit/registry", "esri/layers/FeatureLayer", "esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",
   "esri/layers/GraphicsLayer", "esri/symbols/SimpleLineSymbol", "esri/symbols/CartographicLineSymbol", "esri/tasks/query",
@@ -362,36 +356,25 @@ function StaByAtt(where) {
                    }
 
                var features = event;
+               for (var i = 0; i < features.length; i++) {
+                   features[i] =features[i].attributes
 
+               }
 
-                       registry.byId("TC4").selectChild("RES4", true);;
-                      var div2 = document.getElementById("RES4")
-                 
-                   var scN = 0;
-                   var fsN = 0;
-                   var ptN = 0;
-                   for (var i = 0; i < features.length; i++) {
-                       switch (features[i].attributes.SSNYDLX) {
-                           case "生产设施用地": scN++; break;
-                           case "附属设施用地": fsN++; break;
-                           case "配套设施用地": ptN++; break;
-                       }
+               registry.byId("TC4").selectChild("RES4", true);;
+               var div2 = document.getElementById("RES4")
 
-                   }
+               var res = toClassify(features, stField)   //根据所选字段 统计
 
+               div2.innerHTML = "";
+               for (var i = 0; i < res.length; i++)
+               {
+                   div2.innerHTML += res[i].Field + "：" + res[i].data.length +"</br>"
+                
+               }
+         
 
-                   div2.innerHTML = "<div>生产设施用地图斑数量：" + scN
-                       + "</br> 附属设施用地图斑数量：" + fsN
-                       + "</br> 配套设施用地图斑数量：" + ptN
-                       + "</div>";
-
-
-           
-
-
-
-
-
+             
 
            });
 
@@ -400,3 +383,50 @@ function StaByAtt(where) {
 
 }
 
+function getSelectTime() {   //获取选择时间 数组('2014','2015')
+    var selStr = String($("#yearselect").val());
+    var arr = selStr.split(',');
+    var res="("
+    for (var i = 0; i < arr.length; i++) {
+        if (i == 0)
+        {
+            res += "'" + arr[i] + "'"
+        }
+        else {
+            res += ",'" + arr[i] + "'"
+        }
+    }
+    res+=")"
+    return res;
+}
+
+
+
+function toClassify(arr, Field) {     
+
+
+
+    var map = {},
+        dest = [];
+    for (var i = 0; i < arr.length; i++) {
+        var ai = arr[i];
+        ai[Field] = ai[Field].replace(/\r/g, "");
+        if (!map[ai[Field]]) {
+            dest.push({
+                Field: ai[Field],
+                data: [ai]
+            });
+            map[ai[Field]] = 1;
+        } else {
+            for (var j = 0; j < dest.length; j++) {
+                var dj = dest[j];
+                if (dj.Field == ai[Field]) {
+                    dj.data.push(ai);
+                    break;
+                }
+            }
+            map[ai[Field]]++;
+        }
+    }
+    return dest;
+}

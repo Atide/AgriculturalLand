@@ -2,26 +2,26 @@
 var myFeatureTable2 = null;
 var myFeatureLayer = null;
 //展示图斑
-function displayTB(code)   //点击核查后
+function displayTB(code,selectTime)   //点击树  展示图斑和属性表
 {
     if (code == null) {
         alert("请选择行政区");
         return;
     }
-    var where = "XZQDM like '" + code + "%'";
+    var where = "XZQDM like '" + code + "%'and TIME in" +selectTime;
     displayTBtable(where);  //展示图斑表
     displayTBlayer(where);//展示图斑 动态图层
     showHideYghcTable(1);
    //displayBAXM(code);
 }
 //展示备案项目
-function displayBAXM(code) {
+function displayBAXM(code, selectTime) {
 
     if (code == null) {
         alert("请选择行政区");
         return;
     }
-    var where = "XZQDM like'" + code + "%' and BASJ=" + g_Year;
+    var where = "XZQDM like'" + code + "%' and BASJ in" + selectTime;
     displayBAXMtable(where);  //展示备案项目 表
     displayBAXMlayer(where);  //展示备案项目 图层
 
@@ -39,7 +39,7 @@ function displayTBtable(where)
                   
                 var dataSource = new TableDataSource();    
                 dataSource.workspaceId = "test1";                   
-                dataSource.dataSourceName = "YGHC-" + g_Year + ".shp";            
+                dataSource.dataSourceName = "YGHC.shp";            
                 var layerSource = new LayerDataSource();            
                 layerSource.dataSource = dataSource;
             
@@ -107,7 +107,7 @@ function displayTBtable(where)
             //点击表格后 获取所选 features
                 myFeatureTable2.on("row-select", function (evt) {
                     myFeatureTable2.getFeatureDataById(myFeatureTable2.selectedRowIds).then(function (res) {              
-                     displayBYfeature(res.features[0], "TB")
+                     displayBYfeature(res.features[0], "TB")   
                     });
 
                 });
@@ -164,7 +164,7 @@ function displayTBlayer(where) {
 
 
     
-        var layerName = "YGHC-" + g_Year + ".shp";
+        var layerName = "YGHC.shp";
 
         var dynamicLayerInfo = new DynamicLayerInfo();
         dynamicLayerInfo.id = dynamicLayerInfos.length;
@@ -466,7 +466,7 @@ function displayBAXMlayer(where)     //展示备案项目 动态图层
 }
 
 
-function displayBYfeature(feature,kind)
+function displayBYfeature(feature,kind)    //展示要素方法
 {
     require([
   "esri/layers/ArcGISDynamicMapServiceLayer", "atide/gis/config/system-config","esri/InfoTemplate",
