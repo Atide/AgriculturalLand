@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -184,6 +185,8 @@
     <Content Include="Content\MapSystem\images\ico10.gif" />
     <Content Include="Content\MapSystem\images\ico11.gif" />
     <Content Include="Content\MapSystem\images\ico9.gif" />
+    <Content Include="Content\MapSystem\images\images.png" />
+    <Content Include="Content\MapSystem\images\images_h.png" />
     <Content Include="Content\MapSystem\images\Toolbars-icon\Back.png" />
     <Content Include="Content\MapSystem\images\Toolbars-icon\Empty.png" />
     <Content Include="Content\MapSystem\images\Toolbars-icon\Enlarge.png" />
@@ -201,6 +204,7 @@
     <Content Include="Content\MapSystem\stylesv.css" />
     <Content Include="Content\MapSystem\timeline.css" />
     <Content Include="Content\MapSystem\user.css" />
+    <Content Include="Content\TBFJ\1.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

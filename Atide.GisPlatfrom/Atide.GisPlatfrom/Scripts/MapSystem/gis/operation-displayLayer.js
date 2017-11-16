@@ -513,7 +513,7 @@ function displayBYfeature(feature,kind)    //展示要素方法
                    "备案时间: ${BASJ }<br/>" +
                    "备注: ${BJ}<br/>"
 
-
+           
                 var infoTemplate = new InfoTemplate("备案信息详细", content);
                 displayFeature(BAXMfeatureLayers, g_main._mapControl._map, feature, sms, infoTemplate);
                 break;
@@ -534,7 +534,13 @@ function displayBYfeature(feature,kind)    //展示要素方法
                   "监测图斑编号: ${JCTBBH}<br/>" +
                   "土地变更描述: ${BGMS}<br/>" +
                   "监测年度: ${JCND}<br/>" +           
-                  "备注: ${BZ}<br/>"
+                    "备注: ${BZ}<br/>" +               
+                    "附件查看:"
+                if (true) {
+                    content += "<a onclick='Img_show(\"" + feature.attributes.BSM + "\")' id='Img_show'><img  src='/Content/MapSystem/images/images.png' /></a>"
+                } else {
+                    content += "<a onclick='Img_show()' id='Img_show'><img  src='/Content/MapSystem/images/images_h.png' /></a>"
+                }
                 var infoTemplate = new InfoTemplate("遥感核查详细信息", content);
                 displayFeature(TBfeatureLayers, g_main._mapControl._map, feature, sms, infoTemplate);
                 break;
@@ -549,6 +555,26 @@ function displayBYfeature(feature,kind)    //展示要素方法
 
 
     
+}
+
+
+
+function Img_show(PictureID)
+{
+    if (PictureID == null)
+    {
+        alert("未找到相关附件")
+    }
+    else {
+
+        layer.open({
+            type: 1,
+            title: '附件查看',
+            maxmin: true,
+            area: ['800px', '500px'],
+            content: "<img  src='/Content/TBFJ/1.png' width='600' height='550' />"
+        });
+    }
 }
 
 
