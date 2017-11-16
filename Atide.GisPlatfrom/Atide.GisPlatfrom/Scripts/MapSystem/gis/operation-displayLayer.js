@@ -537,7 +537,7 @@ function displayBYfeature(feature,kind)    //展示要素方法
                     "备注: ${BZ}<br/>" +               
                     "附件查看:"
                 if (true) {
-                    content += "<a onclick='Img_show(\"" + feature.attributes.BSM + "\")' id='Img_show'><img  src='/Content/MapSystem/images/images.png' /></a>"
+                    content += "<a onclick='Img_show(\"" + feature.attributes.JCTBBH + "\"," + "\"" + feature.attributes.TIME + "\"," + "\"" + feature.attributes.XZQDM + "\")' id='Img_show'><img  src='/Content/MapSystem/images/images.png' /></a>"
                 } else {
                     content += "<a onclick='Img_show()' id='Img_show'><img  src='/Content/MapSystem/images/images_h.png' /></a>"
                 }
@@ -558,22 +558,23 @@ function displayBYfeature(feature,kind)    //展示要素方法
 }
 
 
-
-function Img_show(PictureID)
+//附件 弹出 页面
+function Img_show(JCTBBH, TIME, XZQDM)
 {
-    if (PictureID == null)
+    if (JCTBBH == null)
     {
         alert("未找到相关附件")
     }
     else {
-
+    
         layer.open({
-            type: 1,
+            type: 2,
             title: '附件查看',
             maxmin: true,
-            area: ['800px', '500px'],
-            content: "<img  src='/Content/TBFJ/1.png' width='600' height='550' />"
+            area: ['650px', '650px'],
+            content: '/MapSystem/PictureView?JCTBBH=' + JCTBBH + '&TIME=' + TIME + '&XZQDM=' + XZQDM
         });
+     
     }
 }
 

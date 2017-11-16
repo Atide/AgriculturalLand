@@ -61,6 +61,14 @@ namespace Atide.GisPlatfrom.Controllers
             return PartialView("_StatisticsAnalysisView");
         }
 
+        //附件图片查看视图
+        public ActionResult PictureView(string JCTBBH,string TIME,string XZQDM)
+        {
+            ViewBag.JCTBBH = JCTBBH;
+            ViewBag.TIME = TIME;
+            ViewBag.XZQDM = XZQDM;
+            return PartialView("_PictureView");
+        }
         //年份选择下拉视图
         public ActionResult YearSelectView()
         {

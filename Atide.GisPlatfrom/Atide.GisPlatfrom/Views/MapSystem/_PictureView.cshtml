@@ -1,0 +1,80 @@
+﻿@Scripts.Render("~/Scripts/lib/jquery/jquery.min.js")
+
+
+<div>
+    <button onclick="change(1)">上一张</button><button onclick="change(2)">下一张</button>
+    <div id="PictureView"> </div>
+
+    </div>
+
+
+
+<script>
+    var urlOR;
+    var ZPid = 1;
+    $(function () {
+
+        var JCTBBH = '@ViewBag.JCTBBH'
+        var TIME= '@ViewBag.TIME'
+        var XZQDM = '@ViewBag.XZQDM'
+
+          JCTBBH = '1'
+         TIME= '2015'
+         XZQDM = '530181'
+
+         urlOR = "http://172.16.1.143:6080/FJ_YGHC/" + TIME + "/" + XZQDM + "/B/" + XZQDM + "_" + JCTBBH + "_ZP_";
+         url = urlOR+ZPid+ ".jpg";
+        getPicture(url)
+
+
+
+
+
+
+    })
+
+    function getPicture(url)   //创建图片img
+    {
+        var img = document.createElement("img");
+        img.src = url;
+        img.width = '600';
+        img.height = '550';
+        if (img.complete == true)
+        {
+            var div = document.getElementById('PictureView')
+            div.innerHTML = "";
+            div.appendChild(img);
+            return 1;
+        }
+        else {
+            alert("未找到相应图片")
+            return 2;
+        }
+    }
+
+
+
+    function change(kind)  //翻页
+    {
+        if (kind == 1)   //上页
+        {
+            ZPid -= 1;
+            url = urlOR + ZPid + ".jpg";
+            if (getPicture(url) == 2)  //翻页失败 ID不变
+            {   
+                ZPid += 1;
+            }
+
+        }
+
+
+        else {
+            ZPid += 1;
+            url = urlOR + ZPid + ".jpg";
+            if (getPicture(url) == 2)  //翻页失败 ID不变
+            {
+                ZPid -= 1;
+            }
+        }
+    }
+</script>
