@@ -234,15 +234,26 @@ function StaByGeometry(geometry) {   //空间统计
 
                }
                        registry.byId("TC2").selectChild("RES2", true);
-                       var div2 = document.getElementById("RES2")
+                    
                        
                        var res = toClassify(features, whichField)   //根据所选字段 统计
-
-                       div2.innerHTML = "";
-                       for (var i = 0; i < res.length; i++) {
-                           div2.innerHTML += res[i].Field + "：" + res[i].data.length + "</br>"
-
+                       var Xdata = new Array();
+                       var Ydata = new Array();
+                       for (var i = 0; i < res.length; i++)
+                       {
+                           Xdata.push(res[i].Field);
+                           Ydata.push(res[i].data.length);
                        }
+
+
+                       var myChart = echarts.init(document.getElementById('geoSta'));
+                                            var option = {                           title: {                               text: whichField+ '情况统计'                           },                                                     tooltip: {},                                                   xAxis: {                               data: Xdata,                               axisLabel : {
+                                   interval: 0
+                               } ,                           },                           yAxis: {},                           series: [{                               name: '图斑数量',                               type: 'bar',                               data: Ydata                           }]                       };
+                                         myChart.setOption(option);
+
+
+                    
              
 
            });
@@ -362,17 +373,22 @@ function StaByAtt(value, field, stField) {  //属性统计
                }
 
                registry.byId("TC4").selectChild("RES4", true);;
-               var div2 = document.getElementById("RES4")
-
+             
                var res = toClassify(features, stField)   //根据所选字段 统计
 
-               div2.innerHTML = "";
-               for (var i = 0; i < res.length; i++)
-               {
-                   div2.innerHTML += res[i].Field + "：" + res[i].data.length +"</br>"
-                
+               var Xdata = new Array();
+               var Ydata = new Array();
+               for (var i = 0; i < res.length; i++) {
+                   Xdata.push(res[i].Field);
+                   Ydata.push(res[i].data.length);
                }
-         
+
+
+               var myChart = echarts.init(document.getElementById('attSta'));
+               var option = {                   title: {                       text: whichField + '情况统计'                   },                   tooltip: {},                   xAxis: {                       data: Xdata,                       axisLabel : {
+                           interval: 0
+                       } ,                   },                   yAxis: {},                   series: [{                       name: '图斑数量',                       type: 'bar',                       data: Ydata                   }]               };
+               myChart.setOption(option);
 
              
 

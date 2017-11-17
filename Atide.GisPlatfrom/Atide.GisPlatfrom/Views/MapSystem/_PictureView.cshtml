@@ -12,7 +12,8 @@
 <script>
     var urlOR;
     var ZPid = 1;
-    $(function () {
+
+    $(function () {   //初始化弹出页
 
         var JCTBBH = '@ViewBag.JCTBBH'
         var TIME= '@ViewBag.TIME'
@@ -24,7 +25,7 @@
 
          urlOR = "http://172.16.1.143:6080/FJ_YGHC/" + TIME + "/" + XZQDM + "/B/" + XZQDM + "_" + JCTBBH + "_ZP_";
          url = urlOR+ZPid+ ".jpg";
-        getPicture(url)
+         getPicture(url);
 
 
 
