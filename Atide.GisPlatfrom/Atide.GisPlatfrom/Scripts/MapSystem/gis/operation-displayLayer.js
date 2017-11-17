@@ -536,7 +536,9 @@ function displayBYfeature(feature,kind)    //展示要素方法
                   "监测年度: ${JCND}<br/>" +           
                     "备注: ${BZ}<br/>" +               
                     "附件查看:"
-                if (true) {
+                var url = "http://220.165.247.91:6080/FJ_YGHC/" + feature.attributes.TIME + "/" + feature.attributes.XZQDM + "/B/" + feature.attributes.XZQDM + "_" + feature.attributes.JCTBBH + "_CL_1.jpg";
+               
+                if (isPictureEx(url)==1) {
                     content += "<a onclick='Img_show(\"" + feature.attributes.JCTBBH + "\"," + "\"" + feature.attributes.TIME + "\"," + "\"" + feature.attributes.XZQDM + "\")' id='Img_show'><img  src='/Content/MapSystem/images/images.png' /></a>"
                 } else {
                     content += "<a onclick='Img_show()' id='Img_show'><img  src='/Content/MapSystem/images/images_h.png' /></a>"
@@ -578,7 +580,19 @@ function Img_show(JCTBBH, TIME, XZQDM)
     }
 }
 
+function isPictureEx(url)   //检查是否有图片
+{
 
+    var img = document.createElement("img");
+    img.src = url;
+ 
+    if (img.complete == true) {  
+        return 1;
+    }
+    else {     
+        return 2;
+    }
+}
 
 
 

@@ -19,11 +19,11 @@
         var TIME= '@ViewBag.TIME'
         var XZQDM = '@ViewBag.XZQDM'
 
-          JCTBBH = '1'
-         TIME= '2015'
-         XZQDM = '530181'
+         // JCTBBH = '1'
+         //TIME= '2015'
+         //XZQDM = '530181'
 
-         urlOR = "http://172.16.1.143:6080/FJ_YGHC/" + TIME + "/" + XZQDM + "/B/" + XZQDM + "_" + JCTBBH + "_ZP_";
+        urlOR = "http://220.165.247.91:6080/FJ_YGHC/" + TIME + "/" + XZQDM + "/B/" + XZQDM + "_" + JCTBBH + "_CL_";
          url = urlOR+ZPid+ ".jpg";
          getPicture(url);
 
@@ -36,6 +36,7 @@
 
     function getPicture(url)   //创建图片img
     {
+        
         var img = document.createElement("img");
         img.src = url;
         img.width = '600';
@@ -78,4 +79,7 @@
             }
         }
     }
+
+
+ 
 </script>
