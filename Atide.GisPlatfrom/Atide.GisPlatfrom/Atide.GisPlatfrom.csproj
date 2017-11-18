@@ -204,6 +204,24 @@
     <Content Include="Content\MapSystem\stylesv.css" />
     <Content Include="Content\MapSystem\timeline.css" />
     <Content Include="Content\MapSystem\user.css" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\112-circle.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\92-floppy.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\add.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\diy\1_close.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\diy\1_open.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\diy\2.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\diy\3.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\diy\4.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\diy\5.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\diy\6.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\diy\7.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\diy\8.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\diy\9.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\line_conn.gif" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\loading.gif" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\zTreeStandard.gif" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\zTreeStandard.png" />
+    <Content Include="Content\MapSystem\zTreeStyle\zTreeStyle.css" />
     <Content Include="Content\TBFJ\1.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1179,6 +1197,7 @@
     <Content Include="Scripts\lib\ztree.3.5.26\jquery.ztree.exedit.min.js" />
     <Content Include="Scripts\lib\ztree.3.5.26\jquery.ztree.exhide.js" />
     <Content Include="Scripts\lib\ztree.3.5.26\jquery.ztree.exhide.min.js" />
+    <Content Include="Scripts\MapSystem\common\servicemanage.js" />
     <Content Include="Scripts\MapSystem\common\user.js" />
     <Content Include="Scripts\MapSystem\gis\arcgis-toolbars.js" />
     <Content Include="Scripts\MapSystem\gis\config\system-config.js" />
@@ -1188,6 +1207,7 @@
     <Content Include="Scripts\MapSystem\gis\operation-displayTree.js" />
     <Content Include="Scripts\MapSystem\gis\operation-indentifyLayer.js" />
     <Content Include="Scripts\MapSystem\gis\operation-infoQuery.js" />
+    <Content Include="Scripts\MapSystem\gis\operation-ServiceTree.js" />
     <Content Include="Scripts\MapSystem\gis\tdt\TDTYXAnnoLayer.js" />
     <Content Include="Scripts\MapSystem\gis\tdt\TDTYXLayer.js" />
     <Content Include="Scripts\MapSystem\gis\tdt\TDTSLLayer.js" />
@@ -1340,6 +1360,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\MapSystem\_PictureView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\service.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\MapSystem\zTreeStyle\img\diy\Thumbs.db" />
+    <Content Include="Content\MapSystem\zTreeStyle\img\Thumbs.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MapSystem\ServiceManageView.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

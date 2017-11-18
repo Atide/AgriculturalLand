@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Atide.ReadTool;
 using System.IO;
 using Atide.GisPlatfrom.Models;
+using Newtonsoft.Json;
 
 namespace Atide.GisPlatfrom.Controllers
 {
@@ -81,12 +82,31 @@ namespace Atide.GisPlatfrom.Controllers
             return PartialView("UserView");
         }
 
+        //服务管理视图
+        public ActionResult ServiceManageView(string type)
+        {
+            if (type == "1")
+            {
+                ViewBag.type = "服务新增";
+            }
+            else
+            {
+                ViewBag.type = "服务编辑";
+            }
+
+            return View("ServiceManageView");
+        }
 
         #region 工具函数
         //json文件路径："~/Content/json/test.json"
-        public ActionResult GetJsonFromFile(string path)
+        public ActionResult GetJsonFromFile(string name)
         {
-            path = "~/App_Data/user.json";
+            string path = "~/App_Data/";
+            if (string.IsNullOrEmpty(name))
+            {
+                name = "user.json";
+            }
+            path += name;
             try
             {
                 string filepath = Server.MapPath(path);
@@ -104,7 +124,7 @@ namespace Atide.GisPlatfrom.Controllers
             if (string.IsNullOrEmpty(path))
             {
                 path = "~/App_Data/user.json";
-            }            
+            }
 
             string fp = Server.MapPath(path);
             if (!System.IO.File.Exists(fp))  // 判断是否已有相同文件 
@@ -114,6 +134,26 @@ namespace Atide.GisPlatfrom.Controllers
                 fs1.Close();
             }
             System.IO.File.WriteAllText(fp, content);
+            return Content("success");
+        }
+        public ActionResult SaveServiceToJson(string path, string content)
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                path = "~/App_Data/service.json";
+            }
+            //ServiceInfos lstUser = JsonConvert.DeserializeObject<ServiceInfos>(content);
+
+
+
+            string fp = Server.MapPath(path);
+            if (!System.IO.File.Exists(fp))  // 判断是否已有相同文件 
+            {
+                FileStream fs1 = new FileStream(fp, FileMode.Create, FileAccess.ReadWrite);
+
+                fs1.Close();
+            }
+            System.IO.File.WriteAllText(fp, content);//JsonConvert.SerializeObject(lstUser)
             return Content("success");
         }
         #endregion

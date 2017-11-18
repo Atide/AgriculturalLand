@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "UserView";
+    Layout = "~/Views/Shared/_Common.cshtml";
+}
+@section TitleSection{
+    云南省设施农用地备案监管系统
+}
+@section HeaderSection{
+<script type="text/javascript" src="~/Scripts/MapSystem/common/servicemanage.js"></script>
+}
+@section ContentBody{
+
+    <div>    
+        <table class="reg_table" align="center">
+            <tr>
+                <td colspan="2" style="height:50px;text-align:center;">
+                    <span id="serviceOperTitle" style="font-size:20px">@ViewBag.type</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><span style="color:red">*</span>服务名称：</td>
+                <td class="td2"><input id="servicename" type="text" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td class="td1"><span style="color:red">*</span>服务地址：</td>
+                <td class="td2">@*<input id="serviceurl" type="text" />*@
+                    <textarea id="serviceurl" style="width:200px;height:80px;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="td1"><span style="color:red">*</span>可见图层：</td>
+                <td class="td2"><input id="visuallayer" type="text" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height: 50px;">
+                    <button style="margin-right:100px;width:100px" onclick="onButtonOk()"> 确定</button> <button style="width:100px" onclick="onButtonCancle()"> 取消</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+}
+
+

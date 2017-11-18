@@ -13,11 +13,11 @@
 <link rel="stylesheet" href="~/Content/MapSystem/head.css" />
 @*<link rel="stylesheet" href="~/Content/MapSystem/timeline.css" />*@
  
-<link rel="stylesheet" href="~/Scripts/lib/ztree.3.5.26/css/zTreeStyle/zTreeStyle.css" type="text/css">
+@*<link rel="stylesheet" href="~/Scripts/lib/ztree.3.5.26/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.excheck.js"></script>
 <script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.exedit.js"></script>
-<script src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.exhide.js"></script>
+<script src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.exhide.js"></script>*@
 
 @*layer JS*@
 
@@ -32,8 +32,8 @@
 
 
 
-<link href="~/Scripts/lib/jquery-toolbar20160918/css/jquery.toolbar.css" rel="stylesheet" />
-<script src="~/Scripts/lib/jquery-toolbar20160918/js/jquery.toolbar.min.js"></script>
+@*<link href="~/Scripts/lib/jquery-toolbar20160918/css/jquery.toolbar.css" rel="stylesheet" />
+<script src="~/Scripts/lib/jquery-toolbar20160918/js/jquery.toolbar.min.js"></script>*@
 <script type="text/javascript">
         require(["dojo/parser", 'dojo/dom', 'atide/gis/main', "dojox/layout/FloatingPane", "dijit/form/Button", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dijit/layout/TabContainer", "dijit/layout/AccordionContainer", "dijit/layout/AccordionPane"]);
 </script>
@@ -41,11 +41,13 @@
 <script>
     var g_Year=2015;
     var g_Tree;
-     var g_main = null;
+    var g_main = null;
+    var g_ServiceTree = null;
     dojo.ready(function () {
         g_main = new atide.gis.main();
-        require(["atide/gis/operation-displayTree"], function (myZtree) {
+        require(["atide/gis/operation-displayTree", "atide/gis/operation-ServiceTree"], function (myZtree, serviceTree) {
             g_Tree = myZtree();
+            g_ServiceTree = new serviceTree();
         });
 
        

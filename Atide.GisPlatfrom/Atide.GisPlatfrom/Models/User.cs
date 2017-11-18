@@ -23,4 +23,24 @@ namespace Atide.GisPlatfrom.Models
         public string total { get; set; }
         public List<UserInfo> rows { get; set; }
     }
+
+    //{"id":11,"pId":1,"name":"行政区划-1","serviceurl":"http://220.165.247.91:6080/arcgis/rest/services/XZQH/MapServer","visuallayers": "0"}
+    public class ServiceInfo
+    {
+        public string id { get; set; }
+        public string pId { get; set; }
+        public string name { get; set; }
+        public string serviceurl { get; set; }
+        public string visuallayers { get; set; }
+    }
+
+    public class ServiceInfos
+    {
+        public string id { get; set; }
+        public string pId { get; set; }
+        public string name { get; set; }
+        public string open { get; set; }
+        public string nocheck { get; set; }
+        public List<ServiceInfo> children { get; set; }
+    }
 }
