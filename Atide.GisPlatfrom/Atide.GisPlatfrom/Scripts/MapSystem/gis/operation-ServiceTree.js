@@ -67,7 +67,8 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/domReady!"],
                 require(["esri/layers/ArcGISDynamicMapServiceLayer", "dojo/domReady!"],
                     function (ArcGISDynamicMapServiceLayer) {
                         serviceLayer = new ArcGISDynamicMapServiceLayer(treeNode.serviceurl, {
-                            "id": "serviceLayer"
+                            "id": "serviceLayer",
+                            "opacity":treeNode.layeropacity
                         });
                         
                         var visible = treeNode.visuallayers.split(",")

@@ -11,9 +11,10 @@ $(function () {
     if ($('#serviceOperTitle').text() == "服务新增") {
 
 
-           $('#servicename').val(""),
-           $('#serviceurl').val(""),
-         $('#visuallayer').val("")
+           $('#servicename').val("");
+           $('#serviceurl').val("");
+         $('#visuallayer').val("");
+         $('#layeropacity').val(0.5);
 
     }
     else {
@@ -24,6 +25,8 @@ $(function () {
             $('#servicename').val(nodes[i].name);
             $('#serviceurl').val(nodes[i].serviceurl);
             $('#visuallayer').val(nodes[i].visuallayers);
+            $('#layeropacity').val(nodes[i].layeropacity);
+
         }      
     }
 });
@@ -42,7 +45,8 @@ function onButtonOk() {
             pId: 1,
             name: $('#servicename').val(),
             serviceurl: $('#serviceurl').val(),
-            visuallayers: $('#visuallayer').val()
+            visuallayers: $('#visuallayer').val(),
+            layeropacity:$('#layeropacity').val()
         };
         treeObj.addNodes(node, newNode);
     }
@@ -53,6 +57,7 @@ function onButtonOk() {
             nodes[i].name = $('#servicename').val();
             nodes[i].serviceurl = $('#serviceurl').val();
             nodes[i].visuallayers = $('#visuallayer').val();
+            nodes[i].layeropacity = $('#layeropacity').val();
             treeObj.updateNode(nodes[0]);
         }
     }
