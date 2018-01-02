@@ -572,7 +572,7 @@ function Img_show(JCTBBH, TIME, XZQDM)
             type: 2,
             title: '附件查看',
             maxmin: true,
-            area: ['650px', '650px'],
+            area: ['500px', '750px'],
             content: '/MapSystem/PictureView?JCTBBH=' + JCTBBH + '&TIME=' + TIME + '&XZQDM=' + XZQDM
         });
      

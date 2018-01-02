@@ -1,0 +1,6 @@
+[{"id":1,"pId":null,"name":"专题服务","open":true, "nocheck":true,
+  "children":[
+      {"id":11,"pId":1,"name":"行政区划-1","serviceurl":"http://220.165.247.91:6080/arcgis/rest/services/XZQH/MapServer","visuallayers": "0"},
+      {"id":12,"pId":1,"name":"行政区划-2","serviceurl":"http://220.165.247.91:6080/arcgis/rest/services/XZQH/MapServer","visuallayers": "2"},
+      {"id":13,"pId":1,"name":"行政区划-3","serviceurl":"http://220.165.247.91:6080/arcgis/rest/services/XZQH/MapServer","visuallayers": "1"}]
+ }]

@@ -1,0 +1,18 @@
+[{"id":1,"pId":null,"name":"专题服务","open":true,"nocheck":true,"children":[
+  {
+    "id": 11,
+    "pId": 1,
+    "name": "行政区划",
+    "serviceurl": "http://220.165.247.91:6080/arcgis/rest/services/XZQH/MapServer",
+    "layeropacity": "0.5","visuallayers":"0","isFirstNode":true,"level":1,"tId":"serviceTree_2","parentTId":"serviceTree_1","open":false,"isParent":false,"zAsync":true,"isLastNode":false,"isAjaxing":false,"checked":false,"checkedOld":false,"nocheck":false,"chkDisabled":false,"halfCheck":false,"check_Child_State":-1,"check_Focus":false,"isHover":true,"editNameFlag":false,"isHidden":false},
+  {
+    "id": 12,
+    "pId": 1,
+    "name": "行政区划-test",
+    "serviceurl": "http://220.165.247.91:6080/arcgis/rest/services/XZQH/MapServer",
+    "layeropacity": "0.5","visuallayers":"2","level":1,"tId":"serviceTree_3","parentTId":"serviceTree_1","open":false,"isParent":false,"zAsync":true,"isFirstNode":false,"isLastNode":false,"isAjaxing":false,"checked":false,"checkedOld":false,"nocheck":false,"chkDisabled":false,"halfCheck":false,"check_Child_State":-1,"check_Focus":false,"isHover":false,"editNameFlag":false,"isHidden":false},
+  {
+    "pId": 1,
+    "name": "test",
+    "serviceurl": "http://220.165.247.91:6080/arcgis/rest/services/XZQH/MapServer",
+    "layeropacity": "0.5","visuallayers":"1","isLastNode":true,"level":1,"tId":"serviceTree_5","parentTId":"serviceTree_1","open":false,"isParent":false,"zAsync":true,"isFirstNode":false,"isAjaxing":false,"checked":false,"checkedOld":false,"nocheck":false,"chkDisabled":false,"halfCheck":false,"check_Child_State":-1,"check_Focus":false,"isHover":false,"editNameFlag":false,"isHidden":false}],"isFirstNode":true,"isLastNode":true,"level":0,"tId":"serviceTree_1","parentTId":null,"isParent":true,"zAsync":true,"isAjaxing":false,"checked":false,"checkedOld":false,"chkDisabled":false,"halfCheck":false,"check_Child_State":0,"check_Focus":false,"isHover":false,"editNameFlag":false,"isHidden":false}]
