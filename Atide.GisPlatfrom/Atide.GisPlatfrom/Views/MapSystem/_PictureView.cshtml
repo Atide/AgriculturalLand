@@ -6,6 +6,19 @@
 @*layer JS*@
 <script type="text/javascript" src="~/Scripts/lib/layer/2.4/layer.js"></script>
 
+<script type="text/javascript">
+    var baseUrl = '@Url.Content("~/")'; //全局的URl，解决iis中路径的问题
+    var dojoConfig = {
+        parseOnLoad: true,
+        async: true,
+        packages: [{
+            name: "atide",
+            location: baseUrl + 'Scripts/MapSystem'
+        }]
+    };
+</script>
+@Scripts.Render("http://172.16.1.141:8090/arcgis/api/3.20/init.js")
+
 @*<div>*@
 
 
@@ -31,10 +44,16 @@
         //TIME= '2015'
         //XZQDM = '530181'
 
-        urlOR = "http://172.16.1.141:8090/FJ_YGHC/" + TIME + "/" + XZQDM + "/B/" + XZQDM + "_" + JCTBBH + "_CL_";
-        url = urlOR + ZPid + ".jpg";
-        getPicture(url);
+       
 
+        require(["atide/gis/config/system-config", "dojo/domReady!"
+        ], function (SystemConfig) {
+            //layer.msg(SystemConfig.fjConfig.yghcPictureUrl);
+
+            urlOR = SystemConfig.fjConfig.yghcPictureUrl + TIME + "/" + XZQDM + "/B/" + XZQDM + "_" + JCTBBH + "_CL_";
+            url = urlOR + ZPid + ".jpg";
+            getPicture(url);
+        })
 
 
 

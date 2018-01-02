@@ -564,7 +564,8 @@ function Img_show(JCTBBH, TIME, XZQDM)
 {
     if (JCTBBH == null)
     {
-        alert("未找到相关附件")
+        layer.msg("未找到相关附件");
+        //alert("未找到相关附件")
     }
     else {
     
