@@ -68,7 +68,7 @@ namespace Atide.GisPlatfrom.Controllers
             ViewBag.JCTBBH = JCTBBH;
             ViewBag.TIME = TIME;
             ViewBag.XZQDM = XZQDM;
-            return PartialView("_PictureView");
+            return View("_PictureView");
         }
         //年份选择下拉视图
         public ActionResult YearSelectView()

@@ -571,8 +571,8 @@ function Img_show(JCTBBH, TIME, XZQDM)
         layer.open({
             type: 2,
             title: '附件查看',
-            maxmin: true,
-            area: ['500px', '750px'],
+            //maxmin: true,
+            area: ['500px', '550px'],
             content: '/MapSystem/PictureView?JCTBBH=' + JCTBBH + '&TIME=' + TIME + '&XZQDM=' + XZQDM
         });
      

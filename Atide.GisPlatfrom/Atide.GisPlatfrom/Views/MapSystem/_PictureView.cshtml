@@ -1,11 +1,19 @@
-﻿@Scripts.Render("~/Scripts/lib/jquery/jquery.min.js")
+﻿@{
+    Layout = null;
+}
+
+@Scripts.Render("~/Scripts/lib/jquery/jquery.min.js")
+@*layer JS*@
+<script type="text/javascript" src="~/Scripts/lib/layer/2.4/layer.js"></script>
+
+@*<div>*@
 
 
-<div>
-    <button onclick="change(1)">上一张</button><button onclick="change(2)">下一张</button>
-    <div id="PictureView"> </div>
-
-    </div>
+<div id="PictureView" style="margin: 5px; border: 1px solid gray; border-image: none; height: 460px; overflow: auto;"> </div>
+<div style="margin: 0px; height: 25px;">
+    <button style="margin-left:50px;" onclick="change(1)">上一张</button><button style="margin-left: 250px;" onclick="change(2)">下一张</button>
+</div>
+@*</div>*@
 
 
 
@@ -16,18 +24,16 @@
     $(function () {   //初始化弹出页
 
         var JCTBBH = '@ViewBag.JCTBBH'
-        var TIME= '@ViewBag.TIME'
+        var TIME = '@ViewBag.TIME'
         var XZQDM = '@ViewBag.XZQDM'
 
-         // JCTBBH = '1'
-         //TIME= '2015'
-         //XZQDM = '530181'
+        // JCTBBH = '1'
+        //TIME= '2015'
+        //XZQDM = '530181'
 
-        urlOR = "http://220.165.247.91:6080/FJ_YGHC/" + TIME + "/" + XZQDM + "/B/" + XZQDM + "_" + JCTBBH + "_CL_";
-         url = urlOR+ZPid+ ".jpg";
-         getPicture(url);
-
-
+        urlOR = "http://172.16.1.141:8090/FJ_YGHC/" + TIME + "/" + XZQDM + "/B/" + XZQDM + "_" + JCTBBH + "_CL_";
+        url = urlOR + ZPid + ".jpg";
+        getPicture(url);
 
 
 
@@ -36,19 +42,19 @@
 
     function getPicture(url)   //创建图片img
     {
-        
+
         var img = document.createElement("img");
         img.src = url;
-    
-        if (img.complete == true)
-        {
+
+        if (img.complete == true) {
             var div = document.getElementById('PictureView')
             div.innerHTML = "";
             div.appendChild(img);
             return 1;
         }
         else {
-            alert("未找到相应图片")
+            layer.msg("未找到相应图片");
+            //alert("未找到相应图片")
             return 2;
         }
     }
@@ -62,7 +68,7 @@
             ZPid -= 1;
             url = urlOR + ZPid + ".jpg";
             if (getPicture(url) == 2)  //翻页失败 ID不变
-            {   
+            {
                 ZPid += 1;
             }
 
@@ -80,5 +86,6 @@
     }
 
 
- 
+
 </script>
+
