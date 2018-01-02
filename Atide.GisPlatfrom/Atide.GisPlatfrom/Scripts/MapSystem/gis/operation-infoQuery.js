@@ -10,10 +10,10 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
     selectCode = code;
     //query XZQ feature
 
-    require(["esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",
+    require(["atide/gis/config/system-config", "esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",
     "esri/layers/GraphicsLayer", "esri/symbols/SimpleLineSymbol", "esri/symbols/CartographicLineSymbol", "esri/tasks/query",
     "esri/tasks/QueryTask", "atide/gis/config/system-config", "esri/symbols/SimpleMarkerSymbol", "esri/Color", "esri/symbols/SimpleFillSymbol", "esri/symbols/CartographicLineSymbol", "dojo/domReady!"],
-         function (Graphic, InfoTemplate, SpatialReference, Extent, GraphicsLayer, SimpleLineSymbol, CartographicLineSymbol, Query, QueryTask, SystemConfig, SimpleMarkerSymbol, Color, SimpleFillSymbol, CartographicLineSymbol) {
+         function (SystemConfig, Graphic, InfoTemplate, SpatialReference, Extent, GraphicsLayer, SimpleLineSymbol, CartographicLineSymbol, Query, QueryTask, SystemConfig, SimpleMarkerSymbol, Color, SimpleFillSymbol, CartographicLineSymbol) {
 
 
            
@@ -25,11 +25,7 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
                  new Color([216, 23, 232, 0.1]));
 
 
-
-
-
-             var url1 = "http://220.165.247.91:6080/arcgis/rest/services/XZQH/MapServer/0";
-             var queryTask1 = new QueryTask(url1);
+             var queryTask1 = new QueryTask(SystemConfig.urlConfig.xzqQueryUrl);
              var query1 = new Query();
              query1.returnGeometry = true;
              query1.outFields = ["*"];

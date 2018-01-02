@@ -12,8 +12,9 @@ function switchEvent(kind, where,layerinfos) {
 
 
 
-    require(["esri/renderers/SimpleRenderer", "esri/layers/LayerDrawingOptions", "esri/symbols/SimpleLineSymbol",
-    "esri/symbols/SimpleFillSymbol", "esri/Color", "esri/symbols/SimpleMarkerSymbol"], function (SimpleRenderer, LayerDrawingOptions, SimpleLineSymbol, SimpleFillSymbol, Color, SimpleMarkerSymbol) {
+    require(["atide/gis/config/system-config", "esri/renderers/SimpleRenderer", "esri/layers/LayerDrawingOptions", "esri/symbols/SimpleLineSymbol",
+    "esri/symbols/SimpleFillSymbol", "esri/Color", "esri/symbols/SimpleMarkerSymbol"],
+    function (SystemConfig, SimpleRenderer, LayerDrawingOptions, SimpleLineSymbol, SimpleFillSymbol, Color, SimpleMarkerSymbol) {
         var layersId;
         var url;
 
@@ -22,8 +23,8 @@ function switchEvent(kind, where,layerinfos) {
 
 
         switch (kind) {
-            case "TB": layersId = 0; url = "http://220.165.247.91:6080/arcgis/rest/services/test/MapServer"; break;
-            case "BAXM": layersId = 0; url = "http://220.165.247.91:6080/arcgis/rest/services/BAXM2/MapServer"; break;
+            case "TB": layersId = 0; url = SystemConfig.urlConfig.tbServiceUrl; break;
+            case "BAXM": layersId = 0; url = SystemConfig.urlConfig.baxmServiceUrl; break;
 
 
         }

@@ -30,10 +30,10 @@ function displayBAXM(code, selectTime) {
 
 function displayTBtable(where)    
 {
-    require(["esri/layers/FeatureLayer", "esri/InfoTemplate", "esri/layers/TableDataSource",
+    require(["atide/gis/config/system-config", "esri/layers/FeatureLayer", "esri/InfoTemplate", "esri/layers/TableDataSource",
           "esri/layers/LayerDataSource", "esri/symbols/SimpleFillSymbol", "esri/renderers/SimpleRenderer", "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol",
         "esri/Color", "esri/dijit/FeatureTable", "dojo/dom-construct", "esri/layers/DynamicLayerInfo", "esri/layers/TableDataSource", "esri/layers/LayerDataSource", "esri/layers/LayerDrawingOptions", "dojo/domReady!"],
-        function (FeatureLayer, InfoTemplate, TableDataSource, LayerDataSource, SimpleFillSymbol, SimpleRenderer, SimpleMarkerSymbol, SimpleLineSymbol, Color, FeatureTable, domConstruct, DynamicLayerInfo, TableDataSource, LayerDataSource, LayerDrawingOptions) {
+        function (SystemConfig, FeatureLayer, InfoTemplate, TableDataSource, LayerDataSource, SimpleFillSymbol, SimpleRenderer, SimpleMarkerSymbol, SimpleLineSymbol, Color, FeatureTable, domConstruct, DynamicLayerInfo, TableDataSource, LayerDataSource, LayerDrawingOptions) {
         
 
                   
@@ -43,7 +43,7 @@ function displayTBtable(where)
                 var layerSource = new LayerDataSource();            
                 layerSource.dataSource = dataSource;
             
-                var Flayer = new FeatureLayer("http://220.165.247.91:6080/arcgis/rest/services/test/MapServer/dynamicLayer", {
+                var Flayer = new FeatureLayer(SystemConfig.urlConfig.tbServiceUrl + "/dynamicLayer", {
                     id:"TBtable",
                     mode: FeatureLayer.MODE_ONDEMAND,
                     outFields: ["*"],
@@ -152,7 +152,7 @@ function displayTBlayer(where) {
 
 
 
-        TBlayer = new ArcGISDynamicMapServiceLayer("http://220.165.247.91:6080/arcgis/rest/services/test/MapServer", {
+        TBlayer = new ArcGISDynamicMapServiceLayer(SystemConfig.urlConfig.tbServiceUrl, {
             "id": "TBlayer"
         });
 
@@ -219,10 +219,10 @@ function displayTBlayer(where) {
 
 function displayBAXMtable(where) {
     
-    require(["esri/layers/FeatureLayer", "esri/InfoTemplate", "esri/layers/TableDataSource",
+    require(["atide/gis/config/system-config", "esri/layers/FeatureLayer", "esri/InfoTemplate", "esri/layers/TableDataSource",
           "esri/layers/LayerDataSource", "esri/symbols/SimpleFillSymbol", "esri/renderers/SimpleRenderer","esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol",
         "esri/Color", "esri/dijit/FeatureTable", "dojo/dom-construct","esri/layers/DynamicLayerInfo","esri/layers/TableDataSource","esri/layers/LayerDataSource", "esri/layers/LayerDrawingOptions","dojo/domReady!"],
-        function (FeatureLayer, InfoTemplate, TableDataSource, LayerDataSource, SimpleFillSymbol, SimpleRenderer, SimpleMarkerSymbol, SimpleLineSymbol, Color, FeatureTable, domConstruct, DynamicLayerInfo, TableDataSource, LayerDataSource, LayerDrawingOptions) {
+        function (SystemConfig, FeatureLayer, InfoTemplate, TableDataSource, LayerDataSource, SimpleFillSymbol, SimpleRenderer, SimpleMarkerSymbol, SimpleLineSymbol, Color, FeatureTable, domConstruct, DynamicLayerInfo, TableDataSource, LayerDataSource, LayerDrawingOptions) {
            
      
             var dataSource = new TableDataSource();
@@ -231,9 +231,8 @@ function displayBAXMtable(where) {
             var layerSource = new LayerDataSource();
             layerSource.dataSource = dataSource;
 
-            //http://172.16.1.141:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer 内网网址
-            //外网地址 http://220.165.247.91:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer
-            var Flayer = new FeatureLayer("http://220.165.247.91:6080/arcgis/rest/services/BAXM2/MapServer/dynamicLayer", {
+            
+            var Flayer = new FeatureLayer(SystemConfig.urlConfig.baxmServiceUrl + "/dynamicLayer", {
                 id: "BAXMtable",
                 mode: FeatureLayer.MODE_SNAPSHOT,
                 outFields: ["*"],
@@ -401,7 +400,7 @@ function displayBAXMlayer(where)     //展示备案项目 动态图层
 
 
 
-        BAXMlayer = new ArcGISDynamicMapServiceLayer("http://220.165.247.91:6080/arcgis/rest/services/BAXM2/MapServer", {
+        BAXMlayer = new ArcGISDynamicMapServiceLayer(SystemConfig.urlConfig.baxmServiceUrl, {
             "id": "BAXMlayer"
         });
 
@@ -536,7 +535,7 @@ function displayBYfeature(feature,kind)    //展示要素方法
                   "监测年度: ${JCND}<br/>" +           
                     "备注: ${BZ}<br/>" +               
                     "附件查看:"
-                var url = "http://220.165.247.91:6080/FJ_YGHC/" + feature.attributes.TIME + "/" + feature.attributes.XZQDM + "/B/" + feature.attributes.XZQDM + "_" + feature.attributes.JCTBBH + "_CL_1.jpg";
+                var url = SystemConfig.fjConfig.yghcPictureUrl + feature.attributes.TIME + "/" + feature.attributes.XZQDM + "/B/" + feature.attributes.XZQDM + "_" + feature.attributes.JCTBBH + "_CL_1.jpg";
                
                 if (isPictureEx(url)==1) {
                     content += "<a onclick='Img_show(\"" + feature.attributes.JCTBBH + "\"," + "\"" + feature.attributes.TIME + "\"," + "\"" + feature.attributes.XZQDM + "\")' id='Img_show'><img  src='/Content/MapSystem/images/images.png' /></a>"
