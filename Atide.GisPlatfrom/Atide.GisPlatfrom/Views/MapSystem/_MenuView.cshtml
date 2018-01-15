@@ -1,0 +1,101 @@
+﻿<div id="systemmenu">
+    <ul>
+        <li @*class='active'*@>
+            <a href="javascript:void(0)">数据管理@*<span>HOME</span>*@</a><div class="n"></div>
+            @*<ul>
+        <li><a href="javascript:void(0)">备案报表管理</a></li>
+        <li><a href="javascript:void(0)">核查图斑管理</a></li>
+    </ul>*@
+        </li>
+
+        <li><a onclick="popQuerylayer()" href="javascript:void(0)">查询统计@*<span>ABOUT US</span>*@</a><div class="n"></div></li>
+        <li>
+            <a href="javascript:void(0)">监管核查@*<span>SERVICES</span>*@</a><div class="n"></div>
+            <ul>
+                <li><a href="javascript:void(0)">用地规模监管</a></li>
+                <li><a href="javascript:void(0)">备案材料监管</a></li>
+                <li><a href="javascript:void(0)">变更调查监管</a></li>
+            </ul>
+        </li>
+        <li>
+            <a onclick="popUserManage()" href="javascript:void(0)">用户管理@*<span>CONTACT</span>*@</a><div class="n"></div>
+        </li>
+    </ul>
+
+</div>
+
+<script>
+    $(function () {
+        @*var authority = "@ViewBag.authority";
+        if (authority == "2") {
+            $('#datamanage a').removeAttr('href');//去掉a标签中的href属性
+            $('#datamanage a').removeAttr('onclick');//去掉a标签中的onclick事件
+
+            $('#usermanage a').removeAttr('href');//去掉a标签中的href属性
+            $('#usermanage a').removeAttr('onclick');//去掉a标签中的onclick事件
+        }
+        else if (authority == "3") {
+            $('#systemmenu li a').removeAttr('href');//去掉a标签中的href属性
+            $('#systemmenu li a').removeAttr('onclick');//去掉a标签中的onclick事件
+        }*@
+
+        $("#systemmenu>ul>li").hover(function () {
+            $(this).addClass("sfhover");
+            $("#systemmenu ul ul").slideUp("fast");
+            //$(this).find("a:first").animate({ "top": "12px" }, "fast");
+            //$(this).find("span").animate({ "top": "-30px" }, "fast");
+            if (!$(this).find("ul").is(":animated")) $(this).find("ul").slideDown("fast")
+        },
+        function () {
+            $(this).removeClass("sfhover");
+            $(this).find("a:first").animate({ "top": "0px" }, "fast");
+            $(this).find("span").animate({ "top": "0px" }, "fast");
+            if (!$(this).find("ul").is(":animated")) $(this).find("ul").slideUp("fast");
+            $("#systemmenu ul ul").slideUp("fast")
+        })
+    })
+
+    function popQuerylayer() {
+
+        require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+                        function (registry, on) {
+
+                            var a = registry.byId("dFloatingPane");
+
+                            a.show();
+                            a.bringToTop();
+
+                        });
+        document.getElementById("TC2").style.display = 'none';
+        document.getElementById("TC3").style.display = 'none';
+        document.getElementById("TC4").style.display = 'none';
+
+    }
+
+    function switchTAB(index) {
+        var q1 = document.getElementById("TC1");
+        var q2 = document.getElementById("TC2");
+        var q3 = document.getElementById("TC3");
+        var q4 = document.getElementById("TC4");
+        switch (index) {
+            case 1: q1.style.display = 'block'; q2.style.display = 'none'; q3.style.display = 'none'; q4.style.display = 'none'; break;
+            case 2: q1.style.display = 'none'; q2.style.display = 'block'; q3.style.display = 'none'; q4.style.display = 'none'; break;
+            case 3: q1.style.display = 'none'; q2.style.display = 'none'; q3.style.display = 'block'; q4.style.display = 'none'; break;
+            case 4: q1.style.display = 'none'; q2.style.display = 'none'; q3.style.display = 'none'; q4.style.display = 'block'; break;
+
+        }
+
+    }
+
+    function popUserManage() {
+        layer.open({
+            type: 2,
+            title: '用户管理',
+            maxmin: true,
+            area: ['800px', '500px'],
+            content: '/MapSystem/UserView'
+        });
+    }
+
+</script>
+

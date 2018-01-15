@@ -1371,6 +1371,9 @@
   <ItemGroup>
     <Content Include="Views\MapSystem\ServiceManageView.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MapSystem\_MenuView.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
