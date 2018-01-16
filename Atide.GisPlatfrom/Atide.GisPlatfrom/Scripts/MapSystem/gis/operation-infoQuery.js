@@ -69,12 +69,7 @@ function cleanALL()
         delLayers(BAXMfeatureLayers);
     }
 
-    if (g_main._mapControl._map.getLayer("TBlayer") != null) {
-        g_main._mapControl._map.removeLayer(g_main._mapControl._map.getLayer("TBlayer"));
-
-    }
-
-    identifyControl("close", _objEvent);
+   
 
 }
 
@@ -398,17 +393,12 @@ function StaByAtt(value, field, stField) {  //属性统计
 function getSelectTime() {   //获取选择时间 数组('2014','2015')
     var selStr = String($("#yearselect").val());
     var arr = selStr.split(',');
-    var res="("
+    var res = new Array
+   
     for (var i = 0; i < arr.length; i++) {
-        if (i == 0)
-        {
-            res += "'" + arr[i] + "'"
-        }
-        else {
-            res += ",'" + arr[i] + "'"
-        }
+        res.push(arr[i])
     }
-    res+=")"
+   
     return res;
 }
 

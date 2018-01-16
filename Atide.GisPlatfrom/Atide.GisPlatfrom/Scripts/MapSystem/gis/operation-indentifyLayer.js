@@ -4,13 +4,14 @@
  */
 
 
-var _objEvent = {
-    indentifyEventBAXM: null,
-    indentifyEventTB: null
+var _objEventTB = {  //图斑识别事件记录
+    indentifyEventTB2014: null,
+    indentifyEventTB2015: null,
+    indentifyEventTB2016: null,
+    indentifyEventTB2017: null,
+    indentifyEventTB2018: null
 };
-function switchEvent(kind, where,layerinfos) {
-
-
+function switchEventTB(where,layerinfos,year) {   //开启图斑 识别层
 
     require(["atide/gis/config/system-config", "esri/renderers/SimpleRenderer", "esri/layers/LayerDrawingOptions", "esri/symbols/SimpleLineSymbol",
     "esri/symbols/SimpleFillSymbol", "esri/Color", "esri/symbols/SimpleMarkerSymbol"],
@@ -19,15 +20,8 @@ function switchEvent(kind, where,layerinfos) {
         var url;
 
 
+        layersId = 0; url = SystemConfig.urlConfig.tbServiceUrl;
 
-
-
-        switch (kind) {
-            case "TB": layersId = 0; url = SystemConfig.urlConfig.tbServiceUrl; break;
-            case "BAXM": layersId = 0; url = SystemConfig.urlConfig.baxmServiceUrl; break;
-
-
-        }
         var layerDefinitions;
         if (where != null) {
             layerDefinitions = [];
@@ -36,7 +30,56 @@ function switchEvent(kind, where,layerinfos) {
 
 
      
-        identifyControl("open", _objEvent, g_main._mapControl._map, g_main._mapControl._map, url, 3, layersId, layerDefinitions, layerinfos, kind);  //开启查询      
+        require([
+            "esri/tasks/IdentifyTask",
+            "esri/tasks/IdentifyParameters",
+            "dojo/domReady!"
+        ], function (IdentifyTask, IdentifyParameters) {
+           
+
+            var identifyTask, identifyParams;
+            identifyTask = new IdentifyTask(url);
+            identifyParams = new IdentifyParameters();
+            identifyParams.tolerance = 3;
+            identifyParams.returnGeometry = true;
+            identifyParams.layerIds = [layersId];
+            identifyParams.layerOption = IdentifyParameters.LAYER_OPTION_ALL;
+            identifyParams.width = g_main._mapControl._map.width;
+            identifyParams.height = g_main._mapControl._map.height;
+            identifyParams.dynamicLayerInfos = layerinfos;
+            if (layerDefinitions != null) {
+                identifyParams.layerDefinitions = layerDefinitions
+            }
+
+
+            _objEventTB["indentifyEventTB" + year] = g_main._mapControl._map.on("click", executeIdentifyTask);
+
+            function executeIdentifyTask(event) {
+                identifyParams.geometry = event.mapPoint;
+                identifyParams.mapExtent = g_main._mapControl._map.extent;
+                identifyTask.execute(identifyParams);
+            }
+
+            identifyTask.on("complete", function (event) {
+                var response = event.results;
+                if (response.length != 0) {
+
+
+
+                    displayBYfeature(response[0].feature, "TB")
+
+
+
+
+
+                }
+            })
+
+
+
+
+
+        });
 
 
 
@@ -45,93 +88,3 @@ function switchEvent(kind, where,layerinfos) {
 }
 
 
-
-function identifyControl(Type, eventInstance, subject, mapInstance, url, tolerance, layerIds, layerDefinitions, layerinfos, kind) {   //Universal and powerful identify operation method by HuangGuanrui
-    require([
-        "esri/tasks/IdentifyTask",
-        "esri/tasks/IdentifyParameters",
-        "dojo/domReady!"
-    ], function (IdentifyTask, IdentifyParameters) {
-        var eventObj;
-        
-        switch(kind)
-        {
-            case "TB": eventObj = eventInstance.indentifyEventTB; break;
-            case "BAXM": eventObj = eventInstance.indentifyEventBAXM; break;
-        }
-        if (eventObj != null) {
-            eventObj.remove();
-        }
-
-        switch (Type) {
-            case "open": open(); break;
-            case "close": close(); break;
-            case "update": update(); break;
-            case "change": change(); break;
-        }
-
-        function open() {
-
-
-            var identifyTask, identifyParams;
-            identifyTask = new IdentifyTask(url);
-            identifyParams = new IdentifyParameters();
-            identifyParams.tolerance = tolerance;
-            identifyParams.returnGeometry = true;
-            identifyParams.layerIds = [layerIds];
-            identifyParams.layerOption = IdentifyParameters.LAYER_OPTION_ALL;
-            identifyParams.width = mapInstance.width;
-            identifyParams.height = mapInstance.height;
-            identifyParams.dynamicLayerInfos = layerinfos;
-            if (layerDefinitions != null) {
-                identifyParams.layerDefinitions = layerDefinitions
-            }
-
-
-            eventObj = subject.on("click", executeIdentifyTask);
-
-            function executeIdentifyTask(event) {
-                identifyParams.geometry = event.mapPoint;
-                identifyParams.mapExtent = mapInstance.extent;
-                identifyTask.execute(identifyParams);
-            }
-
-            identifyTask.on("complete", function (event) {
-                var response = event.results;
-                if (response.length != 0) {
-                 
-         
-             
-                    displayBYfeature(response[0].feature, kind)
-                   
-                 
-                            
-                    
-
-                }
-            })
-
-        }
-
-
-        function close() {
-            if (eventInstance.indentifyEventBAXM != null) {
-                eventInstance.indentifyEventBAXM.remove();
-            }
-            if (eventInstance.indentifyEventTB != null) {
-                eventInstance.indentifyEventTB.remove();
-            }
-
-        }
-
-
-    });
-
-
-
-
-
-
-
-
-}
