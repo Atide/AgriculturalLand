@@ -34,6 +34,11 @@ namespace Atide.GisPlatfrom.Controllers
             return PartialView("_HeadView");
         }
 
+        public ActionResult MenuView()
+        {
+            return PartialView("_MenuView");
+        }
+
         public ActionResult LeftTreeView()
         {
             return PartialView("_LeftTreeView");

@@ -140,3 +140,22 @@
             margin-left: -90px;
         }
 }
+
+
+/*---导航---*/
+/*#systemmenu{height:35px;text-align:center;clear:both;margin:111px 0 0 0;background:#6C5046;font-family:'microsoft yahei';}*/
+#systemmenu{position:absolute;top:10px;left:750px;}
+#systemmenu ul{width:832px;margin:0 auto;}
+#systemmenu li{float:left;height:50px;position:relative}
+#systemmenu li.line_off{background:none}
+#systemmenu a{display:block;float:left;text-decoration:none;height:35px;padding-top:10px;line-height:18px;font-size:18px;color:rgb(255,255,255);width:90px;outline:none;position:relative;}
+#systemmenu a:hover, #systemmenu .active a, #systemmenu li.sfhover a{color:#7cb14a;text-decoration:none;font-weight:700}
+#systemmenu a span{font-size:8px;-webkit-text-size-adjust:none;line-height:12px;padding-bottom:15px;display:block;font-weight:300;cursor:pointer;position:relative}
+#systemmenu .n{background:url(http://www.jsdaima.com/Upload/1414305512/i2.png) no-repeat 0 4px;width:16px;height:51px;float:left}
+/*---当前分类---*/
+#systemmenu li ul{display:none;position:absolute;top:50px;left:-20px;width:116px;padding:0;background-color:rgba(1, 56, 95, 0.90);/*background:url(http://www.jsdaima.com/Upload/1414305512/nav2.png) repeat-y;*/z-index:11}
+#systemmenu li ul li{line-height:30px;height:30px;margin:0;background-image:none;position:relative;z-index:2}
+#systemmenu li ul a, #systemmenu li.active ul a, #systemmenu li.sfhover ul a{background:none;font-weight:300;height:auto;color:#FBFAFA;line-height:24px;width:120px;margin-left:3px;font-size:12px;float:none;padding:0 20px;background:url(http://www.jsdaima.com/Upload/1414305512/nav2.png) no-repeat -234px -100px;_background:url(http://www.jsdaima.com/Upload/1414305512/nav2_1.gif) no-repeat 0 -30px}
+#systemmenu li ul a:hover{background:url(http://www.jsdaima.com/Upload/1414305512/nav2.png) no-repeat -234px 0;_background:url(http://www.jsdaima.com/Upload/1414305512/nav2_1.gif) no-repeat 0 0;color:#fff;font-weight:300}
+#systemmenu li ul .t{position:relative;z-index:2;top:14px;left:0;width:116px;height:4px;font-size:0;line-height:0;overflow:hidden;background:url(http://www.jsdaima.com/Upload/1414305512/nav2.png) no-repeat -116px 0;_background:url(http://www.jsdaima.com/Upload/1414305512/nav2_2.png) no-repeat}
+

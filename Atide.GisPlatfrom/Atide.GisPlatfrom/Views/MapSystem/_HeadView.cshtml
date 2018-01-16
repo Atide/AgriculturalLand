@@ -1,31 +1,31 @@
-﻿<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:false,liveSplitters:false" style="background-color:rgba(1, 56, 95, 0.90);border-color: transparent;">
+﻿<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:false,liveSplitters:false" style="background-color:rgba(1, 56, 95, 0.90);border-color: transparent;margin:0px;padding:0px;">
     <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'left',splitter:false" style="width:500px;line-height:60px;font-family: 'Dosis';font-size: 30px;font-weight: 600;color: #fff;margin-left:10px;text-transform: uppercase;">
         云南省设施农用地备案监管系统
     </div>
-    <div id="systemmenu" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center',splitter:false">
+    @*<div id="systemmenu" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center',splitter:false">
         <nav class="nav right">
-            <ul>
-                           
-                <li id="datamanage"><a class="fa fa-database" href="javascript:void(0)">数据管理</a></li>
+                <ul>
 
-                <li id=""><a class="fa fa-bar-chart" onclick="popQuerylayer()" href="javascript:void(0)">查询统计</a></li> @*line-chart*@
+                    <li id="datamanage"><a class="fa fa-database" href="javascript:void(0)">数据管理</a></li>
 
-                <li><a class="fa fa-university" onclick="" href="javascript:void(0)">监管核查</a></li>
+                    <li id=""><a class="fa fa-bar-chart" onclick="popQuerylayer()" href="javascript:void(0)">查询统计</a></li>
 
-                <li id="usermanage"><a class="fa fa-user-circle" onclick="popUserManage()" href="javascript:void(0)">用户管理</a></li>
-            </ul>
+                    <li><a class="fa fa-university" onclick="" href="javascript:void(0)">监管核查</a></li>
 
-        </nav>
-        
-    </div>
-    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'right',splitter:false"  style="width:100px;font-family: 'Dosis';font-size: 12px;color: #fff;text-align:center;height:60px;margin-top:10px;">
+                    <li id="usermanage"><a class="fa fa-user-circle" onclick="popUserManage()" href="javascript:void(0)">用户管理</a></li>
+                </ul>
+
+            </nav>
+
+    </div>*@
+    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'right',splitter:false" style="width:100px;font-family: 'Dosis';font-size: 12px;color: #fff;text-align:center;height:60px;margin-top:10px;">
         <span style="display:block">您好：</span>
         <span style="display:block">@ViewBag.UserName</span>
-        </div>
     </div>
+</div>
 
 <script>
-    $(function () {
+    @*$(function () {
         var authority = "@ViewBag.authority";
         if (authority == "2") {
             $('#datamanage a').removeAttr('href');//去掉a标签中的href属性
@@ -38,57 +38,55 @@
             $('#systemmenu li a').removeAttr('href');//去掉a标签中的href属性
             $('#systemmenu li a').removeAttr('onclick');//去掉a标签中的onclick事件
         }
-    })
+    })*@
 
-    function popQuerylayer()
-    {
+    //function popQuerylayer() {
 
-        require(["dijit/registry", "dojo/on", "dojo/domReady!"],
-                        function (registry, on) {
+    //    require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+    //                    function (registry, on) {
 
-                            var a = registry.byId("dFloatingPane");
+    //                        var a = registry.byId("dFloatingPane");
 
-                            a.show();
-                            a.bringToTop();
+    //                        a.show();
+    //                        a.bringToTop();
 
-                        });
-        document.getElementById("TC2").style.display = 'none';
-        document.getElementById("TC3").style.display = 'none';
-        document.getElementById("TC4").style.display = 'none';
+    //                    });
+    //    document.getElementById("TC2").style.display = 'none';
+    //    document.getElementById("TC3").style.display = 'none';
+    //    document.getElementById("TC4").style.display = 'none';
 
-    }
-
+    //}
 
 
-    function switchTAB(index) {
-        var q1 = document.getElementById("TC1");
-        var q2 = document.getElementById("TC2");
-        var q3 = document.getElementById("TC3");
-        var q4 = document.getElementById("TC4");
-       switch(index)
-       {
-           case 1: q1.style.display = 'block'; q2.style.display = 'none'; q3.style.display = 'none'; q4.style.display = 'none'; break;
-           case 2: q1.style.display = 'none'; q2.style.display = 'block'; q3.style.display = 'none'; q4.style.display = 'none'; break;
-           case 3: q1.style.display = 'none'; q2.style.display = 'none'; q3.style.display = 'block'; q4.style.display = 'none'; break;
-           case 4: q1.style.display = 'none'; q2.style.display = 'none'; q3.style.display = 'none'; q4.style.display = 'block'; break;
 
-       }
+    //function switchTAB(index) {
+    //    var q1 = document.getElementById("TC1");
+    //    var q2 = document.getElementById("TC2");
+    //    var q3 = document.getElementById("TC3");
+    //    var q4 = document.getElementById("TC4");
+    //    switch (index) {
+    //        case 1: q1.style.display = 'block'; q2.style.display = 'none'; q3.style.display = 'none'; q4.style.display = 'none'; break;
+    //        case 2: q1.style.display = 'none'; q2.style.display = 'block'; q3.style.display = 'none'; q4.style.display = 'none'; break;
+    //        case 3: q1.style.display = 'none'; q2.style.display = 'none'; q3.style.display = 'block'; q4.style.display = 'none'; break;
+    //        case 4: q1.style.display = 'none'; q2.style.display = 'none'; q3.style.display = 'none'; q4.style.display = 'block'; break;
+
+    //    }
 
 
 
 
 
 
-    }
+    //}
 
-    function popUserManage() {
-        layer.open({
-            type: 2,
-            title: '用户管理',
-            maxmin: true,
-            area: ['800px', '500px'],
-            content: '/MapSystem/UserView'
-        });
-    }
+    //function popUserManage() {
+    //    layer.open({
+    //        type: 2,
+    //        title: '用户管理',
+    //        maxmin: true,
+    //        area: ['800px', '500px'],
+    //        content: '/MapSystem/UserView'
+    //    });
+    //}
 
 </script>

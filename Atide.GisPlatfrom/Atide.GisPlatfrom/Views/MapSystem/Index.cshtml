@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MapSystemLayout.cshtml";
 }
@@ -9,108 +8,104 @@
 }
 
 @section HeaderSection{
-<link rel="stylesheet" href="~/Content/MapSystem/index.css" />
-<link rel="stylesheet" href="~/Content/MapSystem/head.css" />
-@*<link rel="stylesheet" href="~/Content/MapSystem/timeline.css" />*@
- 
-@*<link rel="stylesheet" href="~/Scripts/lib/ztree.3.5.26/css/zTreeStyle/zTreeStyle.css" type="text/css">
-<script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.core.js"></script>
-<script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.excheck.js"></script>
-<script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.exedit.js"></script>
-<script src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.exhide.js"></script>*@
+    <link rel="stylesheet" href="~/Content/MapSystem/index.css" />
+    <link rel="stylesheet" href="~/Content/MapSystem/head.css" />
+    @*<link rel="stylesheet" href="~/Content/MapSystem/timeline.css" />*@
 
-@*layer JS*@
+    @*<link rel="stylesheet" href="~/Scripts/lib/ztree.3.5.26/css/zTreeStyle/zTreeStyle.css" type="text/css">
+        <script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.core.js"></script>
+        <script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.excheck.js"></script>
+        <script type="text/javascript" src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.exedit.js"></script>
+        <script src="~/Scripts/lib/ztree.3.5.26/jquery.ztree.exhide.js"></script>*@
 
-
-@*自定义JS*@
-
-<script src="~/Scripts/MapSystem/gis/tool/tool-arcgis.js"></script>
-<script src="~/Scripts/MapSystem/gis/tool/tool-layerOperation.js"></script>
-<script src="~/Scripts/MapSystem/gis/operation-infoQuery.js"></script>
-<script src="~/Scripts/MapSystem/gis/operation-displayLayer.js"></script>
-<script src="~/Scripts/MapSystem/gis/operation-indentifyLayer.js"></script>
+    @*layer JS*@
 
 
+    @*自定义JS*@
 
-@*<link href="~/Scripts/lib/jquery-toolbar20160918/css/jquery.toolbar.css" rel="stylesheet" />
-<script src="~/Scripts/lib/jquery-toolbar20160918/js/jquery.toolbar.min.js"></script>*@
-<script type="text/javascript">
+    <script src="~/Scripts/MapSystem/gis/tool/tool-arcgis.js"></script>
+    <script src="~/Scripts/MapSystem/gis/tool/tool-layerOperation.js"></script>
+    <script src="~/Scripts/MapSystem/gis/operation-infoQuery.js"></script>
+    <script src="~/Scripts/MapSystem/gis/operation-displayLayer.js"></script>
+    <script src="~/Scripts/MapSystem/gis/operation-indentifyLayer.js"></script>
+
+
+
+    @*<link href="~/Scripts/lib/jquery-toolbar20160918/css/jquery.toolbar.css" rel="stylesheet" />
+        <script src="~/Scripts/lib/jquery-toolbar20160918/js/jquery.toolbar.min.js"></script>*@
+    <script type="text/javascript">
         require(["dojo/parser", 'dojo/dom', 'atide/gis/main', "dojox/layout/FloatingPane", "dijit/form/Button", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dijit/layout/TabContainer", "dijit/layout/AccordionContainer", "dijit/layout/AccordionPane"]);
-</script>
+    </script>
 
-<script>
-    var g_Year=2015;
-    var g_Tree;
-    var g_main = null;
-    var g_ServiceTree = null;
-    dojo.ready(function () {
-        g_main = new atide.gis.main();
-        require(["atide/gis/operation-displayTree", "atide/gis/operation-ServiceTree"], function (myZtree, serviceTree) {
-            g_Tree = myZtree();
-            g_ServiceTree = new serviceTree();
+    <script>
+        var g_Year = 2015;
+        var g_Tree;
+        var g_main = null;
+        var g_ServiceTree = null;
+        dojo.ready(function () {
+            g_main = new atide.gis.main();
+            require(["atide/gis/operation-displayTree", "atide/gis/operation-ServiceTree"], function (myZtree, serviceTree) {
+                g_Tree = myZtree();
+                g_ServiceTree = new serviceTree();
+            });
+
+
         });
 
-       
-    });
+        //底图切换
+        function changemap(type) {
+            g_main._mapControl.setBaseMap(type);
+            if (type == 1) {
+                $("#sldt").removeClass("basemapnormal");
+                $("#yxdt").removeClass("basemaphigh");
+                $("#sldt").addClass("basemaphigh");
+                $("#yxdt").addClass("basemapnormal");
+            }
+            else {
+                $("#sldt").removeClass("basemaphigh");
+                $("#yxdt").removeClass("basemapnormal");
+                $("#yxdt").addClass("basemaphigh");
+                $("#sldt").addClass("basemapnormal");
+            }
 
-    //底图切换
-    function changemap(type) {
-        g_main._mapControl.setBaseMap(type);
-        if (type == 1) {
-            $("#sldt").removeClass("basemapnormal");
-            $("#yxdt").removeClass("basemaphigh");
-            $("#sldt").addClass("basemaphigh");
-            $("#yxdt").addClass("basemapnormal");
         }
-        else {
-            $("#sldt").removeClass("basemaphigh");
-            $("#yxdt").removeClass("basemapnormal");
-            $("#yxdt").addClass("basemaphigh");
-            $("#sldt").addClass("basemapnormal");
-        }
 
-    }
-
-</script>
+    </script>
 
 }
 
 @section ContentBody{
 
-@Html.Partial("_StatisticsAnalysisView")
+    @Html.Partial("_StatisticsAnalysisView")
 
-<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:false,liveSplitters:false" id="borderContainer">
-    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top',splitter:false" style="height:60px;">
-        @Html.Partial("_HeadView")
+    <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:false,liveSplitters:false" id="borderContainer">
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top',splitter:false" style="height:60px;">
+            @Html.Partial("_HeadView")
+        </div>
+        <div id="leftPane" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'left',splitter:true" style="width:200px;padding:0px;margin:0px;">
+            @Html.Partial("_LeftTreeView")
+        </div>
+        @*<div  data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'right'" style="width:100px;padding:0px;margin:0px;background-color:rgb(52, 108, 147)">
+                @Html.Partial("_TimelineView")
+            </div>*@
+
+        <div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center',splitter:false">
+
+            @Html.Partial("_ToolBarView")
+            @Html.Partial("_YearSelectView")
+            <ul style="position:absolute; bottom:5px; right:10px; width:90px;z-index:999;">
+                <li id="sldt" onclick="changemap(1)" class="basemaphigh" style="background-color:rgb(52, 108, 147)">矢量底图</li>
+                <li id="yxdt" onclick="changemap(2)" class="basemapnormal" style="background-color:rgb(52, 108, 147)">影像底图</li>
+            </ul>
+
+            @Html.Partial("_BottomResultView")
+
+        </div>
+        @*<div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom'" style="height:200px;">
+                <div id="myTableNode"></div>
+            </div>*@
     </div>
-    <div id="leftPane" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'left',splitter:true" style="width:200px;padding:0px;margin:0px;">
-        @Html.Partial("_LeftTreeView")
-    </div>
-    @*<div  data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'right'" style="width:100px;padding:0px;margin:0px;background-color:rgb(52, 108, 147)">
-        @Html.Partial("_TimelineView")
-    </div>*@
-
-    <div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center',splitter:false" >
-  
-        @Html.Partial("_ToolBarView")
-        @Html.Partial("_YearSelectView")  
-        <ul style="position:absolute; bottom:5px; right:10px; width:90px;z-index:999;">
-            <li id="sldt" onclick="changemap(1)" class="basemaphigh" style="background-color:rgb(52, 108, 147)">矢量底图</li>
-            <li id="yxdt" onclick="changemap(2)" class="basemapnormal" style="background-color:rgb(52, 108, 147)">影像底图</li>
-        </ul>
-     
-        @Html.Partial("_BottomResultView")
- 
-    </div>
-
-
-    @*<div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom'" style="height:200px;">
-        <div id="myTableNode"></div>
-    </div>*@
-
-   
-</div>
-
+    @Html.Partial("_MenuView")
 
 }
 
