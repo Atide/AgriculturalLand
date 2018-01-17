@@ -1,6 +1,8 @@
 ﻿var myFeatureTable = null;
 var myFeatureTable2 = null;
 var myFeatureLayer = null;
+
+var lastYears = new Array(); //存放上次点击所选的年份数组
 //展示图斑
 function displayTB(code,selectTime)   //点击树  展示图斑和属性表
 {
@@ -8,11 +10,28 @@ function displayTB(code,selectTime)   //点击树  展示图斑和属性表
         alert("请选择行政区");
         return;
     }
-    var where = "XZQDM like '" + code + "%'and TIME in" +selectTime;
-    displayTBtable(where);  //展示图斑表
-    displayTBlayer(where);//展示图斑 动态图层
-    showHideYghcTable(1);
+    if (lastYears.length != 0) {                   //根据上次所选年份清除图层 和事件
+        for (var i = 0; i < lastYears.length; i++) {
+            g_main._mapControl._map.removeLayer(g_main._mapControl._map.getLayer("TBlayer" + lastYears[i]));
+            _objEventTB["indentifyEventTB" + lastYears[i]].remove()
+        }
+    }
+ 
+    lastYears = selectTime;   //本次所选年份记录
+
+    var where = "XZQDM like '" + code + "%'";  //根据行政区生成 查询条件
+
+
+   // displayTBtable(where);  //展示图斑表
+
+    for (var i = 0; i < lastYears.length; i++) {    //循环开启所选年份图斑
+        displayTBlayer(where, lastYears[i]);//展示图斑 动态图层
+    }
+  
+    //showHideYghcTable(1);
    //displayBAXM(code);
+
+  
 }
 //展示备案项目
 function displayBAXM(code, selectTime) {
@@ -118,13 +137,7 @@ function displayTBtable(where)
       );
 }
 
-function displayTBlayer(where) {
-
-    if (g_main._mapControl._map.getLayer("TBlayer") != null) {
-        g_main._mapControl._map.removeLayer(g_main._mapControl._map.getLayer("TBlayer"));
-
-    }
-    var TBlayer;
+function displayTBlayer(where,year) {      //展示图斑层   
     require([
     "esri/layers/ArcGISDynamicMapServiceLayer","esri/renderers/UniqueValueRenderer","atide/gis/config/system-config",
     "esri/layers/DynamicLayerInfo", "esri/layers/LayerDataSource",
@@ -145,15 +158,11 @@ function displayTBlayer(where) {
        query, on, parser, arrayUtils, Source, registry, SimpleMarkerSymbol
     ) {
 
-
+        var TBlayer;
         var dynamicLayerInfos;
 
-
-
-
-
         TBlayer = new ArcGISDynamicMapServiceLayer(SystemConfig.urlConfig.tbServiceUrl, {
-            "id": "TBlayer"
+            "id": "TBlayer" + year
         });
 
 
@@ -162,18 +171,17 @@ function displayTBlayer(where) {
         dynamicLayerInfos = TBlayer.createDynamicLayerInfosFromLayerInfos();
    
 
-
     
-        var layerName = "YGHC.shp";
+        var layerName = "YGHC-"+year+".shp";              //shp名称
 
         var dynamicLayerInfo = new DynamicLayerInfo();
         dynamicLayerInfo.id = dynamicLayerInfos.length;
         dynamicLayerInfo.name = layerName;
 
         var dataSource = new TableDataSource();
-        dataSource.workspaceId = "test1"; // not exposed via REST :(
+        dataSource.workspaceId = "TB"; // 工作空间名称
         dataSource.dataSourceName = layerName;
-        // and now a layer source
+       
         var layerSource = new LayerDataSource();
         layerSource.dataSource = dataSource;
         dynamicLayerInfo.source = layerSource;
@@ -183,35 +191,25 @@ function displayTBlayer(where) {
         TBlayer.setDynamicLayerInfos(dynamicLayerInfos, true);
 
 
-        switchEvent("TB", where, dynamicLayerInfos);  //添加点击查询图层
+        switchEventTB(where, dynamicLayerInfos,year);  //添加点击查询图层
 
 
-        var defaultSymbol = SystemConfig.colorConfig.TBlayerColor;
-        var renderer = new UniqueValueRenderer(defaultSymbol, "SSNYDLX");
+        var defaultSymbol = SystemConfig.colorConfig.TBlayerColor;       //根据用地类型渲染
+        var renderer = new UniqueValueRenderer(defaultSymbol, "YDLX");
         renderer.addValue("生产设施用地", SystemConfig.colorConfig.TBlayerColor2);
         renderer.addValue("附属设施用地", SystemConfig.colorConfig.TBlayerColor3);
         renderer.addValue("配套设施用地", SystemConfig.colorConfig.TBlayerColor4);
 
-
-
         var drawingOptions = new LayerDrawingOptions();
         drawingOptions.renderer = renderer;
 
-
         var options = [];
-
         options[0] = drawingOptions;
         TBlayer.setLayerDrawingOptions(options);
 
-        var layerDefinitions = [];
+        var layerDefinitions = []; //添加条件信息
         layerDefinitions[0] =where;
         TBlayer.setLayerDefinitions(layerDefinitions);
-
-
-
-
-
-
 
     });
 
@@ -495,22 +493,22 @@ function displayBYfeature(feature,kind)    //展示要素方法
                     delLayers(BAXMfeatureLayers);
                 }
                 var sms = SystemConfig.colorConfig.BAXMfeatureColor;
-                var content = "要素代码: ${ID}<br/>" +
-                   "项目名称: ${NAME}<br/>" +
+                var content = "要素编码: ${YSBM}<br/>" +
+                   "图斑编号: ${TBBH}<br/>" +
+                   "项目名称: ${XMMC}<br/>" +
                    "行政区代码: ${XZQDM}<br/>" +
-                   "责任人（单位）: ${ZRR}<br/>" +
-                   "用地位置: ${WZ}<br/>" +
-                   "土地权属性质: ${TDXZ}<br/>" +
-                   "设施农用地类型: ${SSNYDLX}<br/>" +
-                   "设施农用地规模: ${SSNYDGM}<br/>" +
-                   "占用耕地面积: ${ZYGDMJ}<br/>" +
-                   "界址点坐标中心位置: ${ZXZB}<br/>" +
-                   "中心经度: ${JD}<br/>" +
-                   "中心纬度: ${WD}<br/>"+
-                   "有效期限: ${YXQX}<br/>" +
-                   "备案材料: ${BACL}<br/>" +
+                   "责任人: ${ZRR}<br/>" +
+                   "用地位置: ${YDWZ}<br/>" +
+                   "用地面积: ${YDMJ}<br/>" +
+                   "占用耕地: ${GDMJ}<br/>" +
+                   "设施农用地类型: ${YDLX}<br/>" +
+                   "设施农用地规模: ${YDGM}<br/>" +
+                   "实际监测面积: ${SJMJ}<br/>" +
+                   "备案编号: ${BABH}<br/>"+
+                   "现状核查: ${XZHC}<br/>" +
+                   "核查结果: ${HCJG}<br/>" +
                    "备案时间: ${BASJ }<br/>" +
-                   "备注: ${BJ}<br/>"
+                   "备注: ${BZ}<br/>"
 
            
                 var infoTemplate = new InfoTemplate("备案信息详细", content);
@@ -522,18 +520,22 @@ function displayBYfeature(feature,kind)    //展示要素方法
                     delLayers(TBfeatureLayers);
                 }
                 var sms = SystemConfig.colorConfig.TBfeatureColor;
-                var content = "要素代码: ${YSDM}<br/>" +
-                  "标识码: ${BSM}<br/>" +
-                  "行政区代码: ${XZQDM}<br/>" +
-                  "项目名称: ${XMMC}<br/>" +
-                  "变更前地类: ${BGQDL}<br/>" +
-                  "变更后地类: ${BGHDL}<br/>" +
-                  "变更范围: ${BGFW}<br/>" +
-                  "监测变更面积: ${JCMJ}<br/>" +
-                  "监测图斑编号: ${JCTBBH}<br/>" +
-                  "土地变更描述: ${BGMS}<br/>" +
-                  "监测年度: ${JCND}<br/>" +           
-                    "备注: ${BZ}<br/>" +               
+                var content = "要素编码: ${YSBM}<br/>" +
+                    "图斑编号: ${TBBH}<br/>" +
+                    "项目名称: ${XMMC}<br/>" +
+                    "行政区代码: ${XZQDM}<br/>" +
+                    "责任人: ${ZRR}<br/>" +
+                    "用地位置: ${YDWZ}<br/>" +
+                    "用地面积: ${YDMJ}<br/>" +
+                    "占用耕地: ${GDMJ}<br/>" +
+                    "设施农用地类型: ${YDLX}<br/>" +
+                    "设施农用地规模: ${YDGM}<br/>" +
+                    "实际监测面积: ${SJMJ}<br/>" +
+                    "备案编号: ${BABH}<br/>" +
+                    "现状核查: ${XZHC}<br/>" +
+                    "核查结果: ${HCJG}<br/>" +
+                    "备案时间: ${BASJ }<br/>" +
+                    "备注: ${BZ}<br/>"+         
                     "附件查看:"
                 var url = SystemConfig.fjConfig.yghcPictureUrl + feature.attributes.TIME + "/" + feature.attributes.XZQDM + "/B/" + feature.attributes.XZQDM + "_" + feature.attributes.JCTBBH + "_CL_1.jpg";
                

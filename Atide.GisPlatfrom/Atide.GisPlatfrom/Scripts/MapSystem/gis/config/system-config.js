@@ -39,8 +39,8 @@ define(["dojo/_base/declare", "esri/symbols/SimpleFillSymbol", "esri/symbols/Sim
             xzqQueryUrl: "http://" + servicesHost + "/arcgis/rest/services/XZQH/MapServer/0",
 
             //地类图斑服务地址
-            //外网地址 "http://220.165.247.91:6080/arcgis/rest/services/test/MapServer"
-            tbServiceUrl: "http://" + servicesHost + "/arcgis/rest/services/test/MapServer",
+            //外网地址 "http://220.165.247.91:6080/arcgis/rest/services/TB/MapServer"
+            tbServiceUrl: "http://" + servicesHost + "/arcgis/rest/services/TB/MapServer",
 
             //备案信息服务地址
             //内网网址 http://172.16.1.141:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer 
