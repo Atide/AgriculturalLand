@@ -49,7 +49,7 @@ define(["dojo/_base/declare", "esri/symbols/SimpleFillSymbol", "esri/symbols/Sim
         },
         fjConfig:{
             //遥感核查图片虚拟目录地址
-            yghcPictureUrl: "http://172.16.1.141:8090/FJ_YGHC/",
+            yghcPictureUrl: "http://172.16.1.141:8091/FJ_YGHC/",
             //遥感核查附件服务器本地路径
             yghcLocalDir: "E:\\NYSSData\\YGHC\\FJ"
         },
