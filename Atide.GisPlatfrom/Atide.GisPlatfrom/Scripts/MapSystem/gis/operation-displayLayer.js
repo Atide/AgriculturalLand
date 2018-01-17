@@ -2,6 +2,7 @@
 var myFeatureTable2 = null;
 var myFeatureLayer = null;
 
+var featuresList = new Array() //存放所选图层全部要素
 var lastYears = new Array(); //存放上次点击所选的年份数组
 //展示图斑
 function displayTB(code,selectTime)   //点击树  展示图斑和属性表
@@ -10,6 +11,14 @@ function displayTB(code,selectTime)   //点击树  展示图斑和属性表
         alert("请选择行政区");
         return;
     }
+    if (selectTime[0]==null)
+    {
+        alert("请选择年份");
+        return;
+    }
+
+    showHideYghcTable(1);              
+
     if (lastYears.length != 0) {                   //根据上次所选年份清除图层 和事件
         for (var i = 0; i < lastYears.length; i++) {
             g_main._mapControl._map.removeLayer(g_main._mapControl._map.getLayer("TBlayer" + lastYears[i]));
@@ -22,13 +31,13 @@ function displayTB(code,selectTime)   //点击树  展示图斑和属性表
     var where = "XZQDM like '" + code + "%'";  //根据行政区生成 查询条件
 
 
-   // displayTBtable(where);  //展示图斑表
+    getselectFeatures(where, selectTime)  //展示图斑表
 
     for (var i = 0; i < lastYears.length; i++) {    //循环开启所选年份图斑
         displayTBlayer(where, lastYears[i]);//展示图斑 动态图层
     }
   
-    //showHideYghcTable(1);
+   
    //displayBAXM(code);
 
   
@@ -47,21 +56,41 @@ function displayBAXM(code, selectTime) {
 
 }
 
-function displayTBtable(where)    
+
+function getselectFeatures(where, selectTime)
 {
-    require(["atide/gis/config/system-config", "esri/layers/FeatureLayer", "esri/InfoTemplate", "esri/layers/TableDataSource",
-          "esri/layers/LayerDataSource", "esri/symbols/SimpleFillSymbol", "esri/renderers/SimpleRenderer", "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol",
-        "esri/Color", "esri/dijit/FeatureTable", "dojo/dom-construct", "esri/layers/DynamicLayerInfo", "esri/layers/TableDataSource", "esri/layers/LayerDataSource", "esri/layers/LayerDrawingOptions", "dojo/domReady!"],
-        function (SystemConfig, FeatureLayer, InfoTemplate, TableDataSource, LayerDataSource, SimpleFillSymbol, SimpleRenderer, SimpleMarkerSymbol, SimpleLineSymbol, Color, FeatureTable, domConstruct, DynamicLayerInfo, TableDataSource, LayerDataSource, LayerDrawingOptions) {
+    for (var i = 0; i < selectTime.length; i++)    //循环年份 获取要素属性
+    {
+        if (i == selectTime.length - 1)
+        {
+            getTBtable(where, selectTime[i], 1)  //最后一年数据
+        }
+        else {
+            getTBtable(where, selectTime[i])
+        }
+    }
+    
+
+}
+
+
+function getTBtable(where,year,isLast)    
+{
+    require(["atide/gis/config/system-config", "esri/layers/FeatureLayer", "esri/tasks/query", "esri/layers/TableDataSource",
+        "esri/layers/LayerDataSource", "dojo/domReady!"],
+        function (SystemConfig, FeatureLayer, Query, TableDataSource, LayerDataSource) {
         
 
                   
                 var dataSource = new TableDataSource();    
-                dataSource.workspaceId = "test1";                   
-                dataSource.dataSourceName = "YGHC.shp";            
+                dataSource.workspaceId = "TB";                   
+                dataSource.dataSourceName = "YGHC-" + year + ".shp";            
                 var layerSource = new LayerDataSource();            
                 layerSource.dataSource = dataSource;
-            
+                var query = new Query();
+                query.where = "1=1";
+                query.outFields = ["*"];
+                query.returnGeometry = false;
                 var Flayer = new FeatureLayer(SystemConfig.urlConfig.tbServiceUrl + "/dynamicLayer", {
                     id:"TBtable",
                     mode: FeatureLayer.MODE_ONDEMAND,
@@ -70,72 +99,54 @@ function displayTBtable(where)
                   
                 });           
               Flayer.setDefinitionExpression(where);
-             
-                if (myFeatureTable2 != null) {
-                    myFeatureTable2.destroy();
-                    myFeatureTable2 = null;
-                }
+           
 
-                myFeatureLayer = Flayer;
-            // create new FeatureTable and set its properties 
-                myFeatureTable2 = new FeatureTable({
-                    featureLayer: Flayer,
-                    map: g_main._mapControl._map,
-                    showAttachments: false,
-                    syncSelection: true,
-                    zoomToSelection: true,
-                    showGridMenu: false,
-                    editable: false,
-                    showColumnHeaderTooltips: false,
-                    showCyclicalRelationships: false,
-                    showFeatureCount: false,
-                    showStatistics: false,
-                    outFields: ["*"],
+                Flayer.queryFeatures(query, function (featureSet) {
+                    var features = featureSet.features;
+                    for (var i = 0; i < features.length; i++)
+                    {
+                        features[i] = features[i].attributes
+                    }
+                    
+                    featuresList = featuresList.concat(features);
 
-
-                    //fieldInfos: [
-                    //  {
-                    //      name: 'Building_Size_Sqft',
-                    //      alias: 'Building Size',
-                    //      editable: false,
-                    //      format: {
-                    //          template: "${value} sqft"
-                    //      }
-                    //  },
-                    //  {
-                    //      name: 'Available_Size_Sqft',
-                    //      alias: 'Available Size',
-                    //      format: {
-                    //          template: "${value} sqft"
-                    //      }
-                    //  },
-                    //  {
-                    //      name: 'Primary_Parking_Type',
-                    //      format: {
-                    //          template: "${value} parking"
-                    //      }
-                    //  }
-                    //],
-                }, domConstruct.create('div', { id: 'myTableNode2' }, 'yghcTableNode'));
-
-
-
-                myFeatureTable2.startup();
-
-
-            //点击表格后 获取所选 features
-                myFeatureTable2.on("row-select", function (evt) {
-                    myFeatureTable2.getFeatureDataById(myFeatureTable2.selectedRowIds).then(function (res) {              
-                     displayBYfeature(res.features[0], "TB")   
-                    });
-
+                    if (isLast == 1)      //最后一年数据载入完成，展示属性表
+                    {
+                        displayTable();
+                    }
+                   
                 });
+
+
 
 
 
         }
       );
 }
+
+function displayTable()      //展示地图显示图斑的属性table
+{
+    var DTdate = new Array();
+    for (var i = 0; i < featuresList.length; i++)
+    {
+        var obj = featuresList[i];
+        var cache = new Array();
+
+        for (var key in obj) {
+            cache.push(obj[key])
+        }
+
+        DTdate.push(cache);
+    }
+
+
+    $(document).ready(function () {                 
+        $('#myTableNodeDiv').DataTable();
+    });
+}
+
+
 
 function displayTBlayer(where,year) {      //展示图斑层   
     require([
