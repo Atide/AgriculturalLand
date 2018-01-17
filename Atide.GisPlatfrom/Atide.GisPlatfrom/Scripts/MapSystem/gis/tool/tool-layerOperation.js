@@ -84,6 +84,7 @@ function displayFeature(ContainerLayer, mapInstance, feature, symbol, infoTempla
     require(["esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",
        "esri/layers/GraphicsLayer", "esri/symbols/SimpleLineSymbol", "esri/symbols/CartographicLineSymbol", "esri/Color", "esri/symbols/SimpleMarkerSymbol", "esri/Color", "esri/symbols/SimpleFillSymbol", "dojo/domReady!"],
             function (Graphic, InfoTemplate, SpatialReference, Extent, GraphicsLayer, SimpleLineSymbol, CartographicLineSymbol, Color, SimpleMarkerSymbol, Color, SimpleFillSymbol) {
+                centerShowGraphic(feature);
 
                 if (ContainerLayer == 1) {
                     mapInstance.graphics.clear();

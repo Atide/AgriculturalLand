@@ -2048,6 +2048,9 @@
     <Content Include="Scripts\lib\DataTables-1.10.15\media\images\Sorting icons.psd" />
     <Content Include="Scripts\lib\DataTables-1.10.15\Readme.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MapSystem\_DTView.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

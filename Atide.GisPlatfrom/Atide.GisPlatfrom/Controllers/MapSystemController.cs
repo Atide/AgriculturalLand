@@ -67,6 +67,12 @@ namespace Atide.GisPlatfrom.Controllers
             return PartialView("_StatisticsAnalysisView");
         }
 
+        //属性表查看视图
+        public ActionResult DTView()
+        {
+            return PartialView("_DTView");
+        }
+
         //附件图片查看视图
         public ActionResult PictureView(string JCTBBH,string TIME,string XZQDM)
         {

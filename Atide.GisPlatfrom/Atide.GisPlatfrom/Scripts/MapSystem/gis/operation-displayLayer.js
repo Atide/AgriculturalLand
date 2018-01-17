@@ -1,7 +1,7 @@
-﻿var myFeatureTable = null;
-var myFeatureTable2 = null;
-var myFeatureLayer = null;
+﻿
 
+var myFeatureLayers;   //分年featureLayers
+var DT; //属性表
 var featuresList = new Array() //存放所选图层全部要素
 var lastYears = new Array(); //存放上次点击所选的年份数组
 //展示图斑
@@ -11,13 +11,13 @@ function displayTB(code,selectTime)   //点击树  展示图斑和属性表
         alert("请选择行政区");
         return;
     }
-    if (selectTime[0]==null)
+    if (selectTime[0]=="null")
     {
         alert("请选择年份");
         return;
     }
 
-    showHideYghcTable(1);              
+  // showHideYghcTable(1);              
 
     if (lastYears.length != 0) {                   //根据上次所选年份清除图层 和事件
         for (var i = 0; i < lastYears.length; i++) {
@@ -59,90 +59,144 @@ function displayBAXM(code, selectTime) {
 
 function getselectFeatures(where, selectTime)
 {
+    myFeatureLayers = {  //重置要素图层
+        TB2014: null,
+        TB2015: null,
+        TB2016: null,
+        TB2017: null,
+        TB2018: null
+    };
+    featuresList = new Array();    //重置要素列表
+    var yearsNum = 0;
     for (var i = 0; i < selectTime.length; i++)    //循环年份 获取要素属性
-    {
-        if (i == selectTime.length - 1)
-        {
-            getTBtable(where, selectTime[i], 1)  //最后一年数据
-        }
-        else {
-            getTBtable(where, selectTime[i])
-        }
+    {     
+            getTBtable(where, selectTime[i])        
+       
     }
     
+    function getTBtable(where, year) {   //按条件获取 属性表
+        require(["atide/gis/config/system-config", "esri/layers/FeatureLayer", "esri/tasks/query", "esri/layers/TableDataSource",
+            "esri/layers/LayerDataSource", "dojo/domReady!"],
+            function (SystemConfig, FeatureLayer, Query, TableDataSource, LayerDataSource) {
 
-}
 
 
-function getTBtable(where,year,isLast)    
-{
-    require(["atide/gis/config/system-config", "esri/layers/FeatureLayer", "esri/tasks/query", "esri/layers/TableDataSource",
-        "esri/layers/LayerDataSource", "dojo/domReady!"],
-        function (SystemConfig, FeatureLayer, Query, TableDataSource, LayerDataSource) {
-        
-
-                  
-                var dataSource = new TableDataSource();    
-                dataSource.workspaceId = "TB";                   
-                dataSource.dataSourceName = "YGHC-" + year + ".shp";            
-                var layerSource = new LayerDataSource();            
+                var dataSource = new TableDataSource();
+                dataSource.workspaceId = "TB";
+                dataSource.dataSourceName = "YGHC-" + year + ".shp";
+                var layerSource = new LayerDataSource();
                 layerSource.dataSource = dataSource;
                 var query = new Query();
                 query.where = "1=1";
                 query.outFields = ["*"];
-                query.returnGeometry = false;
                 var Flayer = new FeatureLayer(SystemConfig.urlConfig.tbServiceUrl + "/dynamicLayer", {
-                    id:"TBtable",
+                    id: "TBtable",
                     mode: FeatureLayer.MODE_ONDEMAND,
                     outFields: ["*"],
                     source: layerSource,
-                  
-                });           
-              Flayer.setDefinitionExpression(where);
-           
+
+                });
+                Flayer.setDefinitionExpression(where);
+
+                myFeatureLayers["TB" + year] = Flayer;
 
                 Flayer.queryFeatures(query, function (featureSet) {
+                    yearsNum++;//返回结果+1
                     var features = featureSet.features;
-                    for (var i = 0; i < features.length; i++)
-                    {
-                        features[i] = features[i].attributes
+                    for (var i = 0; i < features.length; i++) {
+                        features[i].attributes.YEAR = year;
+
                     }
-                    
+
                     featuresList = featuresList.concat(features);
 
-                    if (isLast == 1)      //最后一年数据载入完成，展示属性表
+                    if (yearsNum == selectTime.length)      //最后一年数据载入完成，展示属性表
                     {
                         displayTable();
                     }
-                   
+
                 });
 
 
 
 
 
-        }
-      );
+            }
+        );
+    }
 }
+
+
+
 
 function displayTable()      //展示地图显示图斑的属性table
 {
     var DTdate = new Array();
     for (var i = 0; i < featuresList.length; i++)
     {
-        var obj = featuresList[i];
+        var obj = featuresList[i].attributes;
         var cache = new Array();
 
         for (var key in obj) {
             cache.push(obj[key])
         }
-
+        cache.shift();
         DTdate.push(cache);
     }
 
 
-    $(document).ready(function () {                 
-        $('#myTableNodeDiv').DataTable();
+    $(document).ready(function () {  
+        if (DT != null)  //已经加载过属性表，销毁
+        {
+            DT.destroy();        
+        }
+       
+        DT = $('#DTable').DataTable({    //生成属性表
+            "data": DTdate,
+            "columns": [
+                { "title": "行政区代码" },
+                { "title": "图斑编号" },
+                { "title": "备注" },
+                { "title": "现状核查" },
+                { "title": "要素编码" },
+                { "title": "项目名称" },
+                { "title": "责任人" },
+                { "title": "用地位置" },
+                { "title": "用地类型" },
+                { "title": "备案编号" },
+                { "title": "备案时间" },
+                { "title": "实际面积" },
+                { "title": "核查结果" },
+                { "title": "用地面积" },
+                { "title": "占用耕地" },
+                { "title": "用地规模" },
+                { "title": "图斑年份" }
+            ]
+        });
+
+      
+
+         $("#DTable").on("click","tr",function(){//给tr或者td添加click事件
+             var row = $(this)[0]._DT_RowIndex;
+         
+             if (row != null)
+             {
+                 for (var i = 0; i < featuresList.length; i++)
+                 {
+                     if (featuresList[i].attributes.TBBH == DTdate[row][1])
+                     {
+                         var selectFeature = featuresList[i];
+                         displayBYfeature(selectFeature, "TB")                        
+                         break;
+                     }
+                 }
+               
+             }
+            
+        })
+
+
+
     });
 }
 
@@ -545,7 +599,7 @@ function displayBYfeature(feature,kind)    //展示要素方法
                     "备案编号: ${BABH}<br/>" +
                     "现状核查: ${XZHC}<br/>" +
                     "核查结果: ${HCJG}<br/>" +
-                    "备案时间: ${BASJ }<br/>" +
+                    "备案时间: ${BASJ}<br/>" +
                     "备注: ${BZ}<br/>"+         
                     "附件查看:"
                 var url = SystemConfig.fjConfig.yghcPictureUrl + feature.attributes.TIME + "/" + feature.attributes.XZQDM + "/B/" + feature.attributes.XZQDM + "_" + feature.attributes.JCTBBH + "_CL_1.jpg";

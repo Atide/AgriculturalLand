@@ -1,5 +1,6 @@
 ﻿<div id="systemmenu">
     <ul>
+        <li><a onclick="popDT()" href="javascript:void(0)">属性表查看@*<span>ABOUT US</span>*@</a><div class="n"></div></li>
         <li @*class='active'*@>
             <a href="javascript:void(0)">数据管理@*<span>HOME</span>*@</a><div class="n"></div>
             @*<ul>
@@ -54,6 +55,21 @@
             $("#systemmenu ul ul").slideUp("fast")
         })
     })
+
+    function popDT() {      //弹出属性表
+
+        require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+            function (registry, on) {
+
+                var a = registry.byId("DTFloatingPane");
+
+                a.show();
+                a.bringToTop();
+
+            });
+       
+
+    }
 
     function popQuerylayer() {
 
