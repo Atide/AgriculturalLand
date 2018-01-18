@@ -204,8 +204,9 @@ define(["dojo/_base/declare",
                 return tree;
             },
             treenodeClicked: function (event, treeId, treeNode, clickFlag) {
-                queryNodebyCode(treeNode.id)
-
+                load = layer.load();
+                queryNodebyCode(treeNode.id);
+                lastXZQ = treeNode.name;
 
             },
         })

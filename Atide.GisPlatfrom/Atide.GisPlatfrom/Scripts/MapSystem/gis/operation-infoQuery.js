@@ -35,7 +35,7 @@ function queryNodebyCode(code)    //树于行政区列表 点击触发
              queryTask1.on("complete", function (event) {       
                  var feature = event.featureSet.features[0];
                  displayFeature(pointlayers, g_main._mapControl._map, feature, fillsymbol, null, false);
-                 showResultPane();
+                //showResultPane();
                  var ext = feature.geometry.getExtent();
                  var res = g_main._mapControl._map.setExtent(ext.expand(1.5));
              

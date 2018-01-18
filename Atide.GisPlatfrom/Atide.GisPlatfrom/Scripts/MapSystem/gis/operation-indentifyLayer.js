@@ -66,7 +66,7 @@ function switchEventTB(where,layerinfos,year) {   //开启图斑 识别层
 
 
 
-                    displayBYfeature(response[0].feature, "TB")
+                    displayBYfeature(response[0].feature, "TB",year)
 
 
 

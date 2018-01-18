@@ -73,11 +73,12 @@
     </script>
 
 }
-
 @section ContentBody{
 @Html.Partial("_DTView")
     @Html.Partial("_StatisticsAnalysisView")
-
+@Html.Partial("_BACLJGView")
+@Html.Partial("_BGDCJGView")
+@Html.Partial("_YDGMJGView")
     <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:false,liveSplitters:false" id="borderContainer">
         <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top',splitter:false" style="height:60px;">
             @Html.Partial("_HeadView")

@@ -72,11 +72,26 @@ namespace Atide.GisPlatfrom.Controllers
         {
             return PartialView("_DTView");
         }
+        //用地规模监管查看视图
+        public ActionResult YDGMJGView()
+        {
+            return PartialView("_YDGMJGView");
+        }
+        //备案材料监管查看视图
+        public ActionResult BACLJGView()
+        {
+            return PartialView("_BACLJGView");
+        }
+        //变更调查查看视图
+        public ActionResult BGDCJGView()
+        {
+            return PartialView("_BGDCJGView");
+        }
 
         //附件图片查看视图
-        public ActionResult PictureView(string JCTBBH,string TIME,string XZQDM)
+        public ActionResult PictureView(string TBBH,string TIME,string XZQDM)
         {
-            ViewBag.JCTBBH = JCTBBH;
+            ViewBag.TBBH = TBBH;
             ViewBag.TIME = TIME;
             ViewBag.XZQDM = XZQDM;
             return View("_PictureView");

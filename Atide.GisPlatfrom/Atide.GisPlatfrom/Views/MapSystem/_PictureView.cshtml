@@ -17,7 +17,7 @@
         }]
     };
 </script>
-@Scripts.Render("http://172.16.1.141:8090/arcgis/api/3.20/init.js")
+@Scripts.Render("http://172.16.1.141:8091/arcgis/api/3.20/init.js")
 
 @*<div>*@
 
@@ -36,7 +36,7 @@
 
     $(function () {   //初始化弹出页
 
-        var JCTBBH = '@ViewBag.JCTBBH'
+        var TBBH = '@ViewBag.TBBH'
         var TIME = '@ViewBag.TIME'
         var XZQDM = '@ViewBag.XZQDM'
 
@@ -50,7 +50,7 @@
         ], function (SystemConfig) {
             //layer.msg(SystemConfig.fjConfig.yghcPictureUrl);
 
-            urlOR = SystemConfig.fjConfig.yghcPictureUrl + TIME + "/" + XZQDM + "/B/" + XZQDM + "_" + JCTBBH + "_CL_";
+            urlOR = SystemConfig.fjConfig.yghcPictureUrl + TIME + "/" + XZQDM + "/" + XZQDM + "_" + TBBH + "_CL_";
             url = urlOR + ZPid + ".jpg";
             getPicture(url);
         })
@@ -64,18 +64,21 @@
 
         var img = document.createElement("img");
         img.src = url;
-
-        if (img.complete == true) {
-            var div = document.getElementById('PictureView')
-            div.innerHTML = "";
-            div.appendChild(img);
-            return 1;
+        setTimeout(check, 1);  //不能同步检查，否则无法判断状态                  
+        function check() {
+            if (img.complete == true) {
+                var div = document.getElementById('PictureView')
+                div.innerHTML = "";
+                div.appendChild(img);
+              
+            }
+            else {
+                layer.msg("未找到相应图片");
+                //alert("未找到相应图片")
+                
+            }
         }
-        else {
-            layer.msg("未找到相应图片");
-            //alert("未找到相应图片")
-            return 2;
-        }
+      
     }
 
 
@@ -86,10 +89,23 @@
         {
             ZPid -= 1;
             url = urlOR + ZPid + ".jpg";
-            if (getPicture(url) == 2)  //翻页失败 ID不变
-            {
-                ZPid += 1;
-            }
+
+            var img = document.createElement("img");
+            img.src = url;
+            setTimeout(check, 1);  //不能同步检查，否则无法判断状态                  
+            function check() {
+                if (img.complete == true) {
+                    var div = document.getElementById('PictureView')
+                    div.innerHTML = "";
+                    div.appendChild(img);
+                   
+                }
+                else {
+                    layer.msg("未找到相应图片");
+                   
+                    ZPid += 1;
+                }
+            }         
 
         }
 
@@ -97,10 +113,22 @@
         else {
             ZPid += 1;
             url = urlOR + ZPid + ".jpg";
-            if (getPicture(url) == 2)  //翻页失败 ID不变
-            {
-                ZPid -= 1;
-            }
+            var img = document.createElement("img");
+            img.src = url;
+            setTimeout(check, 1);  //不能同步检查，否则无法判断状态                  
+            function check() {
+                if (img.complete == true) {
+                    var div = document.getElementById('PictureView')
+                    div.innerHTML = "";
+                    div.appendChild(img);
+
+                }
+                else {
+                    layer.msg("未找到相应图片");
+                   
+                    ZPid -= 1;
+                }
+            }                
         }
     }
 

@@ -13,9 +13,9 @@
         <li>
             <a href="javascript:void(0)">监管核查@*<span>SERVICES</span>*@</a><div class="n"></div>
             <ul>
-                <li><a href="javascript:void(0)">用地规模监管</a></li>
-                <li><a href="javascript:void(0)">备案材料监管</a></li>
-                <li><a href="javascript:void(0)">变更调查监管</a></li>
+                <li><a onclick="popSuperviseLayer(1)" href="javascript:void(0)">用地规模监管</a></li>
+                <li><a onclick="popSuperviseLayer(2)" href="javascript:void(0)">备案材料监管</a></li>
+                <li><a onclick="popSuperviseLayer(3)" href="javascript:void(0)">变更调查监管</a></li>
             </ul>
         </li>
         <li>
@@ -70,6 +70,51 @@
        
 
     }
+
+
+    function popSuperviseLayer(kind) //弹出监管页面
+    {
+        switch (kind)
+        {
+            case 1:
+                require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+                function (registry, on) {
+
+                    var a = registry.byId("YDGMJGFloatingPane");
+
+                    a.show();
+                    a.bringToTop();
+
+                });
+                break;
+            case 2:
+                require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+                    function (registry, on) {
+
+                        var a = registry.byId("BACLJGFloatingPane");
+
+                        a.show();
+                        a.bringToTop();
+
+                    });
+                break;
+            case 3:
+                require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+                    function (registry, on) {
+
+                        var a = registry.byId("BGDCJGFloatingPane");
+
+                        a.show();
+                        a.bringToTop();
+
+                    });
+                break;
+        }
+
+
+    }
+
+
 
     function popQuerylayer() {
 
