@@ -113,6 +113,12 @@
             }
         });
 
+        var date = new Date;
+        var year = date.getFullYear();
+        for (var i = 2014; i <= year; i++) {
+            $('#yearselect').append("<option value=" + i + ">" + i + "</option>");
+        }
+
         var g_sheetIndex = 0;
         var g_fieldName = [];
         var g_rangeTop = 0;
@@ -179,13 +185,6 @@
                 //    handler: function () { save(); }
                 //}]
             });
-
-            var date = new Date;
-            var year = date.getFullYear();
-            for (var i = 2014; i <= year; i++) {
-                $('#yearselect').append("<option value=" + i + ">" + i + "</option>");
-            }
-
         })();
 
 
