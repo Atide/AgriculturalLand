@@ -108,6 +108,12 @@ namespace Atide.GisPlatfrom.Controllers
             return PartialView("UserView");
         }
 
+        //备案报表管理视图
+        public ActionResult BeiAnInfoManageView()
+        {
+            return View("BeiAnInfoManageView");
+        }
+
         //服务管理视图
         public ActionResult ServiceManageView(string type)
         {
@@ -141,7 +147,7 @@ namespace Atide.GisPlatfrom.Controllers
             }
             catch (Exception ex)
             {
-                return Content(ex.Message);
+                return Content("fail:" + ex.Message);
             }
         }
         //
@@ -149,9 +155,12 @@ namespace Atide.GisPlatfrom.Controllers
         {
             if (string.IsNullOrEmpty(path))
             {
-                path = "~/App_Data/user.json";
+                path = "~/App_Data/" + "user.json";
             }
-
+            else
+            {
+                path = "~/App_Data/" + path;
+            }
             string fp = Server.MapPath(path);
             if (!System.IO.File.Exists(fp))  // 判断是否已有相同文件 
             {

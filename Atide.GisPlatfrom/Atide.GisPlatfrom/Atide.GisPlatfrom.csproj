@@ -1807,6 +1807,13 @@
     <Content Include="Scripts\lib\jquery-easyui-1.5.2\themes\metro\validatebox.css" />
     <Content Include="Scripts\lib\jquery-easyui-1.5.2\themes\metro\window.css" />
     <Content Include="Scripts\lib\jquery-easyui-1.5.2\themes\mobile.css" />
+    <Content Include="Scripts\lib\js-xlsx\cpexcel.js" />
+    <Content Include="Scripts\lib\js-xlsx\jszip.js" />
+    <Content Include="Scripts\lib\js-xlsx\shim.min.js" />
+    <Content Include="Scripts\lib\js-xlsx\xlsx.core.min.js" />
+    <Content Include="Scripts\lib\js-xlsx\xlsx.full.min.js" />
+    <Content Include="Scripts\lib\js-xlsx\xlsx.js" />
+    <Content Include="Scripts\lib\js-xlsx\xlsx.min.js" />
     <Content Include="Scripts\lib\layer\2.4\layer.js" />
     <Content Include="Scripts\lib\layer\2.4\skin\default\icon-ext.png" />
     <Content Include="Scripts\lib\layer\2.4\skin\default\icon.png" />
@@ -1850,6 +1857,8 @@
     <Content Include="Scripts\lib\ztree.3.5.26\jquery.ztree.exedit.min.js" />
     <Content Include="Scripts\lib\ztree.3.5.26\jquery.ztree.exhide.js" />
     <Content Include="Scripts\lib\ztree.3.5.26\jquery.ztree.exhide.min.js" />
+    <Content Include="Scripts\MapSystem\common\beianinfo.manage.js" />
+    <Content Include="Scripts\MapSystem\common\excel.access.js" />
     <Content Include="Scripts\MapSystem\common\servicemanage.js" />
     <Content Include="Scripts\MapSystem\common\user.js" />
     <Content Include="Scripts\MapSystem\gis\arcgis-toolbars.js" />
@@ -2059,6 +2068,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\MapSystem\_BGDCJGView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\lib\js-xlsx\LICENSE" />
+    <Content Include="Scripts\lib\js-xlsx\xlsx.core.min.map" />
+    <Content Include="Scripts\lib\js-xlsx\xlsx.full.min.map" />
+    <Content Include="Scripts\lib\js-xlsx\xlsx.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MapSystem\BeiAnInfoManageView.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

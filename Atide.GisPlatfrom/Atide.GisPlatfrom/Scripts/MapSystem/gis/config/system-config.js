@@ -53,6 +53,12 @@ define(["dojo/_base/declare", "esri/symbols/SimpleFillSymbol", "esri/symbols/Sim
             //遥感核查附件服务器本地路径
             yghcLocalDir: "E:\\NYSSData\\YGHC\\FJ"
         },
+        excelConfig: {
+            fieldName:["序号", "县（区）", "项目名称", "用地总面积", "占用耕地面积", "生产设施用地", "附属设施用地", "配套设施用地", "其他类型", "备案文号", "备案时间", "备注"],
+            sheetIndex: 1,
+            rangeTop: 4,
+            rangeBottom:3
+        },
 
         colorConfig: {
         

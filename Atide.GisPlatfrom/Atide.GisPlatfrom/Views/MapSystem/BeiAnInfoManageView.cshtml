@@ -1,0 +1,195 @@
+﻿@{
+    ViewBag.Title = "BeiAnInfoManageView";
+    Layout = "~/Views/Shared/_Common.cshtml";
+}
+@section TitleSection{
+    备案报表管理
+}
+
+@section HeaderSection{
+    <script type="text/javascript" src="~/Scripts/lib/js-xlsx/cpexcel.js"></script>
+    <script type="text/javascript" src="~/Scripts/lib/js-xlsx/shim.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/lib/js-xlsx/jszip.js"></script>
+    <script type="text/javascript" src="~/Scripts/lib/js-xlsx/xlsx.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/icon.css">
+    <script type="text/javascript" src="~/Scripts/lib/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/MapSystem/common/excel.access.js"></script>
+    <script type="text/javascript" src="~/Scripts/MapSystem/common/beianinfo.manage.js"></script>
+
+    <script type="text/javascript">
+        var baseUrl = '@Url.Content("~/")'; //全局的URl，解决iis中路径的问题
+        var dojoConfig = {
+            parseOnLoad: true,
+            async: true,
+            packages: [{
+                name: "atide",
+                location: baseUrl + 'Scripts/MapSystem'
+            }]
+        };
+    </script>
+    @*公司内网*@
+    @Scripts.Render("http://172.16.1.141:8091/arcgis/api/3.20/init.js")
+}
+@section ContentBody{
+
+    <table id="test" class="easyui-datagrid" style="width:950px;height:500px;margin:5px;">  </table>
+
+    <div id="tb" style="padding:4px 5px;">
+        <a>年份选择：</a> <select id="yearselect" onchange="selectOnchang(this)" style="width:150px;"></select>
+        <a style="margin-left:20px;">季度选择：</a><select id="seasonselect" onchange="selectOnchang(this) " style="width:150px;margin-left:10px;">
+            <option value=" 01">
+                第一季度
+            </option>
+            <option value="02">第二季度</option>
+            <option value="03">第三季度</option>
+            <option value="04">第四季度</option>
+        </select>
+    </div>
+
+    <div id="ft" style="padding:2px 5px;">
+        <a onclick="add()" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true">新增</a>
+        <a onclick="del()" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true">删除</a>
+        <a onclick="save()" href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-save" plain="true">保存</a>
+
+        <!-- 必须有个文件上传 -->
+        <span style="float:right;font-size:12px;margin-top:2px;">
+            数据上传：<input type="file" id="xlf" name="xlf" />
+        </span>
+    </div>
+
+    <script>
+        $.extend($.fn.datagrid.methods, {
+            editCell: function (jq, param) {
+                return jq.each(function () {
+                    var opts = $(this).datagrid('options');
+                    var fields = $(this).datagrid('getColumnFields', true).concat($(this).datagrid('getColumnFields'));
+                    for (var i = 0; i < fields.length; i++) {
+                        var col = $(this).datagrid('getColumnOption', fields[i]);
+                        col.editor1 = col.editor;
+                        if (fields[i] != param.field) {
+                            col.editor = null;
+                        }
+                    }
+                    $(this).datagrid('beginEdit', param.index);
+                    var ed = $(this).datagrid('getEditor', param);
+                    if (ed) {
+                        if ($(ed.target).hasClass('textbox-f')) {
+                            $(ed.target).textbox('textbox').focus();
+                        } else {
+                            $(ed.target).focus();
+                        }
+                    }
+                    for (var i = 0; i < fields.length; i++) {
+                        var col = $(this).datagrid('getColumnOption', fields[i]);
+                        col.editor = col.editor1;
+                    }
+                });
+            },
+            enableCellEditing: function (jq) {
+                return jq.each(function () {
+                    var dg = $(this);
+                    var opts = dg.datagrid('options');
+                    opts.oldOnClickCell = opts.onClickCell;
+                    opts.onClickCell = function (index, field) {
+                        if (opts.editIndex != undefined) {
+                            if (dg.datagrid('validateRow', opts.editIndex)) {
+                                dg.datagrid('endEdit', opts.editIndex);
+                                opts.editIndex = undefined;
+                            } else {
+                                return;
+                            }
+                        }
+                        dg.datagrid('selectRow', index).datagrid('editCell', {
+                            index: index,
+                            field: field
+                        });
+                        opts.editIndex = index;
+                        opts.oldOnClickCell.call(this, index, field);
+                    }
+                });
+            }
+        });
+
+        var g_sheetIndex = 0;
+        var g_fieldName = [];
+        var g_rangeTop = 0;
+        var g_rangeBottom = 0;
+        (function () {
+            //
+            require(["atide/gis/config/system-config"], function (SystemConfig) {
+
+                g_sheetIndex = SystemConfig.excelConfig.sheetIndex
+                g_fieldName = SystemConfig.excelConfig.fieldName;
+                g_rangeTop = SystemConfig.excelConfig.rangeTop;
+                g_rangeBottom = SystemConfig.excelConfig.rangeBottom;
+            });
+
+            var drop = document.getElementById('xlf');
+
+            //添加Change绑定事件
+            if (drop.addEventListener) {
+                drop.addEventListener('change', handleFile, false);
+            }
+
+            $('#test').datagrid().datagrid('enableCellEditing');
+            var name = "beian/" + $("#yearselect").val() + $("#seasonselect").val() + ".json"
+            $('#test').datagrid({
+                url: '/MapSystem/GetJsonFromFile?name=' + name,
+                //rownumbers: true,
+                singleSelect: true,
+                columns: [
+                    [
+                        { field: '序号', title: '序号', width: 40, align: "center", rowspan: 2, colspan: 1, editor: 'numberbox' },
+                        { field: '县（区）', title: '县（区）', width: 80, align: "center", rowspan: 2, colspan: 1, editor: 'text' },
+                        { field: '项目名称', title: '项目名称', width: 80, align: "center", rowspan: 2, colspan: 1, editor: 'text' },
+                        { field: '用地总面积', title: '用地总面积', width: 70, align: "center", rowspan: 2, colspan: 1, editor: { type: 'numberbox', options: { precision: 3 } } },
+                        { field: '占用耕地面积', title: '其中：<br />占用耕地面积', width: 80, align: "center", rowspan: 2, colspan: 1, editor: { type: 'numberbox', options: { precision: 3 } } },
+                        { field: '用地类型', title: '用地类型', rowspan: 1, colspan: 4, halign: "center" },
+                        { field: '备案文号', title: '备案文号', width: 80, align: "center", rowspan: 2, colspan: 1, editor: 'text' },
+                        { field: '备案时间', title: '备案时间', width: 80, align: "center", rowspan: 2, colspan: 1, editor: 'datebox' },
+                        { field: '备注', title: '备注', width: 80, halign: "center", rowspan: 2, colspan: 1, editor: 'textarea' }
+                    ],
+                    [
+                        { field: '生产设施用地', title: '生产设施用地', width: 80, align: "center", rowspan: 1, colspan: 1, editor: { type: 'numberbox', options: { precision: 3 } } },
+                        { field: '附属设施用地', title: '附属设施用地', width: 80, align: "center", rowspan: 1, colspan: 1, editor: { type: 'numberbox', options: { precision: 3 } } },
+                        { field: '配套设施用地', title: '配套设施用地', width: 80, align: "center", rowspan: 1, colspan: 1, editor: { type: 'numberbox', options: { precision: 3 } } },
+                        { field: '其他类型', title: '其他类型', width: 70, align: "center", rowspan: 1, colspan: 1, editor: { type: 'numberbox', options: { precision: 3 } } }
+                    ]
+                ],
+                toolbar: '#tb',
+                footer: '#ft'
+                //toolbar:
+                //    [{
+                //    text: '新增',
+                //    iconCls: 'icon-add',
+                //    handler: function () {
+
+
+                //    }
+                //}, {
+                //    text: '删除',
+                //    iconCls: 'icon-remove',
+                //    handler: function () {del();}
+                //}, '-', {
+                //    text: '保存',
+                //    iconCls: 'icon-save',
+                //    handler: function () { save(); }
+                //}]
+            });
+
+            var date = new Date;
+            var year = date.getFullYear();
+            for (var i = 2014; i <= year; i++) {
+                $('#yearselect').append("<option value=" + i + ">" + i + "</option>");
+            }
+
+        })();
+
+
+
+    </script>
+}
+
