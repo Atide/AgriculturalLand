@@ -218,7 +218,10 @@ function superviseInit()  //查询监管内容
             }
         }
         title += "年份"+lastXZQ + "存在" + YDGM.length + "个扩大用地规模的设施农用地"
-        document.getElementById("YDGMtitle").innerHTML= title;
+        //document.getElementById("YDGMtitle").innerHTML = title;
+
+        var gridPanel = $("#YDGMDTable").datagrid("getPanel");//先获取panel对象
+        gridPanel.panel('setTitle', title);
        
     }
 
@@ -241,7 +244,10 @@ function superviseInit()  //查询监管内容
             }
         }
         title += "年份" + lastXZQ + "存在" + BACL.length + "个设施农用地未提供备案材料"
-        document.getElementById("BACLtitle").innerHTML = title;
+        //document.getElementById("BACLtitle").innerHTML = title;
+
+        var gridPanel = $("#BACLDTable").datagrid("getPanel");//先获取panel对象
+        gridPanel.panel('setTitle', title);
 
         layer.close(load);
     }
@@ -272,12 +278,13 @@ function superviseInit()  //查询监管内容
 
         //点击列表方法
         display = function (i) {
-            require(["dijit/registry"], function (registry) {
-                registry.byId("BGDC").selectChild("BGDCRES", true);
+            //require(["dijit/registry"], function (registry) {
+            //    registry.byId("BGDC").selectChild("BGDCRES", true);
+            $('#BGDC').tabs('select', "详细");
                 displayTable(BGDC["level" + i], "#BGDCDTable");  //展示属性表
-            })
+            //})
 
-           
+                
         }
 
 
@@ -304,17 +311,24 @@ function superviseInit()  //查询监管内容
 
 function displayTable(fList,DOMname)      //展示地图显示图斑的属性table
 {
+    console.log(DOMname);
     var DTdate = new Array();
     for (var i = 0; i < fList.length; i++)
     {
         var obj = fList[i].attributes;
         var cache = new Array();
 
+        var res = {};
         for (var key in obj) {
-            cache.push(obj[key])
+            //cache.push(obj[key])
+            res[key] = obj[key];
+            if (i == 0) {
+                console.log(key);
+            }
         }
-        cache.shift();
-        DTdate.push(cache);
+        //cache.shift();
+        //DTdate.push(cache);
+        DTdate.push(res);
     }
 
 
@@ -329,54 +343,56 @@ function displayTable(fList,DOMname)      //展示地图显示图斑的属性tab
             case "#BGDCDTable": whichTB = "BGDCDTable"; break;
         }
 
-        if (DataTable[whichTB] != null)  //已经加载过属性表，销毁
-        {
-            DataTable[whichTB].destroy();        
-        }
-       
-        DataTable[whichTB] = $(DOMname).DataTable({    //生成属性表
-            "data": DTdate,
-            "columns": [
-                { "title": "行政区代码" },
-                { "title": "图斑编号" },
-                { "title": "备注" },
-                { "title": "现状核查" },
-                { "title": "要素编码" },
-                { "title": "项目名称" },
-                { "title": "责任人" },
-                { "title": "用地位置" },
-                { "title": "用地类型" },
-                { "title": "备案编号" },
-                { "title": "备案时间" },
-                { "title": "实际面积" },
-                { "title": "核查结果" },
-                { "title": "用地面积" },
-                { "title": "占用耕地" },
-                { "title": "用地规模" },
-                { "title": "图斑年份" }
-            ]
-        });
+        //if (DataTable[whichTB] != null)  //已经加载过属性表，销毁
+        //{
+            //DataTable[whichTB].destroy();
+        //}
+        DataTable[whichTB]  = $(DOMname).datagrid('loadData', { rows: DTdate });
+        //DataTable[whichTB] = $(DOMname).DataTable({    //生成属性表
+        //    "data": DTdate,
+        //    "scrollY": 200,
+        //    "scrollX": true,
+        //    "columns": [
+        //        { "title": "行政区代码" },
+        //        { "title": "图斑编号" },
+        //        { "title": "备注" },
+        //        { "title": "现状核查" },
+        //        { "title": "要素编码" },
+        //        { "title": "项目名称" },
+        //        { "title": "责任人" },
+        //        { "title": "用地位置" },
+        //        { "title": "用地类型" },
+        //        { "title": "备案编号" },
+        //        { "title": "备案时间" },
+        //        { "title": "实际面积" },
+        //        { "title": "核查结果" },
+        //        { "title": "用地面积" },
+        //        { "title": "占用耕地" },
+        //        { "title": "用地规模" },
+        //        { "title": "图斑年份" }
+        //    ]
+        //});
 
       
 
-        $(DOMname).on("click","tr",function(){//给tr或者td添加click事件
-             var row = $(this)[0]._DT_RowIndex;
+        //$(DOMname).on("click","tr",function(){//给tr或者td添加click事件
+        //     var row = $(this)[0]._DT_RowIndex;
          
-             if (row != null)
-             {
-                 for (var i = 0; i < featuresList.length; i++)
-                 {
-                     if (featuresList[i].attributes.TBBH == DTdate[row][1])
-                     {
-                         var selectFeature = featuresList[i];
-                         displayBYfeature(selectFeature, "TB", selectFeature.attributes.YEAR)                        
-                         break;
-                     }
-                 }
+        //     if (row != null)
+        //     {
+        //         for (var i = 0; i < featuresList.length; i++)
+        //         {
+        //             if (featuresList[i].attributes.TBBH == DTdate[row][1])
+        //             {
+        //                 var selectFeature = featuresList[i];
+        //                 displayBYfeature(selectFeature, "TB", selectFeature.attributes.YEAR)                        
+        //                 break;
+        //             }
+        //         }
                
-             }
+        //     }
             
-        })
+        //})
 
 
 

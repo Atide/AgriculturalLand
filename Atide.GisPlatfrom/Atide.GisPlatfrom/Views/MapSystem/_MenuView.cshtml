@@ -54,20 +54,24 @@
             if (!$(this).find("ul").is(":animated")) $(this).find("ul").slideUp("fast");
             $("#systemmenu ul ul").slideUp("fast")
         })
+
     })
 
     function popDT() {      //弹出属性表
 
-        require(["dijit/registry", "dojo/on", "dojo/domReady!"],
-            function (registry, on) {
+        //require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+        //    function (registry, on) {
 
-                var a = registry.byId("DTFloatingPane");
+        //        var a = registry.byId("DTFloatingPane");
 
-                a.show();
-                a.bringToTop();
+        //        a.show();
+        //        a.bringToTop();
 
-            });
-       
+        //    });
+
+        //$("#DTFloatingPane").show();
+        //$("#DTFloatingPane").style.display = "block";
+        document.getElementById("DTFloatingPane").style.visibility = "visible";
 
     }
 
@@ -77,37 +81,44 @@
         switch (kind)
         {
             case 1:
-                require(["dijit/registry", "dojo/on", "dojo/domReady!"],
-                function (registry, on) {
+                //require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+                //function (registry, on) {
 
-                    var a = registry.byId("YDGMJGFloatingPane");
+                //    var a = registry.byId("YDGMJGFloatingPane");
 
-                    a.show();
-                    a.bringToTop();
+                //    a.show();
+                //    a.bringToTop();
 
-                });
+                //});
+                document.getElementById("YDGMJGFloatingPane").style.visibility = "visible";
                 break;
             case 2:
-                require(["dijit/registry", "dojo/on", "dojo/domReady!"],
-                    function (registry, on) {
+                //require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+                //    function (registry, on) {
 
-                        var a = registry.byId("BACLJGFloatingPane");
+                //        var a = registry.byId("BACLJGFloatingPane");
 
-                        a.show();
-                        a.bringToTop();
+                //        a.show();
+                //        a.bringToTop();
 
-                    });
+                //    });
+                document.getElementById("BACLJGFloatingPane").style.visibility = "visible";
                 break;
             case 3:
-                require(["dijit/registry", "dojo/on", "dojo/domReady!"],
-                    function (registry, on) {
+                //require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+                //    function (registry, on) {
 
-                        var a = registry.byId("BGDCJGFloatingPane");
+                //        var a = registry.byId("BGDCJGFloatingPane");
 
-                        a.show();
-                        a.bringToTop();
+                //        a.show();
+                //        a.bringToTop();
 
-                    });
+                //    });
+                document.getElementById("BGDCJGFloatingPane").style.visibility = "visible";
+                //document.getElementById("BGDCRES").style.visibility = "visible";
+                //document.getElementById("BGDClist").style.visibility = "visible";
+                //document.getElementById("BGDC").style.visibility = "visible";
+                
                 break;
         }
 

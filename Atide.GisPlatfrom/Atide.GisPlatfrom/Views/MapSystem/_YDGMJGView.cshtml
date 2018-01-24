@@ -1,4 +1,4 @@
-﻿<div data-dojo-type="dojox.layout.FloatingPane" id="YDGMJGFloatingPane"
+﻿@*<div data-dojo-type="dojox.layout.FloatingPane" id="YDGMJGFloatingPane"
      data-dojo-props="resizable:true, dockable:false,  closable:false,title:'用地规模监管'"
      style="position:absolute;top:100px;left:100px;width:900px;height:700px;visibility:hidden;">
     <button data-dojo-type="dijit.form.Button" data-dojo-props="label:'关闭', onClick:function(){dijit.byId('YDGMJGFloatingPane').hide();}"></button><br />
@@ -8,7 +8,62 @@
 
 
 
+</div>*@
+<style>
+    #YDGMJGFloatingPane .panel-body {
+        padding: 0px !important;
+    }
+</style>
+<div id="YDGMJGFloatingPane" class="easyui-draggable"  data-options="handle:'#YDGMJGTitle'" style="position:absolute;top:150px;left:200px;width:500px;height:500px;z-index:999999;visibility:hidden;margin:0px;padding:0px;">
+    <div id="YDGMJGTitle" style="padding:5px;background:#ccc;color:#fff"><a>用地规模监管</a> <span style="float:right;cursor:pointer " onclick="closeBACLJFloatingPane()">关闭</span></div>
+    @*<div id="YDGMtitle"></div>*@
+    <table id="YDGMDTable" class="easyui-datagrid" style="width:100%;height:100%;margin:0px;padding:0px;">  </table>
 </div>
+
+<script>
+    $(function () {
+        document.getElementById("YDGMJGFloatingPane").style.visibility = "hidden";
+        $("#YDGMDTable").datagrid({
+            title: 'DataGrid - DetailView',
+            singleSelect: true,
+            rownumbers: true,
+            columns: [[
+                    { field: 'XZQDM', title: '行政区代码', width: 40, align: "center", rowspan: 1, colspan: 1},
+                    { field: 'TBBH', title: '图斑编号', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'BZ', title: '备注', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'XZHC', title: '现状核查', width: 70, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YSBM', title: '要素编码', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'XMMC', title: '项目名称', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'ZRR', title: '责任人', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDWZ', title: '用地位置', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDLX', title: '用地类型', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'BABH', title: '备案编号', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'BASJ', title: '备案时间', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'SJMJ', title: '实际面积', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'HCJG', title: '核查结果', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDMJ', title: '用地面积', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'GDMJ', title: '占用耕地', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDGM', title: '用地规模', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YEAR', title: '图斑年份', width: 80, halign: "center", rowspan: 1, colspan: 1 }
+            ]],
+            onClickRow: function (rowIndex, rowData) {
+                if (rowData != null) {
+                    for (var i = 0; i < featuresList.length; i++) {
+                        if (featuresList[i].attributes.TBBH == rowData["TBBH"]) {
+                            var selectFeature = featuresList[i];
+                            displayBYfeature(selectFeature, "TB", selectFeature.attributes.YEAR)
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+    })
+    function closeBACLJFloatingPane() {
+        document.getElementById("YDGMJGFloatingPane").style.visibility = "hidden";
+    }
+</script>
+
 
 
 

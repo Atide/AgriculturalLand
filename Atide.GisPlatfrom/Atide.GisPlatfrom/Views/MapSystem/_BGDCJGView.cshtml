@@ -1,11 +1,7 @@
-﻿<div data-dojo-type="dojox.layout.FloatingPane" id="BGDCJGFloatingPane"
+﻿@*<div data-dojo-type="dojox.layout.FloatingPane" id="BGDCJGFloatingPane"
      data-dojo-props="resizable:true, dockable:false,  closable:false,title:'变更调查监管'"
      style="position:absolute;top:100px;left:100px;width:900px;height:700px;visibility:hidden;">
     <button data-dojo-type="dijit.form.Button" data-dojo-props="label:'关闭', onClick:function(){dijit.byId('BGDCJGFloatingPane').hide();}"></button><br />
-   
-  
-
-
 
     <div data-dojo-type="dijit/layout/TabContainer" id="BGDC" style="width: 100%; height: 100%;">
         <div data-dojo-type="dijit/layout/ContentPane" id="BGDClist" title="变更调查列表" data-dojo-props="selected:true">
@@ -19,7 +15,89 @@
     </div>
   
 
+</div>*@
+
+<style>
+    #BGDCJGFloatingPane .panel-body {
+        padding: 0px !important;
+    }
+</style>
+
+<div id="BGDCJGFloatingPane" class="easyui-draggable" data-options="handle:'#BGDCJTitle'" style="position:absolute;top:150px;left:200px;width:500px;height:500px;z-index:999999;visibility:hidden;">
+    <div id="BGDCJTitle" style="padding:5px;background:#ccc;color:#fff"><a>变更调查监管</a> <span style="float:right;cursor:pointer " onclick="closeBGDCJGFloatingPane()">关闭</span></div>
+
+    @*<div data-dojo-type="dijit/layout/TabContainer" id="BGDC" style="width: 100%; height: 100%;">
+        <div data-dojo-type="dijit/layout/ContentPane" id="BGDClist" title="变更调查列表" data-dojo-props="selected:true">*@
+            @*<div id="BGDCtitle"></div>
+            <div id="BGDCcontent"></div>*@
+        @*</div>*@
+
+        @*<div data-dojo-type="dijit/layout/ContentPane" id="BGDCRES" title="详细">*@
+            @*<table id="BGDCDTable" class="easyui-datagrid" style="width:490px;height:490px;margin:5px;">  </table>*@
+        @*</div>*@
+    @*</div>*@
+
+    <div id="BGDC" class="easyui-tabs" style="width:100%;height:500px;">
+        <div title="变更调查列表" style="display:none;padding:0px;">
+            <div id="BGDCtitle"></div>
+            <div id="BGDCcontent"></div>
+        </div>
+        <div title="详细" data-options="" style="overflow:auto;display:none;padding:0px;">
+            <table id="BGDCDTable" class="easyui-datagrid" style="width:100%;height:100%;margin:0px;padding:0px;">  </table>
+        </div>
+    </div>
 </div>
+
+<script>
+    $(function () {
+        document.getElementById("BGDCJGFloatingPane").style.visibility = "hidden";
+        //document.getElementById("BGDC").style.visibility = "hidden";
+        //document.getElementById("BGDCRES").style.visibility = "hidden";
+        //document.getElementById("BGDClist").style.visibility = "hidden";
+        $("#BGDCDTable").datagrid({
+            singleSelect: true,
+            rownumbers: true,
+            columns: [[
+                    { field: 'XZQDM', title: '行政区代码', width: 40, align: "center", rowspan: 1, colspan: 1},
+                    { field: 'TBBH', title: '图斑编号', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'BZ', title: '备注', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'XZHC', title: '现状核查', width: 70, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YSBM', title: '要素编码', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'XMMC', title: '项目名称', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'ZRR', title: '责任人', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDWZ', title: '用地位置', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDLX', title: '用地类型', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'BABH', title: '备案编号', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'BASJ', title: '备案时间', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'SJMJ', title: '实际面积', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'HCJG', title: '核查结果', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDMJ', title: '用地面积', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'GDMJ', title: '占用耕地', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDGM', title: '用地规模', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YEAR', title: '图斑年份', width: 80, halign: "center", rowspan: 1, colspan: 1 }
+            ]],
+            onClickRow: function (rowIndex, rowData) {
+                if (rowData != null) {
+                    for (var i = 0; i < featuresList.length; i++) {
+                        if (featuresList[i].attributes.TBBH == rowData["TBBH"]) {
+                            var selectFeature = featuresList[i];
+                            displayBYfeature(selectFeature, "TB", selectFeature.attributes.YEAR)
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+    })
+    function closeBGDCJGFloatingPane() {
+        document.getElementById("BGDCJGFloatingPane").style.visibility = "hidden";
+        //document.getElementById("BGDC").style.visibility = "hidden";
+        //document.getElementById("BGDCRES").style.visibility = "hidden";
+        //document.getElementById("BGDClist").style.visibility = "hidden";
+        
+    }
+</script>
+
 
 
 
