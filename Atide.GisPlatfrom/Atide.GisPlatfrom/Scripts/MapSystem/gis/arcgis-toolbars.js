@@ -277,6 +277,10 @@ define([
             }
 
         },
+        //属性查看
+        _veiwAttribute: function () {
+            document.getElementById("DTFloatingPane").style.visibility = "visible";
+        },
 
         setWidgetSatus: function (contain,button) {
             if (domStyle.get(dom.byId(contain), "display") == "block") {
