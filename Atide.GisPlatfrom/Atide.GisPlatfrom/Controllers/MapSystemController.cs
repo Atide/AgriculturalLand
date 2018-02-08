@@ -72,6 +72,27 @@ namespace Atide.GisPlatfrom.Controllers
         {
             return PartialView("_DTView");
         }
+        //空间查询视图
+        public ActionResult GeoQueView()
+        {
+            return PartialView("_GeoQueView");
+        }
+        //空间统计视图
+        public ActionResult GeoStaView()
+        {
+            return PartialView("_GeoStaView");
+        }
+        //属性查询视图
+        public ActionResult AttQueView()
+        {
+            return PartialView("_GeoQueView");
+        }
+        //属性统计视图
+        public ActionResult AttStaView()
+        {
+            return PartialView("_AttStaView");
+        }
+
         //用地规模监管查看视图
         public ActionResult YDGMJGView()
         {

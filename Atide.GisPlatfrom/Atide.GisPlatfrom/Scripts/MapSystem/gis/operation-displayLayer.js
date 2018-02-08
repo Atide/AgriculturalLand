@@ -6,7 +6,12 @@ var DataTable = { //属性表存放实体
     DTable: null,
     YDGMDTable: null,
     BACLDTable: null,
-    BGDCDTable: null   
+    BGDCDTable: null,
+    GeoQueTable: null,
+    GeoStaTable: null,
+    AttQueTable: null,
+    AttStaTable: null
+ 
 };
 var featuresList = new Array() //存放所选图层全部要素
 var lastYears = new Array(); //存放上次点击所选的年份
@@ -111,24 +116,36 @@ function getselectFeatures(where, selectTime)   //获取所选年份和地区 �
                 var query = new Query();
                 query.where = "1=1";
                 query.outFields = ["*"];
-                Flayer.queryFeatures(query, function (featureSet) {
-                    yearsNum++;//返回结果+1
-                    var features = featureSet.features;
-                    for (var i = 0; i < features.length; i++) {
-                        features[i].attributes.YEAR = year;
 
+
+              
+                    Flayer.queryFeatures(query, function (featureSet) {
+                        yearsNum++;//返回结果+1
+                        var features = featureSet.features;
+                        for (var i = 0; i < features.length; i++) {
+                            features[i].attributes.YEAR = year;
+
+                        }
+
+                        featuresList = featuresList.concat(features);  //将该年份查询要素加入要素列表
+
+                        if (yearsNum == selectTime.length)      //最后一年数据载入完成
+                        {
+                            displayTable(featuresList, "#DTable");  //展示属性表
+                            superviseInit();  //及监管
+
+                        }
+
+                    }, function () {
+                        layer.close(load);
+                        alert("部分图层数据未找到，请检查数据")
                     }
+                    );
+                
+               
 
-                    featuresList = featuresList.concat(features);  //将该年份查询要素加入要素列表
 
-                    if (yearsNum == selectTime.length)      //最后一年数据载入完成
-                    {
-                        displayTable(featuresList,"#DTable");  //展示属性表
-                        superviseInit();  //及监管
-
-                    }
-
-                });
+               
 
 
 
@@ -150,9 +167,12 @@ function superviseInit()  //查询监管内容
         level2: new Array(),
         level3: new Array()
     }   
-
-
     var BACLnum = featuresList.length;
+    if (BACLnum==0)
+    {
+        layer.close(load);
+    }
+   
     var comNum=0; //已完成检查数量
     for (var i = 0; i < featuresList.length; i++)    //循环用户所选要素
     {
@@ -277,7 +297,7 @@ function superviseInit()  //查询监管内容
        
 
         //点击列表方法
-        display = function (i) {
+       function clickResList(i) {
             //require(["dijit/registry"], function (registry) {
             //    registry.byId("BGDC").selectChild("BGDCRES", true);
             $('#BGDC').tabs('select', "详细");
@@ -289,12 +309,36 @@ function superviseInit()  //查询监管内容
 
 
 
-        var div = document.getElementById("BGDCcontent");
-        div.innerHTML = "<div>核查结果：</div>";
+       
 
-        for (var i = 0; i < 4; i++) {
-            div.innerHTML += "<div onclick='display(" + i + ")'>类别" + i + "数量：" + BGDC["level"+i].length+ "个</div>"
-        }
+        //document.getElementById("BGDClevel0").innerHTML = BGDC["level0"].length;
+        //document.getElementById("BGDClevel1").innerHTML = BGDC["level1"].length
+        //document.getElementById("BGDClevel2").innerHTML = BGDC["level2"].length
+        //document.getElementById("BGDClevel3").innerHTML = BGDC["level3"].length
+
+        var Xdata =["等级0","等级1","等级2","等级3"];
+        var Ydata = [BGDC["level0"].length, BGDC["level1"].length, BGDC["level2"].length, BGDC["level3"].length]
+      
+
+
+        var myChart = echarts.init(document.getElementById('BGDCchart'));
+        var option = {            title: {                text: "各等级数量统计"            },            tooltip: {},            xAxis: {                data: Xdata,                axisLabel : {
+                    interval: 0
+                } ,            },            yAxis: {},            series: [{                name: '图斑数量',                type: 'bar',                data: Ydata            }],            label: {
+                normal: {
+
+                    show: true,
+                    position:"top"
+
+                }
+            }        };
+        myChart.setOption(option);
+
+        myChart.on('click', function (params) {
+            clickResList(params.dataIndex)
+           
+        });
+      
 
 
     }
@@ -316,6 +360,10 @@ function displayTable(fList,DOMname)      //展示地图显示图斑的属性tab
     for (var i = 0; i < fList.length; i++)
     {
         var obj = fList[i].attributes;
+        if (obj == null)
+        {
+            obj = fList[i];
+        }
         var cache = new Array();
 
         var res = {};
@@ -341,6 +389,12 @@ function displayTable(fList,DOMname)      //展示地图显示图斑的属性tab
             case "#YDGMDTable": whichTB = "YDGMDTable"; break;
             case "#BACLDTable": whichTB = "BACLDTable"; break;
             case "#BGDCDTable": whichTB = "BGDCDTable"; break;
+            case "#GeoQueTable": whichTB = "GeoQueTable"; break;
+            case "#GeoStaTable": whichTB = "GeoStaTable"; break;
+            case "#AttQueTable": whichTB = "AttQueTable"; break;
+            case "#AttStaTable": whichTB = "AttStaTable"; break;
+          
+               
         }
 
         //if (DataTable[whichTB] != null)  //已经加载过属性表，销毁

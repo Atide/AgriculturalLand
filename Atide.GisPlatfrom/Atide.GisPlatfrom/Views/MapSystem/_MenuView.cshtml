@@ -9,7 +9,14 @@
             </ul>
         </li>
 
-        <li><a onclick="popQuerylayer()" href="javascript:void(0)">查询统计@*<span>ABOUT US</span>*@</a><div class="n"></div></li>
+        <li><a  href="javascript:void(0)">查询统计@*<span>ABOUT US</span>*@</a><div class="n"></div>
+            <ul>
+                <li><a onclick="popQUELayer(1)" href="javascript:void(0)">空间查询</a></li>
+                <li><a onclick="popQUELayer(2)" href="javascript:void(0)">空间统计</a></li>
+                <li><a onclick="popQUELayer(3)" href="javascript:void(0)">属性查询</a></li>
+                <li><a onclick="popQUELayer(4)" href="javascript:void(0)">属性统计</a></li>
+            </ul>
+        </li>
         <li>
             <a href="javascript:void(0)">监管核查@*<span>SERVICES</span>*@</a><div class="n"></div>
             <ul>
@@ -125,7 +132,33 @@
 
     }
 
+    function popQUELayer(kind) //弹出查询统计页面
+    {
+        switch (kind) {
+            case 1:
+               
+                document.getElementById("GeoQueFloatingPane").style.visibility = "visible";
+                break;
+            case 2:
+              
+                document.getElementById("GeoStaFloatingPane").style.visibility = "visible";
+                break;
+            case 3:
+              
+                document.getElementById("AttQueFloatingPane").style.visibility = "visible";
+              
 
+                break;
+            case 4:
+               
+                document.getElementById("AttStaFloatingPane").style.visibility = "visible";
+               
+
+                break;
+        }
+
+
+    }
 
     function popQuerylayer() {
 
