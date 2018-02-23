@@ -1,0 +1,45 @@
+﻿body{margin:0 auto;padding:0;background:#f8f8f8;color:#656565;text-align:center;text-align:center;font-size:13px;font-family:Microsoft Yahei,tahoma,arial,simsun,sans-serif}
+input[type=button]{-webkit-filter:chroma(color=#000000);-moz-filter:chroma(color=#000000);-o-filter:chroma(color=#000000);filter:chroma(color=#000000)}
+input[type=text],input[type=password]{float:right;padding:4px;height:24px;border:1px solid #fff;background:#fff no-repeat 0 0}
+input[type=text]:hover,input[type=password]:hover{border:1px solid #41AFEB}
+input[type=checkbox]{margin:3px 0 0 5px;margin:-1px 0 1px 1px}
+.button-wrap{clear:both;display:block;margin:auto;margin-top:20px;width:156px;height:35px;border:1px solid #FE5727;border-radius:3px;background:#FE6F43;color:#fff;text-align:center;line-height:35px;-ms-border-radius:3px}
+.button{margin-top:10px;width:230px;height:40px;border:none;border-radius:3px;background:#2359a3;color:#fff;text-align:center;font-size:16px;line-height:35px;-ms-border-radius:3px}
+.header{margin-top:-96px;width:1024px;text-align:left}
+.header_nav{height:96px;background:#0366cc}
+.home{float:right;margin:60px 0 0 0;width:100px;height:30px;line-height:30px}
+.home-icon{float:left;width:28px;height:30px;background:url(/images/Login/home-icon.png) center center;background-repeat:no-repeat;line-height:30px}
+.home-go{float:left;width:70px;height:30px;text-align:left;line-height:29px}
+.home-go a{outline-style:none;color:#656565;text-decoration:none}
+.home-go a:hover{color:#c00;text-decoration:underline}
+.main{width:100%;height:521px;background-image:url(/images/Login/main-bg.png)}
+.footer{overflow:hidden;margin:0 auto;height:100%;font-size:12px}
+.footer-content{overflow:hidden;margin:0 auto;padding-top:5px;padding-bottom:5px;width:1024px;height:100%}
+.footer-content div{height:22px;line-height:22px}
+.w1024{position:relative;margin:0 auto;margin-top:-521px;width:1024px;height:521px}
+.login{float:right;margin:85px 100px 0 0;width:300px;height:350px;border-radius:3px;background:#016ed7;color:#fff;-ms-border-radius:3px}
+.login-title{height:40px;border-bottom:2px solid #00AA95;border-radius:3px;color:#fff;text-align:center;font-size:20px;line-height:40px;-ms-border-radius:3px}
+.login-content{padding:15px 65px 30px 65px;width:170px;height:290px;text-align:center}
+.login-content table{margin:0;margin-left:-30px;padding:0;padding-left:0}
+.login-content table tr{line-height:50px}
+.login-content table tr td{text-align:left}
+.con_login{width:100%;background:#2a8be4}
+.login-banner{position:absolute;/*top:140px;*/ top:25%;left:150px;display:block}
+.container{margin:0 auto;width:100%;height:100%;/*background-color:#d9e7f2*/background-image:url(Login/test-2.jpg);background-size:cover; }
+.content{margin:0 auto;width:1024px;height:457px}
+.login-tab{position:absolute;/*top:170px;*/top:25%;right:240px;overflow:hidden;margin:0;padding:0;width:300px;height:330px;border-radius:15px;background:rgba(255,255,255,.8);color:#FFF}
+.login-heaer{margin:0;margin-top:20px;padding:0;text-align:center}
+.login-box{margin:0 auto;padding:0;border:0 solid #000;color:#FFF;list-style:none}
+.login-box li{margin:10px auto;margin-top:20px;width:230px;height:34px;border:1px solid #c9d2d8;background-color:#fff;text-align:left;line-height:50px;position:relative;}
+.login-box li .itemIcon{display:inline-block;overflow:hidden;margin-left:0;width:36px;height:100%;border:0;border-right:1px solid #c9d2d8;vertical-align:top;text-align:center}
+.login-box li .itemIcon img{margin-bottom:5px}
+.login-box li .inbox{width:180px;outline:0}
+.login-box li .Checkbox{display:inline-block;margin-bottom:1px;margin-left:0;width:85px;outline:0;border:none;border-bottom:1px}
+.login-box li .Checkbox input{display:inline-block;margin:0;padding:0;width:100%;height:32px;outline:0}
+.login-box li .CheckCodebox{display:inline-block;margin-left:0;width:100px;outline:0;height:35px;overflow:hidden;position:absolute;right:0px;top: 0px;}
+.login_ul #login_one{height:66px;background:0 0}
+.con_nav{width:100%;background:#0269ce}
+.top-center{position:relative;margin:0 auto;width:80%}
+.logo{position:absolute;display:block;margin-top:20px;margin-left:-110px;}
+.con_footer{overflow:hidden;padding-top:15px;padding-bottom:5px;height:84px;background:#2359a3;color:#fff;text-align:center;width: 100%;position: absolute;bottom: 0;}
+.con_footer div{height:30px;line-height:30px}
