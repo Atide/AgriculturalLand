@@ -1,0 +1,66 @@
+﻿
+<style>
+    #BACLJGFloatingPane .panel-body{
+        padding:0px !important;
+    }
+</style>
+<div id="GeoQueFloatingPane" class="easyui-draggable" data-options="handle:'#GeoQueTitle'" style="position:absolute;top:150px;left:200px;width:500px;height:500px;z-index:999999;visibility:hidden;">
+    <div id="GeoQueTitle" style="padding:5px;background:#ccc;color:#fff"><a>空间查询</a> <span style="float:right;cursor:pointer " onclick="closeGeoQueFloatingPane()">关闭</span></div>
+ 
+    <button onclick="queryTool('Point')">单点</button>
+    <button onclick="queryTool('Freehand_Polyline')">自由曲线</button>
+    <button onclick="queryTool('Freehand_Polygon')">自由曲面</button>
+    <button onclick="queryTool('Circle')">圆形</button>
+
+ 
+
+    <table id="GeoQueTable" class="easyui-datagrid" style="width:100%;height:100%;margin:0px;padding:0px;">  </table>
+</div>
+
+<script>
+    $(function () {
+        document.getElementById("GeoQueFloatingPane").style.visibility = "hidden";
+        $("#GeoQueTable").datagrid({
+            title: '结果列表',
+            singleSelect: true,
+            rownumbers: true,
+            columns: [[
+                    { field: 'XZQDM', title: '行政区代码', width: 40, align: "center", rowspan: 1, colspan: 1},
+                    { field: 'TBBH', title: '图斑编号', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'BZ', title: '备注', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'XZHC', title: '现状核查', width: 70, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YSBM', title: '要素编码', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'XMMC', title: '项目名称', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'ZRR', title: '责任人', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDWZ', title: '用地位置', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDLX', title: '用地类型', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'BABH', title: '备案编号', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'BASJ', title: '备案时间', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'SJMJ', title: '实际面积', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'HCJG', title: '核查结果', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDMJ', title: '用地面积', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'GDMJ', title: '占用耕地', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDGM', title: '用地规模', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YEAR', title: '图斑年份', width: 80, halign: "center", rowspan: 1, colspan: 1 }
+            ]],
+            onClickRow: function (rowIndex, rowData) {
+                if (rowData != null) {
+                    for (var i = 0; i < featuresList.length; i++) {
+                        if (featuresList[i].attributes.TBBH == rowData["TBBH"]) {
+                            var selectFeature = featuresList[i];
+                            displayBYfeature(selectFeature, "TB", selectFeature.attributes.YEAR)
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+    })
+    function closeGeoQueFloatingPane() {
+        document.getElementById("GeoQueFloatingPane").style.visibility = "hidden";
+    }
+</script>
+
+
+
+

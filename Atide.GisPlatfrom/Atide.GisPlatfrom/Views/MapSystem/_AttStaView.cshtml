@@ -1,0 +1,114 @@
+﻿
+<style>
+    #BACLJGFloatingPane .panel-body {
+        padding: 0px !important;
+    }
+</style>
+<div id="AttStaFloatingPane" class="easyui-draggable" data-options="handle:'#AttStaTitle'" style="position:absolute;top:150px;left:200px;width:500px;height:500px;z-index:999999;visibility:hidden;">
+    <div id="AttStaTitle" style="padding:5px;background:#ccc;color:#fff"><a>属性统计</a> <span style="float:right;cursor:pointer " onclick="closeAttStaFloatingPane()">关闭</span></div>
+
+
+    <div id="AttStaPane" class="easyui-tabs" style="width:100%;height:500px;">
+
+        <div title="统计" style="display:none;padding:0px;">
+            <label>选择查询字段：</label> <select name=" selectAttque" id="selectAttque">
+                
+
+            </select>
+            </br>
+            <label>选择统计字段：</label> <select name=" selectAttSta" id="selectAttSta">              
+            </select>
+            </br>
+            <label>输入查询值：</label>   <input id="valueAttStaque" name="valueAttStaque">
+            <button data-dojo-type="dijit/form/Button" onclick="attButton()">查询</button>
+            <div id="attSta" style="width: 400px;height:400px;"></div>
+        </div>
+
+        <div title="详细" data-options="" style="overflow:auto;display:none;padding:0px;">
+            <table id="AttStaTable" class="easyui-datagrid" style="width:100%;height:100%;margin:0px;padding:0px;">  </table>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+<script>
+    $(function () {
+        require(["atide/gis/config/system-config"], function (SystemConfig) {
+            
+            var queSlable = document.getElementById("selectAttque");       //动态生成查询字段下拉
+            queSlable.innerHTML = "";
+            var queSobj = SystemConfig.selectConfig.querySelect;
+            for (var i = 0; i < queSobj.length; i++)
+            {
+                queSlable.innerHTML += '<option value="' + queSobj[i].field + '">'+queSobj[i].title+'</option>'
+            }
+
+            var staSlable = document.getElementById("selectAttSta");       //动态生成统计字段下拉
+            staSlable.innerHTML = "";
+            var staSobj = SystemConfig.selectConfig.staSelect;
+            for (var i = 0; i < staSobj.length; i++) {
+                staSlable.innerHTML += '<option value="' + staSobj[i].field + '">' + staSobj[i].title + '</option>'
+            }
+
+            })
+
+
+       
+
+        document.getElementById("AttStaFloatingPane").style.visibility = "hidden";
+        $("#AttStaTable").datagrid({
+            title: '结果列表',
+            singleSelect: true,
+            rownumbers: true,
+            columns: [[
+                { field: 'XZQDM', title: '行政区代码', width: 40, align: "center", rowspan: 1, colspan: 1 },
+                { field: 'TBBH', title: '图斑编号', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                { field: 'BZ', title: '备注', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                { field: 'XZHC', title: '现状核查', width: 70, align: "center", rowspan: 1, colspan: 1 },
+                { field: 'YSBM', title: '要素编码', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                { field: 'XMMC', title: '项目名称', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                { field: 'ZRR', title: '责任人', width: 80, align: "center", rowspan: 1, colspan: 1 },
+                { field: 'YDWZ', title: '用地位置', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                { field: 'YDLX', title: '用地类型', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                { field: 'BABH', title: '备案编号', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                { field: 'BASJ', title: '备案时间', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                { field: 'SJMJ', title: '实际面积', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                { field: 'HCJG', title: '核查结果', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                { field: 'YDMJ', title: '用地面积', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                { field: 'GDMJ', title: '占用耕地', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                { field: 'YDGM', title: '用地规模', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                { field: 'YEAR', title: '图斑年份', width: 80, halign: "center", rowspan: 1, colspan: 1 }
+            ]],
+            onClickRow: function (rowIndex, rowData) {
+                if (rowData != null) {
+                    for (var i = 0; i < featuresList.length; i++) {
+                        if (featuresList[i].attributes.TBBH == rowData["TBBH"]) {
+                            var selectFeature = featuresList[i];
+                            displayBYfeature(selectFeature, "TB", selectFeature.attributes.YEAR)
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+    })
+    function closeAttStaFloatingPane() {
+        document.getElementById("AttStaFloatingPane").style.visibility = "hidden";
+    }
+
+    function attButton()
+    {
+       
+        var vue1 = document.getElementById("valueAttStaque").value;
+        var vue2 = document.getElementById("selectAttque").value;
+        var vue3 = document.getElementById("selectAttSta").value;
+        StaByAtt(vue1, vue2, vue3)
+    }
+</script>
+
+
+
+

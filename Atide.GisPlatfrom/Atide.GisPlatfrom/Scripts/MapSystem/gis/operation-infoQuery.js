@@ -205,29 +205,15 @@ function queryByGeometry(geometry,kind) {  //空间查询与统计
                        return;
                    }
                    var features = Allfeature;
+                   displayTable(features, "#GeoQueTable");
+                   var title = "共查出" + features.length + "个结果"
+                
 
+                   var gridPanel = $("#GeoQueTable").datagrid("getPanel");//先获取panel对象
+                   gridPanel.panel('setTitle', title);
+                  
 
-                   //点击列表方法
-                   display = function (i) {
-                       registry.byId("TC1").selectChild("RES1", true);
-                       var div2 = document.getElementById("RES1");
-                       div2.innerHTML = "<div>图斑标识码：" + features[i].attributes.TBBH
-                           + "</br> 所在行政区代码：" + features[i].attributes.XZQDM
-                           + "</br> 图斑说明：" + features[i].attributes.BZ
-                           + "</div>";
-                       var ext = features[i].geometry.getExtent();
-                       var res = g_main._mapControl._map.setExtent(ext.expand(1.5));
-                   }
-
-
-
-                   var div = document.getElementById("QU11");
-                   div.innerHTML = "<div>查询结果：" + features.length + "个</div>";
-
-                   for (var i = 0; i < features.length; i++) {
-                       div.innerHTML += "<div onclick='display(" + i + ")'>图斑标识码：" + features[i].attributes.TBBH + ", 所在行政区代码：" + features[i].attributes.XZQDM
-                           + "</div>"
-                   }
+                  
                }
 
                function showGeoStaRES()      //空间统计结果展示
@@ -241,7 +227,7 @@ function queryByGeometry(geometry,kind) {  //空间查询与统计
                        features[i] = features[i].attributes
 
                    }
-                   registry.byId("TC2").selectChild("RES2", true);
+                 
 
 
                    var res = toClassify(features, whichField)   //根据所选字段 统计
@@ -258,6 +244,18 @@ function queryByGeometry(geometry,kind) {  //空间查询与统计
                                interval: 0
                            } ,                       },                       yAxis: {},                       series: [{                           name: '图斑数量',                           type: 'bar',                           data: Ydata                       }]                   };
                    myChart.setOption(option);
+
+                   myChart.on('click', function (params) {
+                      
+                       var Sfeature = res[params.dataIndex].data
+                       displayTable(Sfeature, "#GeoStaTable")
+                       $('#GeoStaPane').tabs('select', "详细");
+                   });
+
+
+                  
+
+
                }
 
 
@@ -269,21 +267,22 @@ function queryByGeometry(geometry,kind) {  //空间查询与统计
 function queryByAtt(value, field) {  //属性查询
 
 
-    if (myFeatureLayers == null) {
-        alert("请先选择图斑");
-        return;
-    }
-    if (value == "") {
-        alert("请输入查寻值");
-        return;
-    }
-    var where = field + "='" + value + "'"
+ 
 
     require(["dijit/registry", "esri/layers/FeatureLayer", "esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",
   "esri/layers/GraphicsLayer", "esri/symbols/SimpleLineSymbol", "esri/symbols/CartographicLineSymbol", "esri/tasks/query",
   "esri/tasks/QueryTask", "atide/gis/config/system-config", "esri/symbols/SimpleMarkerSymbol", "esri/Color", "esri/symbols/SimpleFillSymbol", "esri/symbols/CartographicLineSymbol", "dojo/domReady!"],
        function (registry, FeatureLayer, Graphic, InfoTemplate, SpatialReference, Extent, GraphicsLayer, SimpleLineSymbol, CartographicLineSymbol, Query, QueryTask, SystemConfig, SimpleMarkerSymbol, Color, SimpleFillSymbol, CartographicLineSymbol) {
-    
+           if (myFeatureLayers == null) {
+               alert("请先选择图斑");
+               return;
+           }
+           if (value == "") {
+               alert("请输入查寻值");
+               return;
+           }
+           var where = field + " like '" + value + "%'"
+
 
 
            var query1 = new Query();
@@ -324,34 +323,40 @@ function queryByAtt(value, field) {  //属性查询
 
            function showAttQueRES()    //展示属性查询结果
            {
+            
+
                if (Allfeature.length == 0) {
                    alert("查询为空")
                    return;
                }
                var features = Allfeature;
+               displayTable(features, "#AttQueTable");
+               var title = "共查出" + features.length + "个结果"
 
 
+               var gridPanel = $("#AttQueTable").datagrid("getPanel");//先获取panel对象
+               gridPanel.panel('setTitle', title);
            
-               //点击列表方法                  
-               display = function (i) {
-                   registry.byId("TC3").selectChild("RES3", true);
-                   var div2 = document.getElementById("RES3");
-                   div2.innerHTML = "<div>图斑编号：" + features[i].attributes.TBBH
-                       + "</br> 所在行政区代码：" + features[i].attributes.XZQDM
-                       + "</br> 图斑说明：" + features[i].attributes.BZ
-                       + "</div>";
+               ////点击列表方法                  
+               //display = function (i) {
+               //    registry.byId("TC3").selectChild("RES3", true);
+               //    var div2 = document.getElementById("RES3");
+               //    div2.innerHTML = "<div>图斑编号：" + features[i].attributes.TBBH
+               //        + "</br> 所在行政区代码：" + features[i].attributes.XZQDM
+               //        + "</br> 图斑说明：" + features[i].attributes.BZ
+               //        + "</div>";
 
-                   var ext = features[i].geometry.getExtent();
-                   var res = g_main._mapControl._map.setExtent(ext.expand(1.5));
-               }
+               //    var ext = features[i].geometry.getExtent();
+               //    var res = g_main._mapControl._map.setExtent(ext.expand(1.5));
+               //}
 
-               var div = document.getElementById("QU31");
-               div.innerHTML = "<div>查询结果：" + features.length + "个</div>";
-               var length = features.length < 40 ? features.length : 40;
-               for (var i = 0; i < length; i++) {
-                   div.innerHTML += "<div onclick='display(" + i + ")'>图斑标识码：" + features[i].attributes.TBBH+ ", 所在行政区代码：" + features[i].attributes.XZQDM
-                       + "</div>"
-               }
+               //var div = document.getElementById("QU31");
+               //div.innerHTML = "<div>查询结果：" + features.length + "个</div>";
+               //var length = features.length < 40 ? features.length : 40;
+               //for (var i = 0; i < length; i++) {
+               //    div.innerHTML += "<div onclick='display(" + i + ")'>图斑标识码：" + features[i].attributes.TBBH+ ", 所在行政区代码：" + features[i].attributes.XZQDM
+               //        + "</div>"
+               //}
 
 
            }
@@ -370,7 +375,7 @@ function StaByAtt(value, field, stField) {  //属性统计
         alert("请输入查寻值");
         return;
     }
-    var where = field + "='" + value + "'"
+    var where = field + " like '" + value + "%'"
 
     require(["dijit/registry", "esri/layers/FeatureLayer", "esri/graphic", "esri/InfoTemplate", "esri/SpatialReference", "esri/geometry/Extent",
   "esri/layers/GraphicsLayer", "esri/symbols/SimpleLineSymbol", "esri/symbols/CartographicLineSymbol", "esri/tasks/query",
@@ -428,7 +433,7 @@ function StaByAtt(value, field, stField) {  //属性统计
 
                }
 
-               registry.byId("TC4").selectChild("RES4", true);;
+               
 
                var res = toClassify(features, stField)   //根据所选字段 统计
 
@@ -445,6 +450,12 @@ function StaByAtt(value, field, stField) {  //属性统计
                            interval: 0
                        } ,                   },                   yAxis: {},                   series: [{                       name: '图斑数量',                       type: 'bar',                       data: Ydata                   }]               };
                myChart.setOption(option);
+               myChart.on('click', function (params) {
+
+                   var Sfeature = res[params.dataIndex].data
+                   displayTable(Sfeature, "#AttStaTable")
+                   $('#AttStaPane').tabs('select', "详细");
+               });
            }
 
 

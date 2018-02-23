@@ -10,38 +10,44 @@
     </span>
 
     @*空间查询*@
-    <div data-dojo-type="dijit/layout/TabContainer" id="TC1" style="width: 100%; height: 100%;">
+    @*<div data-dojo-type="dijit/layout/TabContainer" id="TC1" style="width: 100%; height: 100%;">
+
+
+        <div id="GeoQueTitle" style="padding:5px;background:#ccc;color:#fff"><a>空间查询</a></div>
         <div data-dojo-type="dijit/layout/ContentPane" id="QU1" title="查询" data-dojo-props="selected:true">
             <button onclick="queryTool('Point')">单点</button>
             <button onclick="queryTool('Freehand_Polyline')">自由曲线</button>
             <button onclick="queryTool('Freehand_Polygon')">自由曲面</button>
             <button onclick="queryTool('Circle')">圆形</button>
-            <div id="QU11"></div>
+            <table id="GeoQueTable" class="easyui-datagrid" style="width:100%;height:100%;margin:0px;padding:0px;">  </table>
         </div>
+       
 
-        <div data-dojo-type="dijit/layout/ContentPane" id="RES1" title="结果">
+      
 
-        </div>
-    </div>
+       
+      
+       
+    </div>*@
     @*空间统计*@
-    <div data-dojo-type="dijit/layout/TabContainer" id="TC2" style="width: 100%; height: 100%;">
+    @*<div data-dojo-type="dijit/layout/TabContainer" id="TC2" style="width: 100%; height: 100%;">
         <div data-dojo-type="dijit/layout/ContentPane" id="QU2" title="统计" data-dojo-props="selected:true">
-            <label>选择统计字段：</label> <select name=" selectS1" id="selectS1">            
+            <label>选择统计字段：</label> <select name=" selectGeoSta" id="selectGeoSta">            
                 <option value="YDLX" selected="selected">土地类型</option>
                 <option value="XZQDM">行政区代码</option>
             </select>
             </br>
-            <button onclick="queryTool('Point',1,selectS1.value)">单点</button>
-            <button onclick="queryTool('Freehand_Polyline',1,selectS1.value)">自由曲线</button>
-            <button onclick="queryTool('Freehand_Polygon',1,selectS1.value)">自由曲面</button>
-            <button onclick="queryTool('Circle',1,selectS1.value)">圆形</button>
+            <button onclick="queryTool('Point',1,selectGeoSta.value)">单点</button>
+            <button onclick="queryTool('Freehand_Polyline',1,selectGeoSta.value)">自由曲线</button>
+            <button onclick="queryTool('Freehand_Polygon',1,selectGeoSta.value)">自由曲面</button>
+            <button onclick="queryTool('Circle',1,selectGeoSta.value)">圆形</button>
         </div>
         <div data-dojo-type="dijit/layout/ContentPane" id="RES2" title="结果">
             <div id="geoSta" style="width: 400px;height:400px;"></div>
         </div>
-    </div>
+    </div>*@
     @*属性查询*@
-    <div data-dojo-type="dijit/layout/TabContainer" id="TC3" style="width: 100%; height: 100%;">
+    @*<div data-dojo-type="dijit/layout/TabContainer" id="TC3" style="width: 100%; height: 100%;">
         <div data-dojo-type="dijit/layout/ContentPane" id="QU3" title="查询" data-dojo-props="selected:true">
             <label>选择查询字段：</label> <select name=" selectQ1" id="selectQ1">
                 <option value="TBBH" selected="selected">图斑编号</option>
@@ -57,9 +63,9 @@
         <div data-dojo-type="dijit/layout/ContentPane" id="RES3" title="结果">
 
         </div>
-    </div>
+    </div>*@
     @*属性统计*@
-    <div data-dojo-type="dijit/layout/TabContainer" id="TC4" style="width: 100%; height: 100%;">
+    @*<div data-dojo-type="dijit/layout/TabContainer" id="TC4" style="width: 100%; height: 100%;">
         <div data-dojo-type="dijit/layout/ContentPane" id="QU4" title="查询" data-dojo-props="selected:true">
             <label>选择查询字段：</label> <select name=" selectQ2" id="selectQ2">
                 <option value="TBBH" selected="selected">图斑编号</option>
@@ -80,7 +86,7 @@
         <div data-dojo-type="dijit/layout/ContentPane" id="RES4" title="结果">
             <div id="attSta" style="width: 400px;height:400px;"></div>
         </div>
-    </div>
+    </div>*@
 
 
 

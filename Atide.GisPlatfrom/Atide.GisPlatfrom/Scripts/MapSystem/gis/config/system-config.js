@@ -90,6 +90,33 @@ new Color([255, 108, 96]), 1), new Color([255, 108, 96])).setStyle(SimpleMarkerS
 
         },
 
+
+        selectConfig: {              //属性下拉列表选项
+            querySelect: [                     //查询字段配置
+                { field: 'XZQDM', title: '行政区代码'},
+                { field: 'TBBH', title: '图斑编号'},              
+                { field: 'XZHC', title: '现状核查'},
+                { field: 'YSBM', title: '要素编码' },
+                { field: 'XMMC', title: '项目名称' },
+                { field: 'ZRR', title: '责任人'},
+                { field: 'YDWZ', title: '用地位置' },
+                { field: 'YDLX', title: '用地类型'},
+                { field: 'BABH', title: '备案编号'},
+                { field: 'BASJ', title: '备案时间'},               
+                { field: 'HCJG', title: '核查结果'},
+             
+              
+               
+               
+            ],
+            staSelect: [       //统计字段配置
+                { field: 'XZQDM', title: '行政区代码' },                                         
+                { field: 'ZRR', title: '责任人' },               
+                { field: 'YDLX', title: '用地类型' },
+                { field: 'BABH', title: '备案编号' },
+                { field: 'BASJ', title: '备案时间' },
+                { field: 'HCJG', title: '核查结果' },]
+        }
         
     }
 
