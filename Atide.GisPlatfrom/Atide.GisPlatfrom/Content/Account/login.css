@@ -40,6 +40,7 @@ input[type=checkbox]{margin:3px 0 0 5px;margin:-1px 0 1px 1px}
 .login_ul #login_one{height:66px;background:0 0}
 .con_nav{width:100%;background:#0269ce}
 .top-center{position:relative;margin:0 auto;width:80%}
-.logo{position:absolute;display:block;margin-top:10px;margin-left:-110px;width:344px;height:130px;}
+/*.logo{position:absolute;display:block;margin-top:10px;margin-left:-110px;width:344px;height:130px;}*/
+.logo{position:absolute;display:block;margin-top:20px;margin-left:-130px;width:650px;height:70px;}
 .con_footer{overflow:hidden;padding-top:15px;padding-bottom:5px;height:84px;background:#2359a3;color:#fff;text-align:center;width: 100%;position: absolute;bottom: 0;}
 .con_footer div{height:30px;line-height:30px}
