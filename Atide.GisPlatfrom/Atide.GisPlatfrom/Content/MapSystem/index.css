@@ -104,12 +104,28 @@ body,
 
 
 .yp-chart-panel {
-    bottom: 200px;
+    /*bottom: 200px;
     position: absolute;
     left: 50%;
     margin-left: -30px;
     width: 60px;
     height: 10px;
+    border: solid 1px #ccc;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    z-index: 999;*/
+    position: absolute;
+    /*bottom: 0px;
+    left: 50%;*/
+    left: 0px;
+    top: 50%;
+    /*margin-left: -30px;*/
+    margin-top: -30px;
+    /*width: 60px;
+    height: 10px;*/
+    width: 10px;
+    height: 60px;
     /* background-color: #fff; */
     border: solid 1px #ccc;
     cursor: pointer;
@@ -119,17 +135,22 @@ body,
 }
 .yp-chart-panel-unfold {
     position: absolute;
-    bottom: 0px;
-    left: 50%;
-    margin-left: -30px;
-    width: 60px;
-    height: 10px;
+    /*bottom: 0px;
+    left: 50%;*/
+    left: 0px;
+    top: 50%;
+    /*margin-left: -30px;*/
+    margin-top:-30px;
+    /*width: 60px;
+    height: 10px;*/
+    width: 10px;
+    height: 60px;
     /* background-color: #fff; */
     border: solid 1px #ccc;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.9);
     text-align: center;
-    z-index:999;
+    z-index: 999;
 }
 .svgRoate {
     -webkit-transform: rotate(45deg);

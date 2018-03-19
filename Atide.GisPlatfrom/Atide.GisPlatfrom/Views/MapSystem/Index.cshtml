@@ -75,6 +75,38 @@
 
         }
 
+        function showHideLeftPane() {
+            if ($("#test").hasClass("yp-chart-panel-unfold")) {
+                //$("#leftPane").css("width", 0);
+                //$("#leftPane").css("display", "block");
+                //dijit.byId('leftPane').resize(-200,0);
+                //dijit.byId('leftPane').style = 'margin: 0px; padding: 0px; width: 0px;';
+                //dijit.byId('leftPane').layout();
+                dijit.byId('leftPane').resize({ w: 0 });
+                dijit.byId('borderContainer').layout();
+                //dijit.byId('map').resize({ w: 1000 });
+                $("#test").attr("title", "展开面板");
+                $("#test").removeClass("yp-chart-panel-unfold");
+
+                $("#test").addClass("yp-chart-panel");
+                $("#test i").addClass("fa-angle-right");
+                $("#test i").removeClass("fa-angle-left");
+            }
+            else {
+                //$("#leftPane").css("width", 200);
+                //$("#leftPane").css("display", "none");
+                //dijit.byId('leftPane').show();
+                //dijit.byId('leftPane').style='margin: 0px; padding: 0px; width: 200px;';
+                $("#test").attr("title", "收起面板");
+                dijit.byId('leftPane').resize({ w: 200 });
+                dijit.byId('borderContainer').layout();
+                $("#test").removeClass("yp-chart-panel");
+                $("#test").addClass("yp-chart-panel-unfold");
+                $("#test i").removeClass("fa-angle-right");
+                $("#test i").addClass("fa-angle-left");
+            }
+        }
+
     </script>
 
 }
@@ -100,7 +132,9 @@
             </div>*@
 
         <div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center',splitter:false">
-
+            <div id="test" class="yp-chart-panel-unfold" title="收起面板" onclick="showHideLeftPane()">
+                <i class="fa fa-angle-left" style="top: 20px;position: relative;"></i>
+            </div>
             @Html.Partial("_ToolBarView")
             @Html.Partial("_YearSelectView")
             <ul style="position:absolute; bottom:5px; right:10px; width:90px;z-index:999;">
@@ -108,7 +142,7 @@
                 <li id="yxdt" onclick="changemap(2)" class="basemapnormal" style="background-color:rgb(52, 108, 147)">影像底图</li>
             </ul>
 
-            @Html.Partial("_BottomResultView")
+            @*@Html.Partial("_BottomResultView")*@
 
         </div>
         @*<div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom'" style="height:200px;">
