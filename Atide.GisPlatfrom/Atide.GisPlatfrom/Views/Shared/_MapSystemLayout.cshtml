@@ -22,22 +22,28 @@
     @*EChart JS*@
     <script src="~/Scripts/lib/echarts/3.5.4/echarts.min.js"></script>
     @*DT*@
-    <link href="~/Scripts/lib/DataTables-1.10.15/media/css/jquery.dataTables.css" rel="stylesheet" />
-    <script src="~/Scripts/lib/DataTables-1.10.15/media/js/jquery.dataTables.js"></script>
+    @*<link href="~/Scripts/lib/DataTables-1.10.15/media/css/jquery.dataTables.css" rel="stylesheet" />
+    <script src="~/Scripts/lib/DataTables-1.10.15/media/js/jquery.dataTables.js"></script>*@
+
+
 
     @* Arcgis相关引入 *@
     @*公司内网*@
     @Styles.Render("http://172.16.1.141:8091/arcgis/api/3.20/dijit/themes/claro/claro.css")
     @Styles.Render("http://172.16.1.141:8091/arcgis/api/3.20/esri/css/esri.css")
     
-    <link rel="stylesheet" href="http://172.16.1.141:8091/arcgis/api/3.20/dojox/layout/resources/FloatingPane.css">
-    <link rel="stylesheet" href="http://172.16.1.141:8091/arcgis/api/3.20/dojox/layout/resources/ResizeHandle.css">
+    @*<link rel="stylesheet" href="http://172.16.1.141:8091/arcgis/api/3.20/dojox/layout/resources/FloatingPane.css">
+    <link rel="stylesheet" href="http://172.16.1.141:8091/arcgis/api/3.20/dojox/layout/resources/ResizeHandle.css">*@
 
     @*公司外网*@   
     @*<link rel="stylesheet" href="http://220.165.247.91:6080/arcgis/api/3.20W/dojox/layout/resources/FloatingPane.css">
     <link rel="stylesheet" href="http://220.165.247.91:6080/arcgis/api/3.20W/dojox/layout/resources/ResizeHandle.css">
     @Styles.Render("http://220.165.247.91:6080/arcgis/api/3.20W/dijit/themes/claro/claro.css")
     @Styles.Render("http://220.165.247.91:6080/arcgis/api/3.20W/esri/css/esri.css")*@    
+
+    <link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="~/Scripts/lib/jquery-easyui-1.5.2/themes/icon.css">
+    <script type="text/javascript" src="~/Scripts/lib/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
 
     <script type="text/javascript">
         var dojoConfig = {

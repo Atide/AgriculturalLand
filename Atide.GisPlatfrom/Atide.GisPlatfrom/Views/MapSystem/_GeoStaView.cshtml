@@ -1,28 +1,27 @@
 ﻿
 <style>
-    #BACLJGFloatingPane .panel-body{
-        padding:0px !important;
+    #GeoStaFloatingPane .panel-body {
+        padding: 0px !important;
     }
 </style>
-<div id="GeoStaFloatingPane" class="easyui-draggable" data-options="handle:'#GeoStaTitle'" style="position:absolute;top:150px;left:200px;width:500px;height:500px;z-index:999999;visibility:hidden;">
-    <div id="GeoStaTitle" style="padding:5px;background:#ccc;color:#fff"><a>空间统计</a> <span style="float:right;cursor:pointer " onclick="closeGeoStaFloatingPane()">关闭</span></div>
+<div id="GeoStaFloatingPane" class="easyui-draggable" data-options="handle:'#GeoStaTitle'" style="position:absolute;top:150px;left:200px;width:500px;height:500px;z-index:999999;visibility:hidden;border:2px solid #194B6E;">
+    <div id="GeoStaTitle" style="padding:5px;background:rgb(25, 75, 110);color:#fff"><a style="color: #FFFFFF;">空间统计</a> <span style="float:right;cursor:pointer " onclick="closeGeoStaFloatingPane()">关闭</span></div>
  
 
-    <div id="GeoStaPane" class="easyui-tabs" style="width:100%;height:500px;">
+    <div id="GeoStaPane" class="easyui-tabs" style="width:100%;height:466px;">
         <div title="统计" style="display:none;padding:0px;">
             <label>选择统计字段：</label> <select name=" selectGeoSta" id="selectGeoSta">
                 <option value="YDLX" selected="selected">土地类型</option>
                 <option value="XZQDM">行政区代码</option>
             </select>
-            </br>
-            <button onclick="queryTool('Point',1,selectGeoSta.value)">单点</button>
+            <button style="margin-left:100px;" onclick="queryTool('Point',1,selectGeoSta.value)">单点</button>
             <button onclick="queryTool('Freehand_Polyline',1,selectGeoSta.value)">自由曲线</button>
             <button onclick="queryTool('Freehand_Polygon',1,selectGeoSta.value)">自由曲面</button>
             <button onclick="queryTool('Circle',1,selectGeoSta.value)">圆形</button>
             <div id="geoSta" style="width: 400px;height:400px;"></div>
         </div>
         <div title="详细" data-options="" style="overflow:auto;display:none;padding:0px;">
-            <table id="GeoStaTable" class="easyui-datagrid" style="width:100%;height:100%;margin:0px;padding:0px;">  </table>
+            <table id="GeoStaTable" class="easyui-datagrid" style="width:470px;height:410px;margin:0px;padding:0px;">  </table>
         </div>
     </div>
 

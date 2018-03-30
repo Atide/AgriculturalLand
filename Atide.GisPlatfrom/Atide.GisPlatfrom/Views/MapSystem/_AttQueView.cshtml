@@ -1,24 +1,21 @@
-﻿
-<style>
-    #BACLJGFloatingPane .panel-body{
-        padding:0px !important;
+﻿<style>
+    #AttQueFloatingPane .panel-body {
+        padding: 0px !important;
     }
 </style>
-<div id="AttQueFloatingPane" class="easyui-draggable" data-options="handle:'#AttQueTitle'" style="position:absolute;top:150px;left:200px;width:500px;height:500px;z-index:999999;visibility:hidden;">
-    <div id="AttQueTitle" style="padding:5px;background:#ccc;color:#fff"><a>属性查询</a> <span style="float:right;cursor:pointer " onclick="closeAttQueFloatingPane()">关闭</span></div>
+<div id="AttQueFloatingPane" class="easyui-draggable" data-options="handle:'#AttQueTitle'" style="position:absolute;top:150px;left:200px;width:500px;height:500px;z-index:999999;visibility:hidden;border:2px solid #194B6E;background-color:white;">
+    <div id="AttQueTitle" style="padding:5px;background:rgb(25, 75, 110);color:#fff"><a style="color: #FFFFFF;">属性查询</a> <span style="float:right;cursor:pointer " onclick="closeAttQueFloatingPane()">关闭</span></div>
  
     <div>
-        <label>选择查询字段：</label> <select name=" selectQUAtt" id="selectQUAtt">   
-        </select>
-        </br>
-        <label>输入查询值：</label>   <input id="QUAttvalue" name="QUAttvalue">
+        <label>选择查询字段：</label> <select name=" selectQUAtt" id="selectQUAtt">   </select>
+        <label>输入查询值：</label>   <input id="QUAttvalue" name="QUAttvalue" style="width:150px;">
         <button data-dojo-type="dijit/form/Button" onclick="queryButton()">查询</button>
       
     </div>
 
  
 
-    <table id="AttQueTable" class="easyui-datagrid" style="width:100%;height:100%;margin:0px;padding:0px;">  </table>
+    <table id="AttQueTable" class="easyui-datagrid" style="width:496px;height:426px;margin:0px;padding:0px;">  </table>
 </div>
 
 <script>

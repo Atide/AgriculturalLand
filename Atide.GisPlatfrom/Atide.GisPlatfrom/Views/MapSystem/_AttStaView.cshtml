@@ -1,31 +1,27 @@
-﻿
-<style>
-    #BACLJGFloatingPane .panel-body {
+﻿<style>
+    #AttStaFloatingPane .panel-body {
         padding: 0px !important;
     }
 </style>
-<div id="AttStaFloatingPane" class="easyui-draggable" data-options="handle:'#AttStaTitle'" style="position:absolute;top:150px;left:200px;width:500px;height:500px;z-index:999999;visibility:hidden;">
-    <div id="AttStaTitle" style="padding:5px;background:#ccc;color:#fff"><a>属性统计</a> <span style="float:right;cursor:pointer " onclick="closeAttStaFloatingPane()">关闭</span></div>
+<div id="AttStaFloatingPane" class="easyui-draggable" data-options="handle:'#AttStaTitle'" style="position:absolute;top:150px;left:200px;width:500px;height:500px;z-index:999999;visibility:hidden;border:2px solid #194B6E;">
+    <div id="AttStaTitle" style="padding:5px;background:rgb(25, 75, 110);color:#fff"><a style="color: #FFFFFF;">属性统计</a> <span style="float:right;cursor:pointer " onclick="closeAttStaFloatingPane()">关闭</span></div>
 
 
-    <div id="AttStaPane" class="easyui-tabs" style="width:100%;height:500px;">
+    <div id="AttStaPane" class="easyui-tabs" style="width:496px;height:466px;margin:0px;padding:0px;">
 
         <div title="统计" style="display:none;padding:0px;">
             <label>选择查询字段：</label> <select name=" selectAttque" id="selectAttque">
-                
-
             </select>
-            </br>
-            <label>选择统计字段：</label> <select name=" selectAttSta" id="selectAttSta">              
+            <label style="margin-left:20px;">选择统计字段：</label> <select name=" selectAttSta" id="selectAttSta">              
             </select>
             </br>
             <label>输入查询值：</label>   <input id="valueAttStaque" name="valueAttStaque">
             <button data-dojo-type="dijit/form/Button" onclick="attButton()">查询</button>
-            <div id="attSta" style="width: 400px;height:400px;"></div>
+            <div id="attSta" style="width: 400px;height:382px;"></div>
         </div>
 
-        <div title="详细" data-options="" style="overflow:auto;display:none;padding:0px;">
-            <table id="AttStaTable" class="easyui-datagrid" style="width:100%;height:100%;margin:0px;padding:0px;">  </table>
+        <div title="详细" data-options="" style="overflow:auto;display:none;padding:0px;margin:0px;">
+            <table id="AttStaTable" class="easyui-datagrid" style="width:470px;height:410px;margin:0px;padding:0px;">  </table>
         </div>
 
     </div>
