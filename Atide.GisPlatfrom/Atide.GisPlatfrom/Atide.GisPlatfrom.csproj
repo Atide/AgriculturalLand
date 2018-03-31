@@ -176,9 +176,13 @@
     <Content Include="Content\Account\Image\input_password_hover.png" />
     <Content Include="Content\Account\Image\input_users.png" />
     <Content Include="Content\Account\Image\input_users_hover.png" />
-    <Content Include="Content\Account\Image\login_background.png" />
+    <Content Include="Content\Account\Image\login_background-1.png" />
+    <Content Include="Content\Account\Image\login_background.jpg" />
+    <Content Include="Content\Account\Image\login_top-1.png" />
     <Content Include="Content\Account\Image\login_top.png" />
     <Content Include="Content\Account\Image\pwd.png" />
+    <Content Include="Content\Account\Image\timg-1.jpg" />
+    <Content Include="Content\Account\Image\timg.jpg" />
     <Content Include="Content\Account\Image\userName.png" />
     <Content Include="Content\Account\login.css" />
     <Content Include="Content\Account\Login\amuit.png" />
@@ -208,6 +212,9 @@
     <Content Include="Content\Account\Login\nva_bg.png" />
     <Content Include="Content\Account\Login\pageHeader_bg.png" />
     <Content Include="Content\Account\Login\password.png" />
+    <Content Include="Content\Account\Login\test-1.png" />
+    <Content Include="Content\Account\Login\test-2.jpg" />
+    <Content Include="Content\Account\Login\test-3.png" />
     <Content Include="Content\Account\Login\test.png" />
     <Content Include="Content\Account\Login\username.png" />
     <Content Include="Content\Account\Login\verification.png" />
@@ -1995,7 +2002,6 @@
     <Content Include="Scripts\lib\jquery-toolbar20160918\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\lib\font-awesome-4.7.0 1\.DS_Store" />
     <Content Include="Content\lib\font-awesome-4.7.0 1\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\lib\font-awesome-4.7.0 1\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\lib\font-awesome-4.7.0 1\fonts\fontawesome-webfont.woff" />
@@ -2142,6 +2148,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\MapSystem\common\table.excel.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
