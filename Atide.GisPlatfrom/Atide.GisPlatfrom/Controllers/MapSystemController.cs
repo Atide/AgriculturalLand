@@ -7,6 +7,8 @@ using Atide.ReadTool;
 using System.IO;
 using Atide.GisPlatfrom.Models;
 using Newtonsoft.Json;
+using System.Data;
+using Atide.GisPlatfrom.CommonTool;
 
 namespace Atide.GisPlatfrom.Controllers
 {
@@ -211,6 +213,26 @@ namespace Atide.GisPlatfrom.Controllers
             }
             System.IO.File.WriteAllText(fp, content);//JsonConvert.SerializeObject(lstUser)
             return Content("success");
+        }
+
+        /// <summary>
+        /// 导出Excel
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ExportExcel()
+        {
+            string json = Request.Params["data"];
+            try
+            {
+                DataTable dt = ExcelHelper.JsonToDataTable(json);
+                string pathDestop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                ExcelHelper.GridToExcelByNPOI(dt, pathDestop + "\\" + Request.Params["filename"] + "数据导出-" + DateTime.Now.ToString("yyyy-MM-dd") + ".xls");
+                return Content("1");
+            }
+            catch (Exception)
+            {
+                return Content("-1");
+            }
         }
         #endregion
 

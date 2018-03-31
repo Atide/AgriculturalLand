@@ -15,7 +15,11 @@
     }
 </style>
 <div id="BACLJGFloatingPane" class="easyui-draggable" data-options="handle:'#BACLJGTitle'" style="position:absolute;top:150px;left:200px;width:500px;height:500px;z-index:999999;visibility:hidden;border:2px solid #194B6E;">
-    <div id="BACLJGTitle" style="padding:5px;background: rgb(25, 75, 110);color:#fff"><a style="color: #FFFFFF;">备案材料监管</a> <span style="float:right;cursor:pointer " onclick="closeBACLJGFloatingPane()">关闭</span></div>
+    <div id="BACLJGTitle" style="padding:5px;background: rgb(25, 75, 110);color:#fff">
+        <a style="color: #FFFFFF;">备案材料监管</a>
+        <span style="float:right;cursor:pointer;margin-left:20px;" onclick="closeBACLJGFloatingPane()">关闭</span>
+        <span style="cursor:pointer;float:right;" onclick="exportExcel('BACLDTable', '备案材料监管')">导出数据</span>
+    </div>
     <table id="BACLDTable" class="easyui-datagrid" style="width:496px;height:466px;margin:0px;padding:0px;">  </table>
 </div>
 
@@ -23,27 +27,27 @@
     $(function () {
         document.getElementById("BACLJGFloatingPane").style.visibility = "hidden";
         $("#BACLDTable").datagrid({
-            title: 'DataGrid - DetailView',
+            title: '',
             singleSelect: true,
             rownumbers: true,
             columns: [[
-                    { field: 'XZQDM', title: '行政区代码', width: 40, align: "center", rowspan: 1, colspan: 1},
+                    { field: 'XZQDM', title: '行政区代码', width: 40, align: "center", rowspan: 1, colspan: 1 },
                     { field: 'TBBH', title: '图斑编号', width: 80, align: "center", rowspan: 1, colspan: 1 },
-                    { field: 'BZ', title: '备注', width: 80, align: "center", rowspan: 1, colspan: 1 },
-                    { field: 'XZHC', title: '现状核查', width: 70, align: "center", rowspan: 1, colspan: 1 },
+                    { field: 'XZHC', title: '变更调查现状核查', width: 70, align: "center", rowspan: 1, colspan: 1 },
                     { field: 'YSBM', title: '要素编码', width: 80, align: "center", rowspan: 1, colspan: 1 },
                     { field: 'XMMC', title: '项目名称', width: 80, align: "center", rowspan: 1, colspan: 1 },
                     { field: 'ZRR', title: '责任人', width: 80, align: "center", rowspan: 1, colspan: 1 },
                     { field: 'YDWZ', title: '用地位置', width: 80, halign: "center", rowspan: 1, colspan: 1 },
-                    { field: 'YDLX', title: '用地类型', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'YDLX', title: '设施农用地类型', width: 80, halign: "center", rowspan: 1, colspan: 1 },
                     { field: 'BABH', title: '备案编号', width: 80, halign: "center", rowspan: 1, colspan: 1 },
                     { field: 'BASJ', title: '备案时间', width: 80, halign: "center", rowspan: 1, colspan: 1 },
                     { field: 'SJMJ', title: '实际面积', width: 80, halign: "center", rowspan: 1, colspan: 1 },
-                    { field: 'HCJG', title: '核查结果', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'HCJG', title: '变更调查核查结果', width: 80, halign: "center", rowspan: 1, colspan: 1 },
                     { field: 'YDMJ', title: '用地面积', width: 80, halign: "center", rowspan: 1, colspan: 1 },
                     { field: 'GDMJ', title: '占用耕地', width: 80, halign: "center", rowspan: 1, colspan: 1 },
                     { field: 'YDGM', title: '用地规模', width: 80, halign: "center", rowspan: 1, colspan: 1 },
-                    { field: 'YEAR', title: '图斑年份', width: 80, halign: "center", rowspan: 1, colspan: 1 }
+                    { field: 'YEAR', title: '图斑年份', width: 80, halign: "center", rowspan: 1, colspan: 1 },
+                    { field: 'BZ', title: '备注', width: 80, align: "center", rowspan: 1, colspan: 1 },
             ]],
             onClickRow: function (rowIndex, rowData) {
                 if (rowData != null) {
