@@ -849,11 +849,11 @@ function displayBYfeature(feature,kind,year)    //展示要素方法
                     "用地面积: ${YDMJ}<br/>" +
                     "占用耕地: ${GDMJ}<br/>" +
                     "设施农用地类型: ${YDLX}<br/>" +
-                    "设施农用地规模: ${YDGM}<br/>" +
-                    "实际监测面积: ${SJMJ}<br/>" +
+                    "用地规模: ${YDGM}<br/>" +
+                    "用地面积: ${SJMJ}<br/>" +
                     "备案编号: ${BABH}<br/>" +
-                    "现状核查: ${XZHC}<br/>" +
-                    "核查结果: ${HCJG}<br/>" +
+                    "变更调查现状核查: ${XZHC}<br/>" +
+                    "变更调查核查结果: ${HCJG}<br/>" +
                     "备案时间: ${BASJ}<br/>" +
                     "备注: ${BZ}<br/>"+         
                     "附件查看:"
@@ -867,7 +867,7 @@ function displayBYfeature(feature,kind,year)    //展示要素方法
                     } else {
                         content += "<a onclick='Img_show()' id='Img_show'><img  src='/Content/MapSystem/images/images_h.png' /></a>"
                     }
-                    var infoTemplate = new InfoTemplate("遥感核查详细信息", content);
+                    var infoTemplate = new InfoTemplate("设施农用地详细信息", content);
                     displayFeature(TBfeatureLayers, g_main._mapControl._map, feature, sms, infoTemplate);
                     
                 }
