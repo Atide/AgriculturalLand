@@ -48,7 +48,7 @@
             onClickRow: function (rowIndex, rowData) {
                 if (rowData != null) {
                     for (var i = 0; i < featuresList.length; i++) {
-                        if (featuresList[i].attributes.TBBH == rowData["TBBH"]) {
+                        if (featuresList[i].attributes.YSBM == rowData["YSBM"]) {
                             var selectFeature = featuresList[i];
                             displayBYfeature(selectFeature, "TB", selectFeature.attributes.YEAR)
                             break;

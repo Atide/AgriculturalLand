@@ -234,6 +234,22 @@ namespace Atide.GisPlatfrom.Controllers
                 return Content("-1");
             }
         }
+
+        public ActionResult isFileExsit()
+        {
+            string path =  Request.Params["path"];
+            if (string.IsNullOrEmpty(path))
+            {
+                return Content("fail");
+            }
+
+            if (System.IO.File.Exists(path))  // 判断是否已有相同文件 
+            {
+                return Content("success");
+            }
+            return Content("fail");
+        }
+
         #endregion
 
     }

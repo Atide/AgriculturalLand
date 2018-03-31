@@ -192,8 +192,47 @@ function superviseInit()  //查询监管内容
         }
 
         //备案材料检查
-        var url = makeUrl(featuresList[i].attributes.YEAR, featuresList[i].attributes.XZQDM, featuresList[i].attributes.TBBH);
-        BACLcheck(url, i)
+        //var url = makeUrl(featuresList[i].attributes.YEAR, featuresList[i].attributes.XZQDM, featuresList[i].attributes.TBBH);
+        //BACLcheck(url, i);
+
+        //require(["atide/gis/config/system-config", "dojo/domReady!"
+        //], function (SystemConfig) {
+        //    var localurl = SystemConfig.fjConfig.yghcLocalDir + "\\" + featuresList[i].attributes.YEAR + "\\" + featuresList[i].attributes.XZQDM + "\\" + featuresList[i].attributes.XZQDM + "_" + featuresList[i].attributes.TBBH + "_CL_1.jpg";
+        //    var postData = {
+        //        path: localurl
+        //    };
+        //    comNum++;
+            //$.ajax({
+            //    type: 'POST',
+            //    data: postData,
+            //    url: "/MapSystem/isFileExsit",
+            //    async: false, //这是重要的一步，防止重复提交的
+            //    success: function (data) {
+                   
+            //        if (data == "success") {
+       
+            //        } else {
+            //            BACL.push(featuresList[i]);
+            //        }
+            //        if (i == featuresList.length-1) {
+            //            BACLcheckOut();//全部完成备案材料检查结果
+            //        }
+            //    },
+            //    error: function () {
+            //        BACL.push(featuresList[i]);
+            //        if (i == featuresList.length - 1) {
+            //            BACLcheckOut();//全部完成备案材料检查结果
+            //        }
+            //    }
+            //});
+            //})
+        if (typeof att.BASJ == "undefined" || att.BASJ == null || att.BASJ == "" || att.BASJ == " ") {
+            
+            BACL.push(featuresList[i]);
+        }
+        if (i == featuresList.length - 1) {
+                        BACLcheckOut();//全部完成备案材料检查结果
+                    }
      
     }
 
@@ -855,22 +894,50 @@ function displayBYfeature(feature,kind,year)    //展示要素方法
                     "变更调查现状核查: ${XZHC}<br/>" +
                     "变更调查核查结果: ${HCJG}<br/>" +
                     "备案时间: ${BASJ}<br/>" +
-                    "备注: ${BZ}<br/>"+         
-                    "附件查看:"
-                var url = makeUrl(year, feature.attributes.XZQDM, feature.attributes.TBBH)
-                var ImgObj = new Image(); //判断图片是否存在  
-                ImgObj.src = url;
-                setTimeout(check, 1);  //不能同步检查，否则无法判断状态                  
-                function check() {
-                    if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
-                        content += "<a onclick='Img_show(\"" + feature.attributes.TBBH + "\"," + "\"" + year + "\"," + "\"" + feature.attributes.XZQDM + "\")' id='Img_show'><img  src='/Content/MapSystem/images/images.png' /></a>"
-                    } else {
-                        content += "<a onclick='Img_show()' id='Img_show'><img  src='/Content/MapSystem/images/images_h.png' /></a>"
-                    }
-                    var infoTemplate = new InfoTemplate("设施农用地详细信息", content);
-                    displayFeature(TBfeatureLayers, g_main._mapControl._map, feature, sms, infoTemplate);
+                    "备注: ${BZ}<br/>" +
+                    "附件查看:";
+
+                var localurl = SystemConfig.fjConfig.yghcLocalDir + "\\" + year + "\\" + feature.attributes.XZQDM + "\\" + feature.attributes.XZQDM + "_" + feature.attributes.TBBH + "_CL_1.jpg";
+                    var postData = {
+                        path: localurl
+                    };
+                    $.ajax({
+                        type: 'POST',
+                        data: postData,
+                        url: "/MapSystem/isFileExsit",
+                        async: false, //这是重要的一步，防止重复提交的
+                        success: function (data) {
+                            if (data == "success") {
+                                content += "<a onclick='Img_show(\"" + feature.attributes.TBBH + "\"," + "\"" + year + "\"," + "\"" + feature.attributes.XZQDM + "\")' id='Img_show'><img  src='/Content/MapSystem/images/images.png' /></a>";
+                            } else {
+                                content += "<a onclick='Img_show()' id='Img_show'><img  src='/Content/MapSystem/images/images_h.png' /></a>";
+                            }
+                            var infoTemplate = new InfoTemplate("设施农用地详细信息", content);
+                            displayFeature(TBfeatureLayers, g_main._mapControl._map, feature, sms, infoTemplate);
+                        },
+                        error: function () {
+                            content += "<a onclick='Img_show()' id='Img_show'><img  src='/Content/MapSystem/images/images_h.png' /></a>";
+                            var infoTemplate = new InfoTemplate("设施农用地详细信息", content);
+                            displayFeature(TBfeatureLayers, g_main._mapControl._map, feature, sms, infoTemplate);
+                            return;
+                        }
+                    });
+
+
+                //var url = makeUrl(year, feature.attributes.XZQDM, feature.attributes.TBBH)
+                //var ImgObj = new Image(); //判断图片是否存在  
+                //ImgObj.src = url;
+                //setTimeout(check, 1);  //不能同步检查，否则无法判断状态                  
+                //function check() {
+                //    if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+                //        content += "<a onclick='Img_show(\"" + feature.attributes.TBBH + "\"," + "\"" + year + "\"," + "\"" + feature.attributes.XZQDM + "\")' id='Img_show'><img  src='/Content/MapSystem/images/images.png' /></a>"
+                //    } else {
+                //        content += "<a onclick='Img_show()' id='Img_show'><img  src='/Content/MapSystem/images/images_h.png' /></a>"
+                //    }
+                //    var infoTemplate = new InfoTemplate("设施农用地详细信息", content);
+                //    displayFeature(TBfeatureLayers, g_main._mapControl._map, feature, sms, infoTemplate);
                     
-                }
+                //}
                 break;    
                
         }
