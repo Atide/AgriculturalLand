@@ -968,7 +968,7 @@ function Img_show(TBBH, TIME, XZQDM)
             type: 2,
             title: '附件查看',
             //maxmin: true,
-            area: ['500px', '550px'],
+            area: ['600px', '650px'],
             content: '/MapSystem/PictureView?TBBH=' + TBBH + '&TIME=' + TIME + '&XZQDM=' + XZQDM
         });
      

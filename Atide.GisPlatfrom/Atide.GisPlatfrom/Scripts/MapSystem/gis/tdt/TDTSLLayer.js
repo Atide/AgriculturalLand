@@ -40,7 +40,7 @@
             this.onLoad(this);
         },
 
-        getTileUrl: function (level, row, col) {
+        getTileUrl: function (level, row, col) {//vec_w  vec_c
             return "http://t" + col % 8 + ".tianditu.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + level + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
 
         }

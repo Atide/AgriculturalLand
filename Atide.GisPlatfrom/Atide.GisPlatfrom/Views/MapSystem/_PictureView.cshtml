@@ -23,17 +23,18 @@
 @*<div>*@
 
 
-<div id="PictureView" style="margin: 5px; border: 1px solid gray; border-image: none; height: 460px; overflow: auto;"> </div>
+<div id="PictureView" style="margin: 5px; border: 1px solid gray; border-image: none; height: 560px; overflow: auto;"> </div>
 <div style="margin: 0px; height: 25px;">
-    <button style="margin-left:50px;" onclick="change(1)">上一张</button><button style="margin-left: 250px;" onclick="change(2)">下一张</button>
+    <button style="margin-left:100px;" onclick="change(1)">上一张</button><button style="margin-left: 250px;" onclick="change(2)">下一张</button>
 </div>
 @*</div>*@
 
 
 
 <script>
-    var urlOR;
+    var webUrlOR;
     var ZPid = 1;
+    var localUrlOR;
 
     $(function () {   //初始化弹出页
 
@@ -65,6 +66,7 @@
                     var div = document.getElementById('PictureView')
                     div.innerHTML = "";
                     var img = document.createElement("img");
+                    img.setAttribute("style", "height:560px;");
                     img.src = weburl;
                     div.appendChild(img);
                     return;
@@ -114,47 +116,113 @@
         if (kind == 1)   //上页
         {
             ZPid -= 1;
-            url = urlOR + ZPid + ".jpg";
+            var weburl = webUrlOR + ZPid + ".jpg";
 
-            var img = document.createElement("img");
-            img.src = url;
-            setTimeout(check, 1);  //不能同步检查，否则无法判断状态                  
-            function check() {
-                if (img.complete == true) {
-                    var div = document.getElementById('PictureView')
-                    div.innerHTML = "";
-                    div.appendChild(img);
+            var localurl = localUrlOR + ZPid + ".jpg";
+             
+                var postData = {
+                    path: localurl
+                };
+                $.ajax({
+                    type: 'POST',
+                    data: postData,
+                    url: "/MapSystem/isFileExsit",
+                    async: false, //这是重要的一步，防止重复提交的
+                    success: function (data) {
+                        if (data == "success") {
+                            var div = document.getElementById('PictureView')
+                            div.innerHTML = "";
+                            var img = document.createElement("img");
+                            img.setAttribute("style", "height:560px;");
+                            img.src = weburl;
+                            div.appendChild(img);
+                            return;
+                        } else {
+                            ZPid += 1;
+                            layer.msg("未找到相应图片");
+                            return;
+                        }
+                    },
+                    error: function () {
+                        ZPid += 1;
+                        layer.msg("未找到相应图片");
+                        return;
+                    }
+                });
+
+
+            //var img = document.createElement("img");
+            //img.src = url;
+            //setTimeout(check, 1);  //不能同步检查，否则无法判断状态                  
+            //function check() {
+            //    if (img.complete == true) {
+            //        var div = document.getElementById('PictureView')
+            //        div.innerHTML = "";
+            //        div.appendChild(img);
                    
-                }
-                else {
-                    layer.msg("未找到相应图片");
+            //    }
+            //    else {
+            //        layer.msg("未找到相应图片");
                    
-                    ZPid += 1;
-                }
-            }         
+            //        ZPid += 1;
+            //    }
+            //}         
 
         }
 
 
         else {
             ZPid += 1;
-            url = urlOR + ZPid + ".jpg";
-            var img = document.createElement("img");
-            img.src = url;
-            setTimeout(check, 1);  //不能同步检查，否则无法判断状态                  
-            function check() {
-                if (img.complete == true) {
-                    var div = document.getElementById('PictureView')
-                    div.innerHTML = "";
-                    div.appendChild(img);
+            var weburl = webUrlOR + ZPid + ".jpg";
 
-                }
-                else {
-                    layer.msg("未找到相应图片");
-                   
+            var localurl = localUrlOR + ZPid + ".jpg";
+
+            var postData = {
+                path: localurl
+            };
+            $.ajax({
+                type: 'POST',
+                data: postData,
+                url: "/MapSystem/isFileExsit",
+                async: false, //这是重要的一步，防止重复提交的
+                success: function (data) {
+                    if (data == "success") {
+                        var div = document.getElementById('PictureView')
+                        div.innerHTML = "";
+                        var img = document.createElement("img");
+                        img.setAttribute("style", "height:560px;");
+                        img.src = weburl;
+                        div.appendChild(img);
+                        return;
+                    } else {
+                        ZPid -= 1;
+                        layer.msg("未找到相应图片");
+                        return;
+                    }
+                },
+                error: function () {
                     ZPid -= 1;
+                    layer.msg("未找到相应图片");
+                    return;
                 }
-            }                
+            });
+            //url = urlOR + ZPid + ".jpg";
+            //var img = document.createElement("img");
+            //img.src = url;
+            //setTimeout(check, 1);  //不能同步检查，否则无法判断状态                  
+            //function check() {
+            //    if (img.complete == true) {
+            //        var div = document.getElementById('PictureView')
+            //        div.innerHTML = "";
+            //        div.appendChild(img);
+
+            //    }
+            //    else {
+            //        layer.msg("未找到相应图片");
+                   
+            //        ZPid -= 1;
+            //    }
+            //}                
         }
     }
 
