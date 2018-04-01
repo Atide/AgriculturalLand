@@ -26,8 +26,8 @@ namespace Atide.GisPlatfrom.CommonTool
             string strName = rg.Match(strJson).Value;
             DataTable tb = null;
             //去除表名   
-            strJson = strJson.Substring(strJson.IndexOf("[") + 1);
-            strJson = strJson.Substring(0, strJson.IndexOf("]"));
+            //strJson = strJson.Substring(strJson.IndexOf("[") + 1);
+            //strJson = strJson.Substring(0, strJson.IndexOf("]"));
 
             //获取数据   
             rg = new Regex(@"(?<={)[^}]+(?=})");

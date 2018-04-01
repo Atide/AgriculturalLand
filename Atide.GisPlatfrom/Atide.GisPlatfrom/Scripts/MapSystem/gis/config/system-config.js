@@ -3,7 +3,9 @@
  * 系统相关配置
  */
 define(["dojo/_base/declare", "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol", "esri/Color"], function (declare, SimpleFillSymbol, SimpleMarkerSymbol, SimpleLineSymbol, Color) {
-    var servicesHost = "172.16.1.141:6080";   //公司外网GIS服务器映射地址：220.165.247.91  公司内网：172.16.1.143 GIS服务器：172.16.1.141
+    var gisServersHost = "172.16.1.141";   //公司外网GIS服务器映射地址：220.165.247.91  公司内网：172.16.1.143 GIS服务器：172.16.1.141
+    var gisServersPort = "6080"
+    var webServerHost = "172.16.1.141";
     return {
         baseMapConfig: {//地图底图配置
             mapChangeKeepExtent: true,//地图切换后是否保留原有位置
@@ -24,7 +26,7 @@ define(["dojo/_base/declare", "esri/symbols/SimpleFillSymbol", "esri/symbols/Sim
                 },
                 {
                     id: 'basemap_image',
-                    mapUrl: "http://" + servicesHost + "/arcgis/rest/services/ynRaster/ImageServer",//http://172.17.204.200:6080/arcgis/rest/services/ynRaster/ImageServer
+                    mapUrl: "http://" + gisServersHost+":"+gisServersPort + "/arcgis/rest/services/ynRaster/ImageServer",//http://172.17.204.200:6080/arcgis/rest/services/ynRaster/ImageServer
                     label: "云南影像地图",
                     image: "/Content/MapsDisplaySys/Images/BaseMap/imageBase.png",
                 }
@@ -32,26 +34,30 @@ define(["dojo/_base/declare", "esri/symbols/SimpleFillSymbol", "esri/symbols/Sim
         },
         urlConfig: {//地图服务配置
             //几何服务地址 http://172.17.204.200:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer
-            geometryService: "http://" + servicesHost + "/arcgis/rest/services/Utilities/Geometry/GeometryServer",
+            geometryService: "http://" + gisServersHost+":"+gisServersPort + "/arcgis/rest/services/Utilities/Geometry/GeometryServer",
             //打印服务地址
-            printService: "http://" + servicesHost + "/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+            printService: "http://" + gisServersHost+":"+gisServersPort + "/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
             //行政区服务地址
-            xzqQueryUrl: "http://" + servicesHost + "/arcgis/rest/services/XZQH/MapServer/0",
+            xzqQueryUrl: "http://" + gisServersHost+":"+gisServersPort + "/arcgis/rest/services/XZQH/MapServer/0",
 
             //地类图斑服务地址
             //外网地址 "http://220.165.247.91:6080/arcgis/rest/services/TB/MapServer"
-            tbServiceUrl: "http://" + servicesHost + "/arcgis/rest/services/TB/MapServer",
+            tbServiceUrl: "http://" + gisServersHost+":"+gisServersPort + "/arcgis/rest/services/TB/MapServer",
 
             //备案信息服务地址
             //内网网址 http://172.16.1.141:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer 
             //外网地址 http://220.165.247.91:6080/arcgis/rest/services/BAXM/MapServer/dynamicLayer
-            baxmServiceUrl: "http://" + servicesHost + "/arcgis/rest/services/BAXM2/MapServer"
+            baxmServiceUrl: "http://" + gisServersHost+":"+gisServersPort + "/arcgis/rest/services/BAXM2/MapServer"
         },
         fjConfig:{
-            //遥感核查图片虚拟目录地址
-            yghcPictureUrl: "http://172.16.1.141:8091/FJ_YGHC/",
-            //遥感核查附件服务器本地路径
-            yghcLocalDir: "E:\\NYSSData\\YGHC\\FJ"
+            //遥感核查图片虚拟目录地址 内网地址：http://172.16.1.141:8091/FJ_YGHC/ 本地地址：http://127.0.0.1/FJ_YGHC/
+            yghcPictureUrl: "http://" + webServerHost+"/FJ_YGHC/",
+            //遥感核查附件服务器本地路径，用于判断图片是否存在
+            yghcLocalDir: "D:\\工作\\云南省国土资源厅项目\\2017年项目-云南省设施农用地备案监管系统平台建设\\数据服务\\YGHC\\FJ",
+            //导出excel存放本地路径
+            yghcSaveDir: "C:\\NYSSTemp",
+            //导出excelweb下载地址
+            yghcSaveDirWebUrl: "http://" + webServerHost+ "/YGHCTemp/"
         },
         excelConfig: {
             fieldName:["序号", "县（区）", "项目名称", "用地总面积", "占用耕地面积", "生产设施用地", "附属设施用地", "配套设施用地", "其他类型", "备案文号", "备案时间", "备注"],

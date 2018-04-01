@@ -225,8 +225,8 @@ namespace Atide.GisPlatfrom.Controllers
             try
             {
                 DataTable dt = ExcelHelper.JsonToDataTable(json);
-                string pathDestop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                ExcelHelper.GridToExcelByNPOI(dt, pathDestop + "\\" + Request.Params["filename"] + "数据导出-" + DateTime.Now.ToString("yyyy-MM-dd") + ".xls");
+                //string pathDestop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                ExcelHelper.GridToExcelByNPOI(dt, Request.Params["direcotor"] + "\\" + Request.Params["filename"]);
                 return Content("1");
             }
             catch (Exception)
