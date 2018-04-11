@@ -213,16 +213,19 @@ function superviseInit()  //查询监管内容
 
         }
 
-
-        switch (att.YDLX) {            //用地类型监管统计   情况较少，枚举归类
-            case "": YDLX.level0.push(featuresList[i]); break;          
+        var YDLXstr = att.YDLX.replace(' ', '');
+        switch (YDLXstr) {            //用地类型监管统计   情况较少，枚举归类          
             case "1": YDLX.level1.push(featuresList[i]); break;
             case "2": YDLX.level2.push(featuresList[i]); break;
             case "3": YDLX.level3.push(featuresList[i]); break;
             case "1,2": YDLX.level1.push(featuresList[i]); YDLX.level2.push(featuresList[i]); break;
+            case "2,1": YDLX.level1.push(featuresList[i]); YDLX.level2.push(featuresList[i]); break;
             case "1,3": YDLX.level1.push(featuresList[i]); YDLX.level3.push(featuresList[i]); break;
+            case "3,1": YDLX.level1.push(featuresList[i]); YDLX.level3.push(featuresList[i]); break;
             case "2,3": YDLX.level2.push(featuresList[i]); YDLX.level3.push(featuresList[i]); break;
-            case "1,2,3": YDLX.level1.push(featuresList[i]); YDLX.level2.push(featuresList[i]);YDLX.level3.push(featuresList[i]); break;
+            case "3,2": YDLX.level2.push(featuresList[i]); YDLX.level3.push(featuresList[i]); break;
+            case "1,2,3": YDLX.level1.push(featuresList[i]); YDLX.level2.push(featuresList[i]); YDLX.level3.push(featuresList[i]); break;
+            default: YDLX.level0.push(featuresList[i]); break;     
         }
 
 
@@ -464,8 +467,8 @@ function superviseInit()  //查询监管内容
         //document.getElementById("BGDClevel2").innerHTML = BGDC["level2"].length
         //document.getElementById("BGDClevel3").innerHTML = BGDC["level3"].length
 
-        var Xdata = ["空值", "生产设施用地", "附属设施用地", "配套设施用地"];
-        var Ydata = [YDLX["level0"].length, YDLX["level1"].length, YDLX["level2"].length, YDLX["level3"].length]
+        var Xdata = ["生产设施用地", "附属设施用地", "配套设施用地", "其他"];
+        var Ydata = [YDLX["level1"].length, YDLX["level2"].length, YDLX["level3"].length, YDLX["level0"].length]
 
 
 
