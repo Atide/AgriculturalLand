@@ -24,6 +24,8 @@
                 <li><a onclick="popSuperviseLayer(1)" href="javascript:void(0)">用地规模监管</a></li>
                 <li><a onclick="popSuperviseLayer(2)" href="javascript:void(0)">备案材料监管</a></li>
                 <li><a onclick="popSuperviseLayer(3)" href="javascript:void(0)">变更调查监管</a></li>
+                <li><a onclick="popSuperviseLayer(4)" href="javascript:void(0)">设施农用地类型监管</a></li>
+                <li><a onclick="popSuperviseLayer(5)" href="javascript:void(0)">设施农用实际监测面积汇总</a></li>
             </ul>
         </li>
         <li>
@@ -127,6 +129,38 @@
                 //document.getElementById("BGDClist").style.visibility = "visible";
                 //document.getElementById("BGDC").style.visibility = "visible";
                 
+                break;
+            case 4:
+                //require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+                //    function (registry, on) {
+
+                //        var a = registry.byId("BGDCJGFloatingPane");
+
+                //        a.show();
+                //        a.bringToTop();
+
+                //    });
+                document.getElementById("YDLXTJJGFloatingPane").style.visibility = "visible";
+                //document.getElementById("BGDCRES").style.visibility = "visible";
+                //document.getElementById("BGDClist").style.visibility = "visible";
+                //document.getElementById("BGDC").style.visibility = "visible";
+
+                break;
+            case 5:
+                //require(["dijit/registry", "dojo/on", "dojo/domReady!"],
+                //    function (registry, on) {
+
+                //        var a = registry.byId("BGDCJGFloatingPane");
+
+                //        a.show();
+                //        a.bringToTop();
+
+                //    });
+                document.getElementById("JCMJJGFloatingPane").style.visibility = "visible";
+                //document.getElementById("BGDCRES").style.visibility = "visible";
+                //document.getElementById("BGDClist").style.visibility = "visible";
+                //document.getElementById("BGDC").style.visibility = "visible";
+
                 break;
         }
 

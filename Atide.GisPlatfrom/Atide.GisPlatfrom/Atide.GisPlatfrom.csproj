@@ -2151,6 +2151,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\MapSystem\_YDLXTJJGView.cshtml" />
+    <Content Include="Views\MapSystem\_JCMJJGView.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

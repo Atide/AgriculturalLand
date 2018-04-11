@@ -166,7 +166,22 @@ function superviseInit()  //查询监管内容
         level1: new Array(),
         level2: new Array(),
         level3: new Array()
-    }   
+    }
+    var YDLX = {              //用地类型统计列表
+        level0: new Array(),    //空
+        level1: new Array(),
+        level2: new Array(),
+        level3: new Array()
+    }
+    var JCMJ={}  //监测面积按年份统计
+   
+    for (var i = 0; i < lastYears.length; i++) {
+        JCMJ[lastYears[i]]=0
+    }
+
+  
+
+
     var BACLnum = featuresList.length;
     if (BACLnum==0)
     {
@@ -177,6 +192,13 @@ function superviseInit()  //查询监管内容
     for (var i = 0; i < featuresList.length; i++)    //循环用户所选要素
     {
         var att = featuresList[i].attributes;
+
+        if (att.SJMJ != null)
+        {
+            JCMJ[att.YEAR] += att.SJMJ;
+        }
+        
+
 
         if (att.SJMJ > (att.YDGM * 1.5))  //用地规模监管
         {
@@ -190,6 +212,19 @@ function superviseInit()  //查询监管内容
             case 3: BGDC.level3.push(featuresList[i]); break;
 
         }
+
+
+        switch (att.YDLX) {            //用地类型监管统计   情况较少，枚举归类
+            case "": YDLX.level0.push(featuresList[i]); break;          
+            case "1": YDLX.level1.push(featuresList[i]); break;
+            case "2": YDLX.level2.push(featuresList[i]); break;
+            case "3": YDLX.level3.push(featuresList[i]); break;
+            case "1,2": YDLX.level1.push(featuresList[i]); YDLX.level2.push(featuresList[i]); break;
+            case "1,3": YDLX.level1.push(featuresList[i]); YDLX.level3.push(featuresList[i]); break;
+            case "2,3": YDLX.level2.push(featuresList[i]); YDLX.level3.push(featuresList[i]); break;
+            case "1,2,3": YDLX.level1.push(featuresList[i]); YDLX.level2.push(featuresList[i]);YDLX.level3.push(featuresList[i]); break;
+        }
+
 
         //备案材料检查
         //var url = makeUrl(featuresList[i].attributes.YEAR, featuresList[i].attributes.XZQDM, featuresList[i].attributes.TBBH);
@@ -239,6 +274,8 @@ function superviseInit()  //查询监管内容
 
     YDGMcheck(); //展示用地规模检查结果  
     BGDCcheck(); //展示变更调查检查结果
+    YDLXTJcheck(); //展示用地类型检查结果
+    JCMJcheck(); //展示 用地面积统计
 
     function BACLcheck(url, fid) {
         var ImgObj = new Image(); //判断图片是否存在  
@@ -256,6 +293,7 @@ function superviseInit()  //查询监管内容
             }
         }
     }
+
 
     function YDGMcheck()        //展示用地规模检查结果
     {
@@ -382,7 +420,168 @@ function superviseInit()  //查询监管内容
 
     }
 
-    
+    function YDLXTJcheck() //展示用地类型调查检查结果
+    {
+        var title = "";
+        if (lastYears.length == 1) {
+            title = lastYears[0];
+        }
+        else {
+            for (var i = 0; i < lastYears.length; i++) {
+                if (i == lastYears.length - 1) {
+                    title += lastYears[i]
+                }
+                else {
+                    title += lastYears[i] + "、"
+                }
+
+
+            }
+        }
+        title += "年份" + lastXZQ + "核查结果如下："
+
+        document.getElementById("YDLXTJtitle").innerHTML = title;
+
+
+
+        //点击列表方法
+        function clickResList(i) {
+            //require(["dijit/registry"], function (registry) {
+            //    registry.byId("BGDC").selectChild("BGDCRES", true);
+            $('#YDLXTJ').tabs('select', "详细");
+            displayTable(YDLX["level" + i], "#YDLXTJDTable");  //展示属性表
+            //})
+
+
+        }
+
+
+
+
+
+        //document.getElementById("BGDClevel0").innerHTML = BGDC["level0"].length;
+        //document.getElementById("BGDClevel1").innerHTML = BGDC["level1"].length
+        //document.getElementById("BGDClevel2").innerHTML = BGDC["level2"].length
+        //document.getElementById("BGDClevel3").innerHTML = BGDC["level3"].length
+
+        var Xdata = ["空值", "等级1", "等级2", "等级3"];
+        var Ydata = [YDLX["level0"].length, YDLX["level1"].length, YDLX["level2"].length, YDLX["level3"].length]
+
+
+
+        var myChart = echarts.init(document.getElementById('YDLXTJchart'));
+        var option = {
+            title: {
+                text: "各等级数量统计"
+            },            tooltip: {},            xAxis: {
+                data: Xdata,                axisLabel: {
+                    interval: 0
+                },
+            },            yAxis: {},            series: [{
+                name: '图斑数量',                type: 'bar',                data: Ydata
+            }],            label: {
+                normal: {
+
+                    show: true,
+                    position: "top"
+
+                }
+            }
+        };
+        myChart.setOption(option);
+
+        myChart.on('click', function (params) {
+            clickResList(params.dataIndex)
+
+        });
+
+
+
+    }
+
+    function JCMJcheck() ///展示 用地面积统计
+    {
+        var title = "";
+        if (lastYears.length == 1) {
+            title = lastYears[0];
+        }
+        else {
+            for (var i = 0; i < lastYears.length; i++) {
+                if (i == lastYears.length - 1) {
+                    title += lastYears[i]
+                }
+                else {
+                    title += lastYears[i] + "、"
+                }
+
+
+            }
+        }
+        title += "年份" + lastXZQ + "实际监测面积汇总如下："
+
+        document.getElementById("JCMJtitle").innerHTML = title;
+
+
+
+        ////点击列表方法
+        //function clickResList(i) {
+        //    //require(["dijit/registry"], function (registry) {
+        //    //    registry.byId("BGDC").selectChild("BGDCRES", true);
+        //    $('#YDLXTJ').tabs('select', "详细");
+        //    displayTable(YDLX["level" + i], "#YDLXTJDTable");  //展示属性表
+        //    //})
+
+
+        //}
+
+
+
+
+
+        //document.getElementById("BGDClevel0").innerHTML = BGDC["level0"].length;
+        //document.getElementById("BGDClevel1").innerHTML = BGDC["level1"].length
+        //document.getElementById("BGDClevel2").innerHTML = BGDC["level2"].length
+        //document.getElementById("BGDClevel3").innerHTML = BGDC["level3"].length
+        var Xdata = [];
+        var Ydata = [];
+        for (var i in JCMJ) {
+            Xdata.push(i + "年")
+            Ydata.push(JCMJ[i])
+
+        }
+       
+        
+
+
+        var myChart = echarts.init(document.getElementById('JCMJchart'));
+        var option = {
+            title: {
+                text: "各年份实际监测面积汇总"
+            },            tooltip: {},            xAxis: {
+                data: Xdata,                axisLabel: {
+                    interval: 0
+                },
+            },            yAxis: {},            series: [{
+                name: '面积',                type: 'bar',                data: Ydata
+            }],            label: {
+                normal: {
+
+                    show: true,
+                    position: "top"
+
+                }
+            }
+        };
+        myChart.setOption(option);
+
+        //myChart.on('click', function (params) {
+        //    clickResList(params.dataIndex)
+
+        //});
+
+
+
+    }
    
 
 

@@ -110,7 +110,16 @@ namespace Atide.GisPlatfrom.Controllers
         {
             return PartialView("_BGDCJGView");
         }
-
+        //用地类型统计查看视图
+        public ActionResult YDLXTJJGView()
+        {
+            return PartialView("_YDLXTJJGView");
+        }
+        //监测面积查看视图
+        public ActionResult JCMJJGView()
+        {
+            return PartialView("_JCMJJGView");
+        }
         //附件图片查看视图
         public ActionResult PictureView(string TBBH,string TIME,string XZQDM)
         {
