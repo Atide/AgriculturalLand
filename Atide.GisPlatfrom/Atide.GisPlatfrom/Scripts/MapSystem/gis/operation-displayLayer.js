@@ -168,10 +168,11 @@ function superviseInit()  //查询监管内容
         level3: new Array()
     }
     var YDLX = {              //用地类型统计列表
-        level0: new Array(),    //空
+           
         level1: new Array(),
         level2: new Array(),
-        level3: new Array()
+        level3: new Array(),
+        level0: new Array()//空
     }
     var JCMJ={}  //监测面积按年份统计
    
@@ -452,7 +453,16 @@ function superviseInit()  //查询监管内容
             //require(["dijit/registry"], function (registry) {
             //    registry.byId("BGDC").selectChild("BGDCRES", true);
             $('#YDLXTJ').tabs('select', "详细");
-            displayTable(YDLX["level" + i], "#YDLXTJDTable");  //展示属性表
+            var res;
+            switch(i)
+            {
+                case 0: res = YDLX["level1"]; break;
+                case 1: res = YDLX["level2"]; break;
+                case 2: res = YDLX["level3"]; break;
+                case 3: res = YDLX["level0"]; break;
+            }
+
+            displayTable(res, "#YDLXTJDTable");  //展示属性表
             //})
 
 
