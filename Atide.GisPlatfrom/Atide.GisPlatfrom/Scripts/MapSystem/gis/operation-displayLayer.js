@@ -464,7 +464,7 @@ function superviseInit()  //查询监管内容
         //document.getElementById("BGDClevel2").innerHTML = BGDC["level2"].length
         //document.getElementById("BGDClevel3").innerHTML = BGDC["level3"].length
 
-        var Xdata = ["空值", "等级1", "等级2", "等级3"];
+        var Xdata = ["空值", "生产设施用地", "附属设施用地", "配套设施用地"];
         var Ydata = [YDLX["level0"].length, YDLX["level1"].length, YDLX["level2"].length, YDLX["level3"].length]
 
 
@@ -546,8 +546,8 @@ function superviseInit()  //查询监管内容
         var Ydata = [];
         for (var i in JCMJ) {
             Xdata.push(i + "年")
-            Ydata.push(JCMJ[i])
-
+            cache = parseFloat(JCMJ[i].toFixed(2));
+            Ydata.push(cache)
         }
        
         
